@@ -27,6 +27,9 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -39,9 +42,13 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+
+    implementation 'com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base:1.2.4'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
 
     testImplementation 'junit:junit:4.13.2'
 

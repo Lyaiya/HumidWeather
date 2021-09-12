@@ -41,6 +41,10 @@ class PlaceFragment : Fragment() {
         val recyclerView = requireView().findViewById<RecyclerView>(R.id.recyclerView)
         val searchPlaceEdit = requireView().findViewById<EditText>(R.id.searchPlaceEdit)
         val bgImageView = requireView().findViewById<ImageView>(R.id.bgImageView)
+
+        val layoutManager = LinearLayoutManager(activity)
+
+        recyclerView.layoutManager = layoutManager
         adapter = PlaceAdapter(this, viewModel.placeList)
         Log.d(TAG, "onActivityCreated: $adapter")
         recyclerView.adapter = adapter

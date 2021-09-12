@@ -48,7 +48,7 @@ object Repository {
     }
 
     private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>) =
-        liveData {
+        liveData(context) {
             val result = try {
                 block()
             } catch (e: Exception) {

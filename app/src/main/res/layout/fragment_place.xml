@@ -1,53 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?android:windowBackground">
 
     <ImageView
         android:id="@+id/bgImageView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/bg_place" />
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/bg_place"/>
 
-    <View
-        android:id="@+id/actionBarView"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/actionBarLayout"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="?android:colorPrimary">
 
-    <EditText
-        android:id="@+id/searchPlaceEdit"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:autofillHints="false"
-        android:background="@drawable/search_bg"
-        android:hint="输入地址"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="@+id/actionBarView"
-        app:layout_constraintEnd_toEndOf="@+id/actionBarView"
-        app:layout_constraintStart_toStartOf="@+id/actionBarView"
-        app:layout_constraintTop_toTopOf="@+id/actionBarView" />
+        <EditText
+            android:id="@+id/searchPlaceEdit"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:hint="输入地址"
+            android:background="@drawable/search_bg"/>
+    </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actionBarView" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/actionBarLayout"
+        android:visibility="gone"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
