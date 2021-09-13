@@ -11,6 +11,7 @@ import me.atrin.humidweather.R
 import me.atrin.humidweather.logic.model.Place
 import me.atrin.humidweather.ui.weather.WeatherActivity
 
+// FIXME 替换 Adapter
 class PlaceAdapter(private val fragment: Fragment, private val placeList: List<Place>) :
     RecyclerView.Adapter<PlaceAdapter.ViewHolder>() {
 

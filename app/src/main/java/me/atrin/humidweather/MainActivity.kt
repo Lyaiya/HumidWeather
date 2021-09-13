@@ -1,11 +1,13 @@
 package me.atrin.humidweather
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import me.atrin.humidweather.databinding.ActivityMainBinding
+import me.atrin.humidweather.ui.base.BaseBindingActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
     }
+
 }

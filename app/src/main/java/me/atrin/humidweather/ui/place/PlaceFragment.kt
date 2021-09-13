@@ -15,12 +15,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import me.atrin.humidweather.R
+import me.atrin.humidweather.databinding.FragmentPlaceBinding
+import me.atrin.humidweather.ui.base.BaseBindingFragment
 
-class PlaceFragment : Fragment() {
-
-    companion object {
-        private const val TAG = "PlaceFragment"
-    }
+class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
 
     private val viewModel by lazy {
         ViewModelProvider(this)[PlaceViewModel::class.java]
@@ -28,25 +26,22 @@ class PlaceFragment : Fragment() {
 
     private lateinit var adapter: PlaceAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_place, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        val recyclerView = requireView().findViewById<RecyclerView>(R.id.recyclerView)
-        val searchPlaceEdit = requireView().findViewById<EditText>(R.id.searchPlaceEdit)
-        val bgImageView = requireView().findViewById<ImageView>(R.id.bgImageView)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val recyclerView = binding.recyclerView
+        val searchPlaceEdit = binding.searchPlaceEdit
+        val bgImageView = binding.bgImageView
 
         val layoutManager = LinearLayoutManager(activity)
 
         recyclerView.layoutManager = layoutManager
         adapter = PlaceAdapter(this, viewModel.placeList)
-        Log.d(TAG, "onActivityCreated: $adapter")
+
+        // FIXME 替换 Adapter
+        // adapter = PlaceQuickAdapter()
+        //
+        // adapter.setList(viewModel.placeList)
+
         recyclerView.adapter = adapter
         searchPlaceEdit.addTextChangedListener { editable ->
             val content = editable.toString()
@@ -71,8 +66,7 @@ class PlaceFragment : Fragment() {
                     result.exceptionOrNull()?.printStackTrace()
                 }
             })
-
         }
-
     }
+
 }

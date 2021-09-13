@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.dylanc.viewbinding.base.inflateBindingWithGeneric
+import com.zackratos.ultimatebarx.ultimatebarx.navigationBar
 
 abstract class BaseBindingActivity<VB : ViewBinding> : AppCompatActivity() {
 
@@ -13,5 +14,18 @@ abstract class BaseBindingActivity<VB : ViewBinding> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = inflateBindingWithGeneric(layoutInflater)
         setContentView(binding.root)
+
+        initBar()
+    }
+
+    /**
+     * 初始化状态栏或导航栏
+     */
+    protected open fun initBar() {
+        // 初始化导航栏
+        navigationBar  {
+            light = true
+            transparent()
+        }
     }
 }

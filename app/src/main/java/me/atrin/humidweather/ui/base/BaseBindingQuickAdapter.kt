@@ -19,4 +19,5 @@ abstract class BaseBindingQuickAdapter<T, VB : ViewBinding>(layoutResId: Int = -
         @Suppress("UNCHECKED_CAST")
         fun <VB : ViewBinding> getViewBinding() = binding as VB
     }
+
 }
