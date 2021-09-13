@@ -27,24 +27,15 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // FIXME 跳转有问题
-        // Log.d(TAG, "onCreate: ")
-        // if (viewModel.isPlaceSaved()) {
-        //     val place = viewModel.getSavedPlace()
-        //     Log.d(TAG, "onCreate: $place")
-        //     val intent = Intent(context, WeatherActivity::class.java).apply {
-        //         putExtra(PlaceKey.LOCATION_LNG, place.location.lng)
-        //         putExtra(PlaceKey.LOCATION_LAT, place.location.lat)
-        //         putExtra(PlaceKey.PLACE_NAME, place.name)
-        //     }
-        //     startActivity(intent)
-        //     activity?.finish()
-        //     return
-        // }
+        Log.d(TAG, "onCreate: start")
+        // moveToWeatherActivity()
+        Log.d(TAG, "onCreate: finish")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Log.d(TAG, "onViewCreated: start")
 
         val recyclerView = binding.recyclerView
         val searchPlaceEdit = binding.searchPlaceEdit
@@ -85,6 +76,28 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
                 }
             })
         }
+
+        Log.d(TAG, "onViewCreated: finish")
+    }
+
+    private fun moveToWeatherActivity() {
+        Log.d(TAG, "moveToWeatherActivity: start")
+
+        if (viewModel.isPlaceSaved()) {
+            val place = viewModel.getSavedPlace()
+            Log.d(TAG, "moveToWeatherActivity: $place")
+            val intent = Intent(context, WeatherActivity::class.java).apply {
+                putExtra(PlaceKey.LOCATION_LNG, place.location.lng)
+                putExtra(PlaceKey.LOCATION_LAT, place.location.lat)
+                putExtra(PlaceKey.PLACE_NAME, place.name)
+            }
+            Log.d(TAG, "moveToWeatherActivity: startActivity")
+            startActivity(intent)
+            Log.d(TAG, "moveToWeatherActivity: finishActivity")
+            activity?.finish()
+        }
+
+        Log.d(TAG, "moveToWeatherActivity: finish")
     }
 
 }

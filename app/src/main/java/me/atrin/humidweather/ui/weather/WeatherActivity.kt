@@ -1,5 +1,7 @@
 package me.atrin.humidweather.ui.weather
 
+import android.content.res.TypedArray
+import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -44,8 +46,16 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
                 Toast.makeText(this, "无法成功获取天气信息", Toast.LENGTH_SHORT).show()
                 result.exceptionOrNull()?.printStackTrace()
             }
+            binding.swipeRefresh.isRefreshing = false
         })
-        viewModel.refreshWeather(viewModel.locationLng, viewModel.locationLat)
+
+        binding.swipeRefresh.setColorSchemeColors(getColorPrimary())
+
+        refreshWeather()
+
+        binding.swipeRefresh.setOnRefreshListener {
+            refreshWeather()
+        }
     }
 
     override fun initBar() {
@@ -124,6 +134,18 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
         lifeIndexLayout.ultravioletText.text = lifeIndex.ultraviolet[0].desc
         lifeIndexLayout.carWashingText.text = lifeIndex.carWashing[0].desc
         binding.weatherLayout.visibility = View.VISIBLE
+    }
+
+    private fun refreshWeather() {
+        viewModel.refreshWeather(viewModel.locationLng, viewModel.locationLat)
+        binding.swipeRefresh.isRefreshing = true
+    }
+
+    private fun getColorPrimary(): Int {
+        val obtainStyledAttributes = obtainStyledAttributes(intArrayOf(android.R.attr.colorPrimary))
+        val color = obtainStyledAttributes.getColor(0, Color.BLACK)
+        obtainStyledAttributes.recycle()
+        return color
     }
 
 }

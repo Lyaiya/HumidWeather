@@ -1,6 +1,7 @@
 package me.atrin.humidweather.ui.place
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,10 @@ import me.atrin.humidweather.ui.weather.WeatherActivity
 // FIXME 替换 Adapter
 class PlaceAdapter(private val fragment: PlaceFragment, private val placeList: List<Place>) :
     RecyclerView.Adapter<PlaceAdapter.ViewHolder>() {
+
+    companion object {
+        private const val TAG = "PlaceAdapter"
+    }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val placeName: TextView = view.findViewById(R.id.placeName)
