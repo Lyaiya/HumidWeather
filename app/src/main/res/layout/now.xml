@@ -16,6 +16,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="15dp"
+            android:theme="@style/ButtonStyle"
             android:background="@drawable/ic_home" />
 
         <TextView

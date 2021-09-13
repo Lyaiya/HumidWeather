@@ -1,19 +1,26 @@
 package me.atrin.humidweather.ui.weather
 
-import android.content.res.TypedArray
+import android.content.Context
 import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
 import com.zackratos.ultimatebarx.ultimatebarx.statusBar
 import me.atrin.humidweather.R
 import me.atrin.humidweather.databinding.ActivityWeatherBinding
+import me.atrin.humidweather.databinding.ForecastBinding
+import me.atrin.humidweather.databinding.LifeIndexBinding
+import me.atrin.humidweather.databinding.NowBinding
 import me.atrin.humidweather.logic.model.Weather
 import me.atrin.humidweather.logic.model.getSky
 import me.atrin.humidweather.ui.base.BaseBindingActivity
@@ -25,8 +32,16 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
         ViewModelProvider(this)[WeatherViewModel::class.java]
     }
 
+    private lateinit var incNowLayout: NowBinding
+    private lateinit var incForecastLayout: ForecastBinding
+    private lateinit var incLifeIndexLayout: LifeIndexBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        incNowLayout = binding.includedNowLayout
+        incForecastLayout = binding.includedForecastLayout
+        incLifeIndexLayout = binding.includedLifeIndexLayout
 
         if (viewModel.locationLng.isEmpty()) {
             viewModel.locationLng = intent.getStringExtra("location_lng") ?: ""
@@ -56,6 +71,30 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
         binding.swipeRefresh.setOnRefreshListener {
             refreshWeather()
         }
+
+        // 点击按钮打开抽屉
+        incNowLayout.navBtn.setOnClickListener {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+
+        // 监听抽屉状态
+        binding.drawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
+
+            override fun onDrawerOpened(drawerView: View) {}
+
+            override fun onDrawerClosed(drawerView: View) {
+                val manager = getSystemService(Context.INPUT_METHOD_SERVICE)
+                        as InputMethodManager
+                // 抽屉关闭时隐藏输入法
+                manager.hideSoftInputFromWindow(
+                    drawerView.windowToken,
+                    InputMethodManager.HIDE_NOT_ALWAYS
+                )
+            }
+
+            override fun onDrawerStateChanged(newState: Int) {}
+        })
     }
 
     override fun initBar() {
@@ -71,29 +110,26 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
     }
 
     private fun showWeatherInfo(weather: Weather) {
-        val nowLayout = binding.includedNowLayout
-        val forecastLayout = binding.includedForecastLayout
-        val lifeIndexLayout = binding.includedLifeIndexLayout
 
         val realtime = weather.realtime
         val daily = weather.daily
 
         // now.xml
-        nowLayout.placeName.text = viewModel.placeName
+        incNowLayout.placeName.text = viewModel.placeName
 
         val currentTempText = "${realtime.temperature.toInt()} ℃"
-        nowLayout.currentTemp.text = currentTempText
+        incNowLayout.currentTemp.text = currentTempText
 
         val realtimeSky = getSky(realtime.skycon)
-        nowLayout.currentSky.text = realtimeSky.info
+        incNowLayout.currentSky.text = realtimeSky.info
 
         val currentPM25Text = "空气指数 ${realtime.airQuality.aqi.chn.toInt()}"
-        nowLayout.currentAQI.text = currentPM25Text
+        incNowLayout.currentAQI.text = currentPM25Text
 
-        nowLayout.nowLayout.setBackgroundResource(realtimeSky.bg)
+        incNowLayout.nowLayout.setBackgroundResource(realtimeSky.bg)
 
         // forecast.xml
-        forecastLayout.forecastLayout.removeAllViews()
+        incForecastLayout.forecastLayout.removeAllViews()
 
         val days = daily.skycon.size
 
@@ -104,7 +140,7 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
             // FIXME 添加一个 Adapter？
             val view = LayoutInflater.from(this).inflate(
                 R.layout.forecast_item,
-                forecastLayout.forecastLayout,
+                incForecastLayout.forecastLayout,
                 false
             )
 
@@ -123,16 +159,16 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
 
             val tempText = "${temperature.min.toInt()} ~ ${temperature.max.toInt()} ℃"
             temperatureInfo.text = tempText
-            forecastLayout.forecastLayout.addView(view)
+            incForecastLayout.forecastLayout.addView(view)
         }
 
         // life_item.xml
         val lifeIndex = daily.lifeIndex
 
-        lifeIndexLayout.coldRiskText.text = lifeIndex.coldRisk[0].desc
-        lifeIndexLayout.dressingText.text = lifeIndex.dressing[0].desc
-        lifeIndexLayout.ultravioletText.text = lifeIndex.ultraviolet[0].desc
-        lifeIndexLayout.carWashingText.text = lifeIndex.carWashing[0].desc
+        incLifeIndexLayout.coldRiskText.text = lifeIndex.coldRisk[0].desc
+        incLifeIndexLayout.dressingText.text = lifeIndex.dressing[0].desc
+        incLifeIndexLayout.ultravioletText.text = lifeIndex.ultraviolet[0].desc
+        incLifeIndexLayout.carWashingText.text = lifeIndex.carWashing[0].desc
         binding.weatherLayout.visibility = View.VISIBLE
     }
 
