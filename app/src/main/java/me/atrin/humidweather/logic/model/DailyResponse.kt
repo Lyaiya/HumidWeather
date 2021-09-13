@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.util.*
 
 data class DailyResponse(val status: String, val result: Result) {
+
     data class Result(val daily: Daily)
 
     data class Daily(
@@ -24,4 +25,5 @@ data class DailyResponse(val status: String, val result: Result) {
     )
 
     data class LifeDescription(val desc: String)
+
 }

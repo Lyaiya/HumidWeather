@@ -10,6 +10,7 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 object HumidWeatherNetwork {
+
     private val placeService = ServiceCreator.create<PlaceService>()
     private val weatherService = ServiceCreator.create<WeatherService>()
 
@@ -42,4 +43,5 @@ object HumidWeatherNetwork {
             })
         }
     }
+
 }

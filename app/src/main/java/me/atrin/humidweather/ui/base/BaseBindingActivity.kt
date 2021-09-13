@@ -23,9 +23,10 @@ abstract class BaseBindingActivity<VB : ViewBinding> : AppCompatActivity() {
      */
     protected open fun initBar() {
         // 初始化导航栏
-        navigationBar  {
+        navigationBar {
             light = true
             transparent()
         }
     }
+
 }

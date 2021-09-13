@@ -1,33 +1,51 @@
 package me.atrin.humidweather.ui.place
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import me.atrin.humidweather.R
 import me.atrin.humidweather.databinding.FragmentPlaceBinding
+import me.atrin.humidweather.logic.model.PlaceKey
 import me.atrin.humidweather.ui.base.BaseBindingFragment
+import me.atrin.humidweather.ui.weather.WeatherActivity
 
 class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
 
-    private val viewModel by lazy {
+    companion object {
+        private const val TAG = "PlaceFragment"
+    }
+
+    val viewModel by lazy {
         ViewModelProvider(this)[PlaceViewModel::class.java]
     }
 
     private lateinit var adapter: PlaceAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // FIXME 跳转有问题
+        // Log.d(TAG, "onCreate: ")
+        // if (viewModel.isPlaceSaved()) {
+        //     val place = viewModel.getSavedPlace()
+        //     Log.d(TAG, "onCreate: $place")
+        //     val intent = Intent(context, WeatherActivity::class.java).apply {
+        //         putExtra(PlaceKey.LOCATION_LNG, place.location.lng)
+        //         putExtra(PlaceKey.LOCATION_LAT, place.location.lat)
+        //         putExtra(PlaceKey.PLACE_NAME, place.name)
+        //     }
+        //     startActivity(intent)
+        //     activity?.finish()
+        //     return
+        // }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val recyclerView = binding.recyclerView
         val searchPlaceEdit = binding.searchPlaceEdit
         val bgImageView = binding.bgImageView

@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 
 class HumidWeatherApplication : Application() {
+
     companion object {
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
@@ -15,4 +16,5 @@ class HumidWeatherApplication : Application() {
         super.onCreate()
         context = applicationContext
     }
+
 }
