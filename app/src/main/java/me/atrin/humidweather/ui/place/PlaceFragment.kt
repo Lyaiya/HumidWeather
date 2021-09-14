@@ -104,7 +104,7 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
         Log.d(TAG, "moveToWeatherActivity: finish")
     }
 
-    protected fun initBar() {
+    private fun initBar() {
         binding.actionBarLayout.addStatusBarTopPadding()
     }
 

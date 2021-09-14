@@ -7,6 +7,7 @@ import me.atrin.humidweather.logic.Repository
 import me.atrin.humidweather.logic.model.Location
 
 class WeatherViewModel : ViewModel() {
+
     private val locationLiveData = MutableLiveData<Location>()
 
     var locationLng = ""

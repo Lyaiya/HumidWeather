@@ -20,4 +20,5 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
         super.onDestroy()
         Log.d(TAG, "onDestroy: start")
     }
+
 }
