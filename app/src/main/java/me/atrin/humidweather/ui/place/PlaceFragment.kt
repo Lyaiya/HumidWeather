@@ -2,12 +2,12 @@ package me.atrin.humidweather.ui.place
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.drakeet.multitype.MultiTypeAdapter
 import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
 import me.atrin.humidweather.MainActivity
 import me.atrin.humidweather.databinding.FragmentPlaceBinding
@@ -17,27 +17,19 @@ import me.atrin.humidweather.ui.weather.WeatherActivity
 
 class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
 
-    companion object {
-        private const val TAG = "PlaceFragment"
-    }
-
     val viewModel by lazy {
         ViewModelProvider(this)[PlaceViewModel::class.java]
     }
 
-    private lateinit var adapter: PlaceAdapter
+    private lateinit var adapter: MultiTypeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate: start")
         moveToWeatherActivity()
-        Log.d(TAG, "onCreate: finish")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        Log.d(TAG, "onViewCreated: start")
 
         initBar()
 
@@ -45,15 +37,14 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
         val searchPlaceEdit = binding.searchPlaceEdit
         val bgImageView = binding.bgImageView
 
+        // 设置 LayoutManager
         val layoutManager = LinearLayoutManager(activity)
-
         recyclerView.layoutManager = layoutManager
-        adapter = PlaceAdapter(this, viewModel.placeList)
 
-        // FIXME 替换 Adapter
-        // adapter = PlaceQuickAdapter()
-        //
-        // adapter.setList(viewModel.placeList)
+        // 设置 Adapter
+        adapter = MultiTypeAdapter()
+        adapter.register(PlaceViewDelegate(this))
+        adapter.items = viewModel.placeList
 
         recyclerView.adapter = adapter
         searchPlaceEdit.addTextChangedListener { editable ->
@@ -80,28 +71,19 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
                 }
             })
         }
-
-        Log.d(TAG, "onViewCreated: finish")
     }
 
     private fun moveToWeatherActivity() {
-        Log.d(TAG, "moveToWeatherActivity: start")
-
         if (activity is MainActivity && viewModel.isPlaceSaved()) {
             val place = viewModel.getSavedPlace()
-            Log.d(TAG, "moveToWeatherActivity: $place")
             val intent = Intent(context, WeatherActivity::class.java).apply {
                 putExtra(PlaceKey.LOCATION_LNG, place.location.lng)
                 putExtra(PlaceKey.LOCATION_LAT, place.location.lat)
                 putExtra(PlaceKey.PLACE_NAME, place.name)
             }
-            Log.d(TAG, "moveToWeatherActivity: startActivity")
             startActivity(intent)
-            Log.d(TAG, "moveToWeatherActivity: finishActivity")
             activity?.finish()
         }
-
-        Log.d(TAG, "moveToWeatherActivity: finish")
     }
 
     private fun initBar() {
