@@ -48,11 +48,15 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
 
-    implementation "com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base:1.2.4"
+    // GitHub: https://github.com/DylanCaiCoding/ViewBindingKTX
+    // Docs: https://dylancaicoding.github.io/ViewBindingKTX
+    implementation "com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base:2.0.1"
 
+    // GitHub: https://github.com/drakeet/MultiType
     implementation 'com.drakeet.multitype:multitype:4.3.0'
 
-    implementation 'com.gitee.zackratos:UltimateBarX:0.7.1'
+    // GitHub: https://github.com/Zackratos/UltimateBarX
+    implementation 'com.gitee.zackratos:UltimateBarX:0.8.0'
 
     testImplementation 'junit:junit:4.13.2'
 

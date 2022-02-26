@@ -10,12 +10,10 @@ import me.atrin.humidweather.ui.weather.WeatherActivity
 class PlaceViewDelegate(private val fragment: PlaceFragment) :
     BaseBindingViewDelegate<Place, PlaceItemBinding>() {
 
-    override fun onBindViewHolder(
-        holder: BindingViewHolder<PlaceItemBinding>,
-        item: Place
-    ) {
+    override fun onBindViewHolder(binding: PlaceItemBinding, item: Place, position: Int) {
+        val holder = BindingViewHolder(binding)
+
         holder.itemView.setOnClickListener {
-            holder.bindingAdapterPosition
             val intent = Intent(holder.itemView.context, WeatherActivity::class.java).apply {
                 putExtra(PlaceKey.LOCATION_LNG, item.location.lng)
                 putExtra(PlaceKey.LOCATION_LAT, item.location.lat)
@@ -30,6 +28,7 @@ class PlaceViewDelegate(private val fragment: PlaceFragment) :
             placeName.text = item.name
             placeAddress.text = item.address
         }
+
     }
 
 }

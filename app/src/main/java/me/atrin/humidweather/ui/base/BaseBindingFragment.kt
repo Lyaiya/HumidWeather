@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.dylanc.viewbinding.base.inflateBindingWithGeneric
+import com.dylanc.viewbinding.base.ViewBindingUtil
 
 abstract class BaseBindingFragment<VB : ViewBinding> : Fragment() {
 
@@ -18,7 +18,7 @@ abstract class BaseBindingFragment<VB : ViewBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = inflateBindingWithGeneric(layoutInflater, container, false)
+        _binding = ViewBindingUtil.inflateWithGeneric(this, inflater, container, false)
         return binding.root
     }
 

@@ -52,7 +52,7 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
             viewModel.placeName = intent.getStringExtra("place_name") ?: ""
         }
 
-        viewModel.weatherLiveData.observe(this, { result ->
+        viewModel.weatherLiveData.observe(this) { result ->
             val weather = result.getOrNull()
             if (weather != null) {
                 showWeatherInfo(weather)
@@ -61,7 +61,7 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
                 result.exceptionOrNull()?.printStackTrace()
             }
             binding.swipeRefresh.isRefreshing = false
-        })
+        }
 
         binding.swipeRefresh.setColorSchemeColors(getColorPrimary())
 
