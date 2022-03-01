@@ -1,5 +1,7 @@
 package me.atrin.humidweather.logic.network
 
+import me.atrin.humidweather.logic.network.service.PlaceService
+import me.atrin.humidweather.logic.network.service.WeatherService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

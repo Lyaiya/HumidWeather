@@ -1,8 +1,8 @@
-package me.atrin.humidweather.logic.network
+package me.atrin.humidweather.logic.network.service
 
 import me.atrin.humidweather.HumidWeatherApplication
-import me.atrin.humidweather.logic.model.DailyResponse
-import me.atrin.humidweather.logic.model.RealtimeResponse
+import me.atrin.humidweather.logic.model.response.DailyResponse
+import me.atrin.humidweather.logic.model.response.RealtimeResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

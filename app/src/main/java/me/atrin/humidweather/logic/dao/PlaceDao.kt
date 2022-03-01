@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.core.content.edit
 import com.google.gson.Gson
 import me.atrin.humidweather.HumidWeatherApplication
-import me.atrin.humidweather.logic.model.Place
+import me.atrin.humidweather.logic.model.response.Place
 
 object PlaceDao {
 

@@ -1,4 +1,4 @@
-package me.atrin.humidweather.logic.model
+package me.atrin.humidweather.logic.model.response
 
 import com.google.gson.annotations.SerializedName
 import java.util.*

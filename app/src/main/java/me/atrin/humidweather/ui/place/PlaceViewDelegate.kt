@@ -2,8 +2,8 @@ package me.atrin.humidweather.ui.place
 
 import android.content.Intent
 import me.atrin.humidweather.databinding.PlaceItemBinding
-import me.atrin.humidweather.logic.model.Place
 import me.atrin.humidweather.logic.model.PlaceKey
+import me.atrin.humidweather.logic.model.response.Place
 import me.atrin.humidweather.ui.base.BaseBindingViewDelegate
 import me.atrin.humidweather.ui.weather.WeatherActivity
 

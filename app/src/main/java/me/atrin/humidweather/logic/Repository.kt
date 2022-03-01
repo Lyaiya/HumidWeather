@@ -5,8 +5,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import me.atrin.humidweather.logic.dao.PlaceDao
-import me.atrin.humidweather.logic.model.Place
+import me.atrin.humidweather.logic.model.ResponseStatus
 import me.atrin.humidweather.logic.model.Weather
+import me.atrin.humidweather.logic.model.response.Place
 import me.atrin.humidweather.logic.network.HumidWeatherNetwork
 import kotlin.coroutines.CoroutineContext
 
@@ -14,7 +15,7 @@ object Repository {
 
     fun searchPlaces(query: String) = fire(Dispatchers.IO) {
         val placeResponse = HumidWeatherNetwork.searchPlaces(query)
-        if (placeResponse.status == "ok") {
+        if (placeResponse.status == ResponseStatus.OK) {
             val places = placeResponse.places
             Result.success(places)
         } else {
@@ -34,7 +35,7 @@ object Repository {
             val realtimeResponse = deferredRealtime.await()
             val dailyResponse = deferredDaily.await()
 
-            if (realtimeResponse.status == "ok" && dailyResponse.status == "ok") {
+            if (realtimeResponse.status == ResponseStatus.OK && dailyResponse.status == ResponseStatus.OK) {
                 val weather =
                     Weather(realtimeResponse.result.realtime, dailyResponse.result.daily)
 
