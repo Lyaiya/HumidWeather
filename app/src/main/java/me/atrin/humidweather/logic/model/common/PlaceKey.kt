@@ -1,4 +1,4 @@
-package me.atrin.humidweather.logic.model
+package me.atrin.humidweather.logic.model.common
 
 object PlaceKey {
 

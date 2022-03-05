@@ -20,8 +20,8 @@ import me.atrin.humidweather.databinding.ActivityWeatherBinding
 import me.atrin.humidweather.databinding.ForecastBinding
 import me.atrin.humidweather.databinding.LifeIndexBinding
 import me.atrin.humidweather.databinding.NowBinding
-import me.atrin.humidweather.logic.model.Weather
-import me.atrin.humidweather.logic.model.getSky
+import me.atrin.humidweather.logic.model.common.Weather
+import me.atrin.humidweather.logic.model.common.getSky
 import me.atrin.humidweather.ui.base.BaseBindingActivity
 import java.util.*
 

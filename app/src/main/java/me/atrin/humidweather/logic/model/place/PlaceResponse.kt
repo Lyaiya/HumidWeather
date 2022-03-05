@@ -1,4 +1,4 @@
-package me.atrin.humidweather.logic.model.response
+package me.atrin.humidweather.logic.model.place
 
 import com.google.gson.annotations.SerializedName
 

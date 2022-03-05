@@ -11,7 +11,7 @@ import com.drakeet.multitype.MultiTypeAdapter
 import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
 import me.atrin.humidweather.MainActivity
 import me.atrin.humidweather.databinding.FragmentPlaceBinding
-import me.atrin.humidweather.logic.model.PlaceKey
+import me.atrin.humidweather.logic.model.common.PlaceKey
 import me.atrin.humidweather.ui.base.BaseBindingFragment
 import me.atrin.humidweather.ui.weather.WeatherActivity
 

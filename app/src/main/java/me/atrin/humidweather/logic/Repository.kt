@@ -5,9 +5,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import me.atrin.humidweather.logic.dao.PlaceDao
-import me.atrin.humidweather.logic.model.ResponseStatus
-import me.atrin.humidweather.logic.model.Weather
-import me.atrin.humidweather.logic.model.response.Place
+import me.atrin.humidweather.logic.model.common.ResponseStatus
+import me.atrin.humidweather.logic.model.common.Weather
+import me.atrin.humidweather.logic.model.place.Place
 import me.atrin.humidweather.logic.network.HumidWeatherNetwork
 import kotlin.coroutines.CoroutineContext
 
@@ -36,8 +36,7 @@ object Repository {
             val dailyResponse = deferredDaily.await()
 
             if (realtimeResponse.status == ResponseStatus.OK && dailyResponse.status == ResponseStatus.OK) {
-                val weather =
-                    Weather(realtimeResponse.result.realtime, dailyResponse.result.daily)
+                val weather = Weather(realtimeResponse.result.realtime, dailyResponse.result.daily)
 
                 Result.success(weather)
             } else {
