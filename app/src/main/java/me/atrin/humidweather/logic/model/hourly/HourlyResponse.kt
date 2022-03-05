@@ -12,16 +12,19 @@ data class HourlyResponse(val status: String, val result: Result) {
         val description: String
     )
 
-    // 天气状况
-    data class Skycon(
-        val value: Float,
-        val datetime: Date
-    )
+    /**
+     * 天气状况
+     *
+     * @property value 数值
+     * @property datetime 时间
+     */
+    data class Skycon(val value: Float, val datetime: Date)
 
-    // 温度
-    data class Temperature(
-        val value: Float
-    )
-
+    /**
+     * 温度
+     *
+     * @property value 数值
+     */
+    data class Temperature(val value: Float)
 
 }

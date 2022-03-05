@@ -12,7 +12,14 @@ data class RealtimeResponse(val status: String, val result: Result) {
         @SerializedName("air_quality") val airQuality: AirQuality
     )
 
-    // 空气质量
+    /**
+     * 空气质量
+     *
+     * @property aqi AQI
+     * @property pm25 PM25
+     * @property pm10 PM10
+     * @property description 描述
+     */
     data class AirQuality(val aqi: AQI, val pm25: Int, val pm10: Int, val description: Description)
 
     data class AQI(val chn: Float, val usa: Float)
