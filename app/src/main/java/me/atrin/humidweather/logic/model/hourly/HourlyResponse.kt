@@ -18,7 +18,7 @@ data class HourlyResponse(val status: String, val result: Result) {
      * @property value 数值
      * @property datetime 时间
      */
-    data class Skycon(val value: Float, val datetime: Date)
+    data class Skycon(val value: String, val datetime: Date)
 
     /**
      * 温度

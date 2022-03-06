@@ -29,6 +29,8 @@
             android:layout_marginEnd="10dp"
             android:background="@drawable/search_bg"
             android:hint="输入地址"
+            android:importantForAutofill="no"
+            android:inputType="text"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:textColor="?android:attr/textColorPrimary"

@@ -16,10 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
 import com.zackratos.ultimatebarx.ultimatebarx.statusBar
 import me.atrin.humidweather.R
-import me.atrin.humidweather.databinding.ActivityWeatherBinding
-import me.atrin.humidweather.databinding.ForecastBinding
-import me.atrin.humidweather.databinding.LifeIndexBinding
-import me.atrin.humidweather.databinding.NowBinding
+import me.atrin.humidweather.databinding.*
 import me.atrin.humidweather.logic.model.common.Weather
 import me.atrin.humidweather.logic.model.common.getSky
 import me.atrin.humidweather.ui.base.BaseBindingActivity
@@ -32,6 +29,7 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
     }
 
     private lateinit var inclNowLayout: NowBinding
+    private lateinit var inclHourlyLayout: HourlyBinding
     private lateinit var inclForecastLayout: ForecastBinding
     private lateinit var inclLifeIndexLayout: LifeIndexBinding
 
@@ -39,6 +37,7 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
         super.onCreate(savedInstanceState)
 
         inclNowLayout = binding.includedNowLayout
+        inclHourlyLayout = binding.includedHourlyLayout
         inclForecastLayout = binding.includedForecastLayout
         inclLifeIndexLayout = binding.includedLifeIndexLayout
 
@@ -57,7 +56,7 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
             if (weather != null) {
                 showWeatherInfo(weather)
             } else {
-                Toast.makeText(this, "无法成功获取天气信息", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "无法获取天气信息", Toast.LENGTH_SHORT).show()
                 result.exceptionOrNull()?.printStackTrace()
             }
             binding.swipeRefresh.isRefreshing = false
@@ -111,6 +110,7 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
     private fun showWeatherInfo(weather: Weather) {
         val realtime = weather.realtime
         val daily = weather.daily
+        val hourly = weather.hourly
 
         // now.xml
         inclNowLayout.placeName.text = viewModel.placeName
@@ -121,10 +121,15 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
         val realtimeSky = getSky(realtime.skycon)
         inclNowLayout.currentSky.text = realtimeSky.info
 
-        val currentPM25Text = "空气指数 ${realtime.airQuality.aqi.chn.toInt()}"
-        inclNowLayout.currentAQI.text = currentPM25Text
+        val currentAQIText = "空气指数 ${realtime.airQuality.aqi.chn.toInt()}"
+        inclNowLayout.currentAQI.text = currentAQIText
 
         inclNowLayout.nowLayout.setBackgroundResource(realtimeSky.bg)
+
+        // TODO: hourly.xml
+        inclHourlyLayout.hourlyDescription.text = hourly.description
+
+        // TODO: hourly_item.xml
 
         // forecast.xml
         inclForecastLayout.forecastLayout.removeAllViews()
@@ -144,8 +149,8 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
             val dateInfo = view.findViewById<TextView>(R.id.dateInfo)
             val skyIcon = view.findViewById<ImageView>(R.id.skyIcon)
             val skyInfo = view.findViewById<TextView>(R.id.skyInfo)
-
             val temperatureInfo = view.findViewById<TextView>(R.id.temperatureInfo)
+
             val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
             dateInfo.text = simpleDateFormat.format(skycon.date)

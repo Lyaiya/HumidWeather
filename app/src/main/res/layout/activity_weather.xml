@@ -29,6 +29,10 @@
                     layout="@layout/now" />
 
                 <include
+                    android:id="@+id/includedHourlyLayout"
+                    layout="@layout/hourly" />
+
+                <include
                     android:id="@+id/includedForecastLayout"
                     layout="@layout/forecast" />
 
