@@ -81,7 +81,7 @@
                 android:layout_marginStart="13dp"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                tools:text="空气指数 53" />
+                tools:text="AQI(CN) 53" />
 
         </LinearLayout>
 
