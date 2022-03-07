@@ -2,8 +2,8 @@ package me.atrin.humidweather.ui.place
 
 import android.content.Intent
 import me.atrin.humidweather.databinding.PlaceItemBinding
-import me.atrin.humidweather.logic.model.common.PlaceKey
 import me.atrin.humidweather.logic.model.place.Place
+import me.atrin.humidweather.logic.model.place.PlaceKey
 import me.atrin.humidweather.ui.base.BaseBindingViewDelegate
 import me.atrin.humidweather.ui.weather.WeatherActivity
 
@@ -24,7 +24,7 @@ class PlaceViewDelegate(private val fragment: PlaceFragment) :
             fragment.activity?.finish()
         }
 
-        holder.binding.apply {
+        binding.apply {
             placeName.text = item.name
             placeAddress.text = item.address
         }

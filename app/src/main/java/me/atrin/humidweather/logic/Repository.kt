@@ -39,7 +39,10 @@ object Repository {
             val dailyResponse = deferredDaily.await()
             val hourlyResponse = deferredHourly.await()
 
-            if (realtimeResponse.status == ResponseStatus.OK && dailyResponse.status == ResponseStatus.OK) {
+            if (realtimeResponse.status == ResponseStatus.OK &&
+                dailyResponse.status == ResponseStatus.OK &&
+                hourlyResponse.status == ResponseStatus.OK
+            ) {
                 val weather = Weather(
                     realtimeResponse.result.realtime,
                     dailyResponse.result.daily,
@@ -51,7 +54,8 @@ object Repository {
                 Result.failure(
                     RuntimeException(
                         "realtime response status is ${realtimeResponse.status}" +
-                                "daily response status is ${dailyResponse.status}"
+                                "daily response status is ${dailyResponse.status}" +
+                                "hourly response status is ${hourlyResponse.status}"
                     )
                 )
             }

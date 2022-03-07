@@ -11,7 +11,7 @@ import com.drakeet.multitype.MultiTypeAdapter
 import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
 import me.atrin.humidweather.MainActivity
 import me.atrin.humidweather.databinding.FragmentPlaceBinding
-import me.atrin.humidweather.logic.model.common.PlaceKey
+import me.atrin.humidweather.logic.model.place.PlaceKey
 import me.atrin.humidweather.ui.base.BaseBindingFragment
 import me.atrin.humidweather.ui.weather.WeatherActivity
 
@@ -38,8 +38,7 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
         val bgImageView = binding.bgImageView
 
         // 设置 LayoutManager
-        val layoutManager = LinearLayoutManager(activity)
-        recyclerView.layoutManager = layoutManager
+        recyclerView.layoutManager = LinearLayoutManager(activity)
 
         // 设置 Adapter
         adapter = MultiTypeAdapter()

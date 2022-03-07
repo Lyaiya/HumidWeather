@@ -1,5 +1,6 @@
 package me.atrin.humidweather.logic.model.hourly
 
+import me.atrin.humidweather.logic.model.common.Sky
 import java.util.*
 
 data class HourlyResponse(val status: String, val result: Result) {
@@ -28,3 +29,5 @@ data class HourlyResponse(val status: String, val result: Result) {
     data class Temperature(val value: Float)
 
 }
+
+data class HourlyItem(val date: String, val skyIcon: Sky, val temperature: Float)

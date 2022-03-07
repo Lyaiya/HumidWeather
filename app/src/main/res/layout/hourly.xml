@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="15dp"
@@ -20,13 +21,13 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="?android:attr/textColorPrimary"
+            tools:text="多云，今天凌晨5点钟后转小雨，其后多云" />
 
-        <LinearLayout
-            android:id="@+id/hourlyLayout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/hourlyRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

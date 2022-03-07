@@ -13,16 +13,23 @@ import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.drakeet.multitype.MultiTypeAdapter
 import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
 import com.zackratos.ultimatebarx.ultimatebarx.statusBar
 import me.atrin.humidweather.R
 import me.atrin.humidweather.databinding.*
 import me.atrin.humidweather.logic.model.common.Weather
 import me.atrin.humidweather.logic.model.common.getSky
+import me.atrin.humidweather.logic.model.hourly.HourlyItem
 import me.atrin.humidweather.ui.base.BaseBindingActivity
 import java.util.*
 
 class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
+
+    companion object {
+        private const val TAG = "WeatherActivity"
+    }
 
     private val viewModel by lazy {
         ViewModelProvider(this)[WeatherViewModel::class.java]
@@ -32,6 +39,8 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
     private lateinit var inclHourlyLayout: HourlyBinding
     private lateinit var inclForecastLayout: ForecastBinding
     private lateinit var inclLifeIndexLayout: LifeIndexBinding
+
+    private lateinit var adapter: MultiTypeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,6 +102,21 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
 
             override fun onDrawerStateChanged(newState: Int) {}
         })
+
+        val recyclerView = binding.includedHourlyLayout.hourlyRecyclerView
+
+        // 设置 LayoutManager
+        val linearLayoutManager = LinearLayoutManager(this)
+        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        recyclerView.layoutManager = linearLayoutManager
+
+        // 设置 Adapter
+        adapter = MultiTypeAdapter()
+        adapter.register(HourlyViewDelegate())
+        // TODO
+        adapter.items = viewModel.hourlyList
+
+        recyclerView.adapter = adapter
     }
 
     override fun initBar() {
@@ -126,10 +150,29 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
 
         inclNowLayout.nowLayout.setBackgroundResource(realtimeSky.bg)
 
-        // TODO: hourly.xml
+        // hourly.xml
         inclHourlyLayout.hourlyDescription.text = hourly.description
 
-        // TODO: hourly_item.xml
+        // hourly_item.xml
+        val hourlyDays = hourly.skycon.size
+
+        if (viewModel.hourlyList.isNotEmpty()) {
+            viewModel.hourlyList.clear()
+        }
+
+        for (i in 0 until hourlyDays) {
+            val skycon = hourly.skycon[i]
+            val temperature = hourly.temperature[i]
+
+            val simpleDateFormat = SimpleDateFormat("aK", Locale.getDefault())
+            val hourlyItem = HourlyItem(
+                simpleDateFormat.format(skycon.datetime),
+                getSky(skycon.value),
+                temperature.value
+            )
+
+            viewModel.hourlyList.add(hourlyItem)
+        }
 
         // forecast.xml
         inclForecastLayout.forecastLayout.removeAllViews()
