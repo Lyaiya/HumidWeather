@@ -3,6 +3,7 @@ package me.atrin.humidweather.ui.weather
 import android.content.Context
 import android.graphics.Color
 import android.icu.text.SimpleDateFormat
+import android.icu.util.TimeZone
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -113,7 +114,6 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
         // 设置 Adapter
         adapter = MultiTypeAdapter()
         adapter.register(HourlyViewDelegate())
-        // TODO
         adapter.items = viewModel.hourlyList
 
         recyclerView.adapter = adapter
@@ -164,7 +164,16 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
             val skycon = hourly.skycon[i]
             val temperature = hourly.temperature[i]
 
-            val simpleDateFormat = SimpleDateFormat("aK", Locale.getDefault())
+            val nowDate = Date()
+
+            if (skycon.datetime.before(nowDate)) {
+                continue
+            }
+
+            val simpleDateFormat = SimpleDateFormat("a h 时", Locale.getDefault()).apply {
+                timeZone = TimeZone.getTimeZone("GMT+8:00")
+            }
+
             val hourlyItem = HourlyItem(
                 simpleDateFormat.format(skycon.datetime),
                 getSky(skycon.value),
@@ -173,6 +182,7 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
 
             viewModel.hourlyList.add(hourlyItem)
         }
+        adapter.notifyDataSetChanged()
 
         // forecast.xml
         inclForecastLayout.forecastLayout.removeAllViews()
