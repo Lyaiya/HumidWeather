@@ -107,9 +107,9 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
         val recyclerView = binding.includedHourlyLayout.hourlyRecyclerView
 
         // 设置 LayoutManager
-        val linearLayoutManager = LinearLayoutManager(this)
-        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        recyclerView.layoutManager = linearLayoutManager
+        recyclerView.layoutManager = LinearLayoutManager(this).apply {
+            orientation = LinearLayoutManager.HORIZONTAL
+        }
 
         // 设置 Adapter
         adapter = MultiTypeAdapter()
@@ -145,7 +145,7 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
         val realtimeSky = getSky(realtime.skycon)
         inclNowLayout.currentSky.text = realtimeSky.info
 
-        val currentAQIText = "空气指数 ${realtime.airQuality.aqi.chn.toInt()}"
+        val currentAQIText = "AQI(CN) ${realtime.airQuality.aqi.chn.toInt()}"
         inclNowLayout.currentAQI.text = currentAQIText
 
         inclNowLayout.nowLayout.setBackgroundResource(realtimeSky.bg)
@@ -154,16 +154,15 @@ class WeatherActivity : BaseBindingActivity<ActivityWeatherBinding>() {
         inclHourlyLayout.hourlyDescription.text = hourly.description
 
         // hourly_item.xml
-        val hourlyDays = hourly.skycon.size
-
         if (viewModel.hourlyList.isNotEmpty()) {
             viewModel.hourlyList.clear()
         }
 
+        val hourlyDays = hourly.skycon.size
+
         for (i in 0 until hourlyDays) {
             val skycon = hourly.skycon[i]
             val temperature = hourly.temperature[i]
-
             val nowDate = Date()
 
             if (skycon.datetime.before(nowDate)) {

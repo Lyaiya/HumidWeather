@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.HumidWeather" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.HumidWeather" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -15,7 +15,7 @@
     </style>
 
     <!-- FIXME 可能有更好的替换样式的方法-->
-    <style name="ButtonStyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="ButtonStyle" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/white</item>
     </style>
 
