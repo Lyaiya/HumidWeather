@@ -27,4 +27,23 @@ abstract class BaseBindingFragment<VB : ViewBinding> : Fragment() {
         _binding = null
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        defineView()
+        initSystemBar()
+    }
+
+    protected open fun defineView() {
+
+    }
+
+    protected open fun initSystemBar() {
+        // 初始化导航栏
+        // navigationBar {
+        //     light = true
+        //     transparent()
+        // }
+    }
+
 }

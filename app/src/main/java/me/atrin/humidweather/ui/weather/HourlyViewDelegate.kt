@@ -1,13 +1,13 @@
 package me.atrin.humidweather.ui.weather
 
-import me.atrin.humidweather.databinding.HourlyItemBinding
+import me.atrin.humidweather.databinding.ItemHourlyBinding
 import me.atrin.humidweather.logic.model.hourly.HourlyItem
 import me.atrin.humidweather.ui.base.BaseBindingViewDelegate
 
-class HourlyViewDelegate : BaseBindingViewDelegate<HourlyItem, HourlyItemBinding>() {
+class HourlyViewDelegate : BaseBindingViewDelegate<HourlyItem, ItemHourlyBinding>() {
 
     override fun onBindViewHolder(
-        binding: HourlyItemBinding,
+        binding: ItemHourlyBinding,
         item: HourlyItem,
         position: Int
     ) {
