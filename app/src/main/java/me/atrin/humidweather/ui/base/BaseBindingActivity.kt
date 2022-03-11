@@ -15,13 +15,13 @@ abstract class BaseBindingActivity<VB : ViewBinding> : AppCompatActivity() {
         binding = ViewBindingUtil.inflateWithGeneric(this, layoutInflater)
         setContentView(binding.root)
 
-        initBar()
+        initSystemBar()
     }
 
     /**
      * 初始化状态栏或导航栏
      */
-    protected open fun initBar() {
+    protected open fun initSystemBar() {
         // 初始化导航栏
         navigationBar {
             light = true

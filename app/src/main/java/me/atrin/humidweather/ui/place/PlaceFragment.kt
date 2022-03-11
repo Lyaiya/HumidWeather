@@ -1,37 +1,33 @@
 package me.atrin.humidweather.ui.place
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
 import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
-import me.atrin.humidweather.MainActivity
 import me.atrin.humidweather.databinding.FragmentPlaceBinding
-import me.atrin.humidweather.logic.model.place.PlaceKey
 import me.atrin.humidweather.ui.base.BaseBindingFragment
-import me.atrin.humidweather.ui.weather.WeatherActivity
 
 class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
 
-    val viewModel by lazy {
-        ViewModelProvider(this)[PlaceViewModel::class.java]
-    }
+    // val viewModel by lazy {
+    //     ViewModelProvider(this)[PlaceViewModel::class.java]
+    // }
+
+    val viewModel: PlaceViewModel by activityViewModels()
 
     private lateinit var adapter: MultiTypeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        moveToWeatherActivity()
+        // moveToWeatherActivity()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        initBar()
 
         val recyclerView = binding.recyclerView
         val searchPlaceEdit = binding.searchPlaceEdit
@@ -72,20 +68,20 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
         }
     }
 
-    private fun moveToWeatherActivity() {
-        if (activity is MainActivity && viewModel.isPlaceSaved()) {
-            val place = viewModel.getSavedPlace()
-            val intent = Intent(context, WeatherActivity::class.java).apply {
-                putExtra(PlaceKey.LOCATION_LNG, place.location.lng)
-                putExtra(PlaceKey.LOCATION_LAT, place.location.lat)
-                putExtra(PlaceKey.PLACE_NAME, place.name)
-            }
-            startActivity(intent)
-            activity?.finish()
-        }
-    }
+    // private fun moveToWeatherActivity() {
+    //     if (activity is MainActivity && viewModel.isPlaceSaved()) {
+    //         val place = viewModel.getSavedPlace()
+    //         val intent = Intent(context, WeatherActivity::class.java).apply {
+    //             putExtra(PlaceKey.LOCATION_LNG, place.location.lng)
+    //             putExtra(PlaceKey.LOCATION_LAT, place.location.lat)
+    //             putExtra(PlaceKey.PLACE_NAME, place.name)
+    //         }
+    //         startActivity(intent)
+    //         activity?.finish()
+    //     }
+    // }
 
-    private fun initBar() {
+    override fun initSystemBar() {
         binding.actionBarLayout.addStatusBarTopPadding()
     }
 
