@@ -34,16 +34,8 @@ abstract class BaseBindingFragment<VB : ViewBinding> : Fragment() {
         initSystemBar()
     }
 
-    protected open fun defineView() {
+    protected open fun defineView() {}
 
-    }
-
-    protected open fun initSystemBar() {
-        // 初始化导航栏
-        // navigationBar {
-        //     light = true
-        //     transparent()
-        // }
-    }
+    protected open fun initSystemBar() {}
 
 }

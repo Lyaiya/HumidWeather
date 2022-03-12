@@ -13,10 +13,6 @@ import me.atrin.humidweather.ui.base.BaseBindingFragment
 
 class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
 
-    // val viewModel by lazy {
-    //     ViewModelProvider(this)[PlaceViewModel::class.java]
-    // }
-
     val viewModel: PlaceViewModel by activityViewModels()
 
     private lateinit var adapter: MultiTypeAdapter

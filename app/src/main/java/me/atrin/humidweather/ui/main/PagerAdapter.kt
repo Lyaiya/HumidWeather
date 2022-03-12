@@ -9,7 +9,9 @@ import me.atrin.humidweather.ui.place.PlaceViewModel
 import me.atrin.humidweather.ui.weather.WeatherFragment
 
 class PagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
+
     override fun getItemCount(): Int {
+        // TODO: 多个地点
         return 3
     }
 

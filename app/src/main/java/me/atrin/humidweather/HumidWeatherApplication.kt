@@ -9,6 +9,8 @@ class HumidWeatherApplication : Application() {
     companion object {
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
+
+        // OPTIMIZE: 密钥应存储在本地
         const val TOKEN = "GQG7IE2PXti6FpBV"
     }
 
