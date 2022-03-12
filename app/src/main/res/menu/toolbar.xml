@@ -4,7 +4,14 @@
 
     <item
         android:id="@+id/place"
-        android:title="地点"
+        android:icon="@drawable/ic_location_city_rounded_black"
+        android:title="地址"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/setting"
+        android:icon="@drawable/ic_settings_rounded_black"
+        android:title="设置"
         app:showAsAction="ifRoom" />
 
 </menu>
