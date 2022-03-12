@@ -7,28 +7,8 @@
     android:background="@drawable/bg_partly_cloudy_day"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/titleLayout"
-        android:layout_width="match_parent"
-        android:layout_height="70dp">
-
-        <TextView
-            android:id="@+id/placeName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="60dp"
-            android:layout_marginEnd="60dp"
-            android:ellipsize="middle"
-            android:singleLine="true"
-            android:textColor="#fff"
-            android:textSize="24sp"
-            tools:text="珠海市" />
-
-    </FrameLayout>
-
+    <!-- OPTIMIZE: 布局修改 -->
     <LinearLayout
-        android:id="@+id/bodyLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

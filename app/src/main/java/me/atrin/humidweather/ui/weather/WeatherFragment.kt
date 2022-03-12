@@ -12,7 +12,6 @@ import androidx.core.view.isNotEmpty
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
-import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
 import com.zackratos.ultimatebarx.ultimatebarx.statusBar
 import me.atrin.humidweather.R
 import me.atrin.humidweather.databinding.*
@@ -20,6 +19,7 @@ import me.atrin.humidweather.logic.model.common.Weather
 import me.atrin.humidweather.logic.model.common.getSky
 import me.atrin.humidweather.logic.model.hourly.HourlyItem
 import me.atrin.humidweather.ui.base.BaseBindingFragment
+import me.atrin.humidweather.ui.main.MainActivity
 import me.atrin.humidweather.util.ResUtil
 import java.util.*
 
@@ -118,10 +118,10 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         super.initSystemBar()
         statusBar {
             transparent()
-            light = true
+            // light = true
         }
         // 给 titleLayout 增加状态栏高度
-        containerNow.titleLayout.addStatusBarTopPadding()
+        // containerNow.titleLayout.addStatusBarTopPadding()
     }
 
     private fun showWeatherInfo(weather: Weather) {
@@ -130,7 +130,10 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         val hourly = weather.hourly
 
         // now.xml
-        containerNow.placeName.text = viewModel.placeName
+        // containerNow.placeName.text = viewModel.placeName
+        // OPTIMIZE: 或许有更好的做法
+        val mainActivity = activity as MainActivity
+        mainActivity.binding.containerToolbar.toolbar.title = viewModel.placeName
 
         val currentTempText = "${realtime.temperature.toInt()} ℃"
         containerNow.currentTemp.text = currentTempText

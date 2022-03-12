@@ -31,14 +31,16 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:baselineAligned="false">
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_weight="1">
 
-                <!-- FIXME 深色模式下图片反色 -->
+                <!-- FIXME: 深色模式下图片反色 -->
+                <!-- OPTIMIZE: 图标更换-->
                 <ImageView
                     android:id="@+id/coldRiskImg"
                     android:layout_width="wrap_content"
