@@ -27,7 +27,7 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
         super.initSystemBar()
         statusBar {
             transparent()
-            light = true
+            // light = true
         }
         binding.containerToolbar.appBarLayout.addStatusBarTopPadding()
     }

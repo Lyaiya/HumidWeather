@@ -19,7 +19,7 @@
         android:layout_height="60dp"
         android:background="?android:colorPrimary">
 
-        <!-- FIXME 深色模式下背景还是白色-->
+        <!-- FIXME: 深色模式下背景还是白色-->
         <EditText
             android:id="@+id/searchPlaceEdit"
             android:layout_width="match_parent"

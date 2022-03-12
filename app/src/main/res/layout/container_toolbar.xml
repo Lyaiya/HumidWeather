@@ -13,7 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:theme="@style/Theme.HumidWeather.AppBarTheme"
         app:menu="@menu/toolbar"
-        app:title="Toolbar" />
+        app:titleCentered="true" />
 
 </com.google.android.material.appbar.AppBarLayout>
 
