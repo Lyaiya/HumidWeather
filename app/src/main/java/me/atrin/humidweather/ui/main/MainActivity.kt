@@ -29,7 +29,6 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
             transparent()
             light = true
         }
-        // FIXME: TOOLBAR
         binding.containerToolbar.appBarLayout.addStatusBarTopPadding()
     }
 

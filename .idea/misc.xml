@@ -7,9 +7,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/drawable/ic_location_city_rounded_black.xml" value="0.2155" />
+        <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/drawable/ic_settings_rounded_black.xml" value="0.2155" />
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/layout/activity_main.xml" value="0.2390625" />
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/layout/activity_weather.xml" value="0.25364583333333335" />
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/layout/container_forecast.xml" value="0.16847826086956522" />
+        <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/layout/container_life_index.xml" value="0.1125" />
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/layout/container_now.xml" value="0.2" />
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/layout/container_toolbar.xml" value="0.25364583333333335" />
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/layout/container_weather_toolbar.xml" value="0.16847826086956522" />

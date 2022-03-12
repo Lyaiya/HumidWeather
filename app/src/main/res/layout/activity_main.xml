@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
-    <!--FIXME: TOOLBAR-->
     <include
         android:id="@+id/containerToolbar"
         layout="@layout/container_toolbar" />
