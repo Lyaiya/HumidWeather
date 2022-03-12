@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
 import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
+import com.zackratos.ultimatebarx.ultimatebarx.statusBar
 import me.atrin.humidweather.R
 import me.atrin.humidweather.databinding.*
 import me.atrin.humidweather.logic.model.common.Weather
@@ -115,6 +116,10 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
     override fun initSystemBar() {
         super.initSystemBar()
+        statusBar {
+            transparent()
+            light = true
+        }
         // 给 titleLayout 增加状态栏高度
         containerNow.titleLayout.addStatusBarTopPadding()
     }
