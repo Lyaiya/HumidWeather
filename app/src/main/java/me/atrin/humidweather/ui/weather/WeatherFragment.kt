@@ -144,7 +144,7 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         val currentAQIText = "AQI(CN) ${realtime.airQuality.aqi.chn.toInt()}"
         containerNow.currentAQI.text = currentAQIText
 
-        containerNow.nowLayout.setBackgroundResource(realtimeSky.bg)
+        containerNow.nowContainer.setBackgroundResource(realtimeSky.bg)
 
         // hourly.xml
         containerHourly.hourlyDescription.text = hourly.description

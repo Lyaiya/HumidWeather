@@ -1,61 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nowLayout"
+    android:id="@+id/nowContainer"
     android:layout_width="match_parent"
     android:layout_height="530dp"
-    android:background="@drawable/bg_partly_cloudy_day"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:background="@drawable/bg_partly_cloudy_day">
 
-    <!-- OPTIMIZE: 布局修改 -->
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/currentTemp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical">
+        android:layout_above="@id/nowDetailLayout"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/white"
+        android:textSize="70sp"
+        tools:text="19 ℃" />
+
+    <LinearLayout
+        android:id="@+id/nowDetailLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp">
 
         <TextView
-            android:id="@+id/currentTemp"
+            android:id="@+id/currentSky"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textColor="#fff"
-            android:textSize="70sp"
-            tools:text="19 ℃" />
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:text="多云" />
 
-        <LinearLayout
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp">
+            android:layout_marginStart="12dp"
+            android:text="|"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/currentSky"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#fff"
-                android:textSize="18sp"
-                tools:text="多云" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="13dp"
-                android:text="|"
-                android:textColor="#fff"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/currentAQI"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="13dp"
-                android:textColor="#fff"
-                android:textSize="18sp"
-                tools:text="AQI(CN) 53" />
-
-        </LinearLayout>
-
+        <TextView
+            android:id="@+id/currentAQI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:text="AQI(CN) 53" />
     </LinearLayout>
 
 </RelativeLayout>
