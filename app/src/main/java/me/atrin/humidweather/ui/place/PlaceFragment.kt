@@ -7,7 +7,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
 import com.dylanc.longan.design.snackbar
-import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
 import me.atrin.humidweather.databinding.FragmentPlaceBinding
 import me.atrin.humidweather.ui.base.BaseBindingFragment
 
@@ -78,7 +77,7 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
     // }
 
     override fun initSystemBar() {
-        binding.actionBarLayout.addStatusBarTopPadding()
+        // binding.actionBarLayout.addStatusBarTopPadding()
     }
 
 }

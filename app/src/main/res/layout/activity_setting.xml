@@ -7,13 +7,13 @@
     tools:context=".ui.setting.SettingActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/settingAppBarLayout"
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:outlineProvider="none">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/settingToolbar"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/Theme.HumidWeather.AppBarTheme"
