@@ -13,6 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HumidWeather">
         <activity
+            android:name=".ui.setting.SettingActivity"
+            android:exported="true"
+            android:label="@string/title_activity_setting" />
+        <activity
+            android:name=".ui.management.ManagementActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>

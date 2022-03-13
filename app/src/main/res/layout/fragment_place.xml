@@ -13,7 +13,7 @@
         android:contentDescription="背景图片"
         android:src="@drawable/bg_place" />
 
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/actionBarLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -35,7 +35,7 @@
             android:paddingEnd="10dp"
             android:textColor="?android:attr/textColorPrimary"
             android:textColorHint="?android:attr/textColorPrimary" />
-    </FrameLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

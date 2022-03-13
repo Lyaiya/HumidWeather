@@ -26,4 +26,5 @@ class PagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) 
         }
         return weatherFragment
     }
+
 }

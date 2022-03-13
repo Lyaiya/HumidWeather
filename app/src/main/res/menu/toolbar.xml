@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/place"
-        android:icon="@drawable/ic_place_rounded_black"
+        android:id="@+id/management"
+        android:icon="@drawable/ic_management_rounded_black"
         android:title="地址"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/setting"
-        android:icon="@drawable/ic_settings_rounded_black"
+        android:icon="@drawable/ic_setting_rounded_black"
         android:title="设置"
         app:showAsAction="ifRoom" />
 
