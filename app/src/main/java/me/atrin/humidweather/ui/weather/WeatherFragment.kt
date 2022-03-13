@@ -7,11 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.isNotEmpty
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
+import com.dylanc.longan.design.snackbar
 import com.zackratos.ultimatebarx.ultimatebarx.statusBar
 import me.atrin.humidweather.R
 import me.atrin.humidweather.databinding.*
@@ -52,7 +52,7 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
             if (weather != null) {
                 showWeatherInfo(weather)
             } else {
-                Toast.makeText(requireContext(), "无法获取天气信息", Toast.LENGTH_SHORT).show()
+                snackbar("无法获取天气信息")
                 result.exceptionOrNull()?.printStackTrace()
             }
             binding.weatherSwipeRefresh.isRefreshing = false

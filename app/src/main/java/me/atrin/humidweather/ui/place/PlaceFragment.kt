@@ -2,11 +2,11 @@ package me.atrin.humidweather.ui.place
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
+import com.dylanc.longan.design.snackbar
 import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
 import me.atrin.humidweather.databinding.FragmentPlaceBinding
 import me.atrin.humidweather.ui.base.BaseBindingFragment
@@ -57,7 +57,7 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
                     viewModel.placeList.addAll(places)
                     adapter.notifyDataSetChanged()
                 } else {
-                    Toast.makeText(activity, "未能查询到任何地点", Toast.LENGTH_SHORT).show()
+                    snackbar("未能查询到任何地点")
                     result.exceptionOrNull()?.printStackTrace()
                 }
             }

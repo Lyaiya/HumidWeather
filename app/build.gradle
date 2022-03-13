@@ -24,7 +24,6 @@ android {
     }
 
     compileOptions {
-        // coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
@@ -42,6 +41,7 @@ dependencies {
     def lifecycle_version = "2.4.1"
     def retrofit2_version = "2.9.0"
     def nav_version = "2.4.1"
+    def longan_version = "1.0.5"
 
     implementation 'com.google.android.material:material:1.5.0'
 
@@ -78,7 +78,8 @@ dependencies {
 
     // GitHub: https://github.com/DylanCaiCoding/Longan
     // Docs: https://dylancaicoding.github.io/Longan
-    implementation 'com.github.DylanCaiCoding.Longan:longan:1.0.5'
+    implementation "com.github.DylanCaiCoding.Longan:longan:$longan_version"
+    implementation "com.github.DylanCaiCoding.Longan:longan-design:$longan_version"
 
     testImplementation 'junit:junit:4.13.2'
 

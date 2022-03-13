@@ -18,6 +18,7 @@ class SettingActivity : BaseBindingActivity<ActivitySettingBinding>() {
                 .replace(R.id.settings, SettingsFragment())
                 .commit()
         }
+        setSupportActionBar(binding.settingToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

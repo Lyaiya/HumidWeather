@@ -2,7 +2,6 @@ package me.atrin.humidweather.ui.main
 
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
-import com.dylanc.activityresult.launcher.StartActivityLauncher
 import com.dylanc.longan.startActivity
 import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
 import com.zackratos.ultimatebarx.ultimatebarx.statusBar
@@ -16,15 +15,10 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
 
     private lateinit var viewPager: ViewPager2
 
-    private lateinit var startActivityLauncher: StartActivityLauncher
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initViewPager()
-
-        startActivityLauncher = StartActivityLauncher(this)
 
         binding.containerToolbar.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -39,6 +33,15 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
                 else -> false
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // TODO: 检查网络状况
+        // if (isNetworkAvailable) {
+        //
+        // }
     }
 
     private fun initViewPager() {
