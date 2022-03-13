@@ -29,7 +29,7 @@
             android:background="@color/grey_300" />
 
         <LinearLayout
-            android:id="@+id/forecastLayout"
+            android:id="@+id/forecastItemLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />

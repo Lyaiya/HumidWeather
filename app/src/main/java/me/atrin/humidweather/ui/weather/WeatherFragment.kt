@@ -120,8 +120,6 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
             transparent()
             // light = true
         }
-        // 给 titleLayout 增加状态栏高度
-        // containerNow.titleLayout.addStatusBarTopPadding()
     }
 
     private fun showWeatherInfo(weather: Weather) {
@@ -129,8 +127,7 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         val daily = weather.daily
         val hourly = weather.hourly
 
-        // now.xml
-        // containerNow.placeName.text = viewModel.placeName
+        // Container Now
         // OPTIMIZE: 或许有更好的做法
         val mainActivity = activity as MainActivity
         mainActivity.binding.containerToolbar.toolbar.title = viewModel.placeName
@@ -146,10 +143,10 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
         containerNow.nowContainer.setBackgroundResource(realtimeSky.bg)
 
-        // hourly.xml
+        // Container Hourly
         containerHourly.hourlyDescription.text = hourly.description
 
-        // hourly_item.xml
+        // Item Hourly
         if (viewModel.hourlyList.isNotEmpty()) {
             viewModel.hourlyList.clear()
         }
@@ -179,9 +176,9 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         }
         adapter.notifyDataSetChanged()
 
-        // forecast.xml
-        if (containerForecast.forecastLayout.isNotEmpty()) {
-            containerForecast.forecastLayout.removeAllViews()
+        // Container Forecast
+        if (containerForecast.forecastItemLayout.isNotEmpty()) {
+            containerForecast.forecastItemLayout.removeAllViews()
         }
 
         val days = daily.skycon.size
@@ -192,7 +189,7 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
             val view = LayoutInflater.from(requireContext()).inflate(
                 R.layout.item_forecast,
-                containerForecast.forecastLayout,
+                containerForecast.forecastItemLayout,
                 false
             )
 
@@ -211,10 +208,10 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
             val tempText = "${temperature.min.toInt()} ~ ${temperature.max.toInt()} ℃"
             temperatureInfo.text = tempText
-            containerForecast.forecastLayout.addView(view)
+            containerForecast.forecastItemLayout.addView(view)
         }
 
-        // life_item.xml
+        // Container LifeIndex
         val lifeIndex = daily.lifeIndex
 
         containerLifeIndex.coldRiskText.text = lifeIndex.coldRisk[0].desc
