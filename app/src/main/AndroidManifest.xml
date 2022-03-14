@@ -14,11 +14,10 @@
         android:theme="@style/Theme.HumidWeather">
         <activity
             android:name=".ui.setting.SettingActivity"
-            android:exported="true"
-            android:label="@string/title_activity_setting" />
+            android:exported="false" />
         <activity
             android:name=".ui.management.ManagementActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">

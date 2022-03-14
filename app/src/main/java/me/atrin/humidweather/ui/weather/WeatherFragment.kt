@@ -18,6 +18,7 @@ import me.atrin.humidweather.databinding.*
 import me.atrin.humidweather.logic.model.common.Weather
 import me.atrin.humidweather.logic.model.common.getSky
 import me.atrin.humidweather.logic.model.hourly.HourlyItem
+import me.atrin.humidweather.logic.model.place.PlaceKey
 import me.atrin.humidweather.ui.base.BaseBindingFragment
 import me.atrin.humidweather.ui.main.MainActivity
 import me.atrin.humidweather.util.ResUtil
@@ -38,13 +39,13 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         if (viewModel.locationLng.isEmpty()) {
-            viewModel.locationLng = arguments?.getString("location_lng") ?: ""
+            viewModel.locationLng = arguments?.getString(PlaceKey.LOCATION_LNG) ?: ""
         }
         if (viewModel.locationLat.isEmpty()) {
-            viewModel.locationLat = arguments?.getString("location_lat") ?: ""
+            viewModel.locationLat = arguments?.getString(PlaceKey.LOCATION_LAT) ?: ""
         }
         if (viewModel.placeName.isEmpty()) {
-            viewModel.placeName = arguments?.getString("place_name") ?: ""
+            viewModel.placeName = arguments?.getString(PlaceKey.PLACE_NAME) ?: ""
         }
 
         viewModel.weatherLiveData.observe(viewLifecycleOwner) { result ->
@@ -66,30 +67,6 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
             refreshWeather()
         }
 
-        // // 点击按钮打开抽屉
-        // inclNowLayout.navBtn.setOnClickListener {
-        //     binding.drawerLayout.openDrawer(GravityCompat.START)
-        // }
-        //
-        // // 监听抽屉状态
-        // binding.drawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {
-        //     override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
-        //
-        //     override fun onDrawerOpened(drawerView: View) {}
-        //
-        //     override fun onDrawerClosed(drawerView: View) {
-        //         val manager = getSystemService(Context.INPUT_METHOD_SERVICE)
-        //                 as InputMethodManager
-        //         // 抽屉关闭时隐藏输入法
-        //         manager.hideSoftInputFromWindow(
-        //             drawerView.windowToken,
-        //             InputMethodManager.HIDE_NOT_ALWAYS
-        //         )
-        //     }
-        //
-        //     override fun onDrawerStateChanged(newState: Int) {}
-        // })
-
         val recyclerView = containerHourly.hourlyRecyclerView
 
         // 设置 LayoutManager
@@ -98,10 +75,10 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         }
 
         // 设置 Adapter
-        adapter = MultiTypeAdapter()
-        adapter.register(HourlyViewDelegate())
-        adapter.items = viewModel.hourlyList
-
+        adapter = MultiTypeAdapter().apply {
+            register(HourlyViewDelegate())
+            items = viewModel.hourlyList
+        }
         recyclerView.adapter = adapter
     }
 
@@ -128,7 +105,6 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         val hourly = weather.hourly
 
         // Container Now
-        // OPTIMIZE: 或许有更好的做法
         val mainActivity = activity as MainActivity
         mainActivity.binding.containerToolbar.toolbar.title = viewModel.placeName
 

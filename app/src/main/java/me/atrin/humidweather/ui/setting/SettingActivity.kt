@@ -1,7 +1,6 @@
 package me.atrin.humidweather.ui.setting
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.preference.PreferenceFragmentCompat
 import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
 import com.zackratos.ultimatebarx.ultimatebarx.statusBar
@@ -29,11 +28,9 @@ class SettingActivity : BaseBindingActivity<ActivitySettingBinding>() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-            }
+    override fun onSupportNavigateUp(): Boolean {
+        if (!super.onSupportNavigateUp()) {
+            finish()
         }
         return true
     }

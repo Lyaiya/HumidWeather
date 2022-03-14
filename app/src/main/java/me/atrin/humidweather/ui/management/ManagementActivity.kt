@@ -1,7 +1,8 @@
 package me.atrin.humidweather.ui.management
 
 import android.os.Bundle
-import android.view.MenuItem
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
 import com.zackratos.ultimatebarx.ultimatebarx.statusBar
 import me.atrin.humidweather.databinding.ActivityManagementBinding
@@ -20,11 +21,9 @@ class ManagementActivity : BaseBindingActivity<ActivityManagementBinding>() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-            }
+    override fun onSupportNavigateUp(): Boolean {
+        if (!super.onSupportNavigateUp()) {
+            finish()
         }
         return true
     }
@@ -38,10 +37,9 @@ class ManagementActivity : BaseBindingActivity<ActivityManagementBinding>() {
     }
 
     private fun showPlaceFragment() {
-        supportFragmentManager.beginTransaction().apply {
-            replace(binding.placeFragment.id, PlaceFragment())
+        supportFragmentManager.commit {
+            replace<PlaceFragment>(binding.placeFragment.id)
             addToBackStack(null)
-            commit()
         }
     }
 

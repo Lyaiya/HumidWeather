@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/management"
-        android:icon="@drawable/ic_management_rounded_black"
-        android:title="地址"
+        android:id="@+id/place_management"
+        android:icon="@drawable/ic_place_management_rounded_black"
+        android:title="@string/toolbar_menu_management_title"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/setting"
         android:icon="@drawable/ic_setting_rounded_black"
-        android:title="设置"
+        android:title="@string/toolbar_menu_setting_title"
         app:showAsAction="ifRoom" />
 
 </menu>

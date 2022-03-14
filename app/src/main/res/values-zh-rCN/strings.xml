@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HumidWeather</string>
+
+    <string name="toolbar_menu_management_title">地址管理</string>
+    <string name="toolbar_menu_setting_title">设置</string>
+
+    <string name="setting_appearance_title">外观</string>
+    <string name="setting_dark_theme_title">深色主题</string>
+    <string-array name="setting_dark_theme_entries">
+        <item>跟随系统</item>
+        <item>关闭</item>
+        <item>开启</item>
+    </string-array>
+
+    <string name="setting_basis_title">基础</string>
+    <string name="setting_unit_title">单位</string>
+</resources>

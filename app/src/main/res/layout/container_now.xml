@@ -4,8 +4,8 @@
     android:id="@+id/nowContainer"
     android:layout_width="match_parent"
     android:layout_height="530dp"
-    android:orientation="vertical"
-    tools:background="@drawable/bg_partly_cloudy_day">
+    android:background="@drawable/bg_clear_day"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/currentTemp"

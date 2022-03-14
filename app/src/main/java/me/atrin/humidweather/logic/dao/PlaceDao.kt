@@ -8,25 +8,26 @@ import me.atrin.humidweather.logic.model.place.Place
 
 object PlaceDao {
 
-    private const val KEY_PLACE = "place"
-    private const val KEY_APP_NAME = "humid_weather"
+    private const val PREF_TITLE_PLACE = "place"
+    private const val KEY_SAVED_PLACE = "saved_place"
+
+    private fun sharedPreferences() =
+        HumidWeatherApplication.context.getSharedPreferences(
+            PREF_TITLE_PLACE,
+            Context.MODE_PRIVATE
+        )
 
     fun savePlace(place: Place) {
         sharedPreferences().edit {
-            putString(KEY_PLACE, Gson().toJson(place))
+            putString(KEY_SAVED_PLACE, Gson().toJson(place))
         }
     }
 
     fun getSavedPlace(): Place {
-        val placeJson = sharedPreferences().getString(KEY_PLACE, "")
+        val placeJson = sharedPreferences().getString(KEY_SAVED_PLACE, "")
         return Gson().fromJson(placeJson, Place::class.java)
     }
 
-    fun isPlaceSaved() = sharedPreferences().contains(KEY_PLACE)
-
-    private fun sharedPreferences() = HumidWeatherApplication.context.getSharedPreferences(
-        KEY_APP_NAME,
-        Context.MODE_PRIVATE
-    )
+    fun isPlaceSaved() = sharedPreferences().contains(KEY_SAVED_PLACE)
 
 }
