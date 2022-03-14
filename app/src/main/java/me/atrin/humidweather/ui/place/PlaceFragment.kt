@@ -32,26 +32,32 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
         // 设置 Adapter
-        adapter = MultiTypeAdapter()
-        adapter.register(PlaceViewDelegate(this))
-        adapter.items = viewModel.placeList
-
+        adapter = MultiTypeAdapter().apply {
+            register(PlaceViewDelegate(this@PlaceFragment))
+            items = viewModel.placeList
+        }
         recyclerView.adapter = adapter
+
         searchPlaceEdit.addTextChangedListener { editable ->
             val content = editable.toString()
+
             if (content.isNotEmpty()) {
                 viewModel.searchPlaces(content)
             } else {
                 recyclerView.visibility = View.GONE
                 bgImageView.visibility = View.VISIBLE
+
                 viewModel.placeList.clear()
                 adapter.notifyDataSetChanged()
             }
+
             viewModel.placeLiveData.observe(viewLifecycleOwner) { result ->
                 val places = result.getOrNull()
+
                 if (places != null) {
                     recyclerView.visibility = View.VISIBLE
                     bgImageView.visibility = View.GONE
+
                     viewModel.placeList.clear()
                     viewModel.placeList.addAll(places)
                     adapter.notifyDataSetChanged()
@@ -75,9 +81,5 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
     //         activity?.finish()
     //     }
     // }
-
-    override fun initSystemBar() {
-        // binding.actionBarLayout.addStatusBarTopPadding()
-    }
 
 }
