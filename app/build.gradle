@@ -87,6 +87,10 @@ dependencies {
     // GitHub: https://github.com/RikkaApps/RikkaX
     implementation 'dev.rikka.rikkax.preference:simplemenu-preference:1.0.3'
 
+    // GitHub: https://github.com/Tencent/MMKV
+    // Docs: https://github.com/Tencent/MMKV/wiki/android_tutorial_cn
+    implementation 'com.tencent:mmkv:1.2.11'
+
     testImplementation 'junit:junit:4.13.2'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

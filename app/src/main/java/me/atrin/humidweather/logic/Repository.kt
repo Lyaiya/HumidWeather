@@ -4,7 +4,7 @@ import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import me.atrin.humidweather.logic.dao.PlaceDao
+import me.atrin.humidweather.logic.dao.PlaceKvDao
 import me.atrin.humidweather.logic.model.common.ResponseStatus
 import me.atrin.humidweather.logic.model.common.Weather
 import me.atrin.humidweather.logic.model.place.Place
@@ -15,6 +15,7 @@ object Repository {
 
     fun searchPlaces(query: String) = fire(Dispatchers.IO) {
         val placeResponse = HumidWeatherNetwork.searchPlaces(query)
+
         if (placeResponse.status == ResponseStatus.OK) {
             val places = placeResponse.places
             Result.success(places)
@@ -62,11 +63,11 @@ object Repository {
         }
     }
 
-    fun savePlace(place: Place) = PlaceDao.savePlace(place)
+    fun savePlace(place: Place) = PlaceKvDao.savePlace(place)
 
-    fun getSavedPlace() = PlaceDao.getSavedPlace()
+    fun getSavedPlace() = PlaceKvDao.getSavedPlace()
 
-    fun isPlaceSaved() = PlaceDao.isPlaceSaved()
+    fun isPlaceSaved() = PlaceKvDao.isPlaceSaved()
 
     private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>) =
         liveData(context) {

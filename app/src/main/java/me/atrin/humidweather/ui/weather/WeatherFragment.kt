@@ -3,13 +3,17 @@ package me.atrin.humidweather.ui.weather
 import android.icu.text.SimpleDateFormat
 import android.icu.util.TimeZone
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isNotEmpty
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.drakeet.multitype.MultiTypeAdapter
 import com.dylanc.longan.design.snackbar
 import com.zackratos.ultimatebarx.ultimatebarx.statusBar
@@ -18,56 +22,69 @@ import me.atrin.humidweather.databinding.*
 import me.atrin.humidweather.logic.model.common.Weather
 import me.atrin.humidweather.logic.model.common.getSky
 import me.atrin.humidweather.logic.model.hourly.HourlyItem
-import me.atrin.humidweather.logic.model.place.PlaceKey
 import me.atrin.humidweather.ui.base.BaseBindingFragment
 import me.atrin.humidweather.ui.main.MainActivity
+import me.atrin.humidweather.ui.main.MainViewModel
 import me.atrin.humidweather.util.ResUtil
 import java.util.*
 
 class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
-    private val viewModel: WeatherViewModel by viewModels()
+    companion object {
+        private const val TAG = "WeatherFragment"
+    }
+
+    private val weatherViewModel: WeatherViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     private lateinit var containerNow: ContainerNowBinding
     private lateinit var containerHourly: ContainerHourlyBinding
     private lateinit var containerForecast: ContainerForecastBinding
     private lateinit var containerLifeIndex: ContainerLifeIndexBinding
 
+    private lateinit var weatherSwipeRefresh: SwipeRefreshLayout
+    private lateinit var recyclerView: RecyclerView
+
     private lateinit var adapter: MultiTypeAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (viewModel.locationLng.isEmpty()) {
-            viewModel.locationLng = arguments?.getString(PlaceKey.LOCATION_LNG) ?: ""
-        }
-        if (viewModel.locationLat.isEmpty()) {
-            viewModel.locationLat = arguments?.getString(PlaceKey.LOCATION_LAT) ?: ""
-        }
-        if (viewModel.placeName.isEmpty()) {
-            viewModel.placeName = arguments?.getString(PlaceKey.PLACE_NAME) ?: ""
+        // mainViewModel.savedPlaceLiveData.observe(viewLifecycleOwner) { result ->
+        //     weatherViewModel.placeName = result.address
+        //     weatherViewModel.locationLng = result.location.lng
+        //     weatherViewModel.locationLat = result.location.lat
+        // }
+
+        if (mainViewModel.isPlaceSaved()) {
+            val savedPlace = mainViewModel.getSavedPlace()
+            Log.d(TAG, "onViewCreated: $savedPlace")
+
+            weatherViewModel.locationLng = savedPlace.location.lng
+            weatherViewModel.locationLat = savedPlace.location.lat
+            weatherViewModel.placeName = savedPlace.name
         }
 
-        viewModel.weatherLiveData.observe(viewLifecycleOwner) { result ->
+        weatherViewModel.weatherLiveData.observe(viewLifecycleOwner) { result ->
             val weather = result.getOrNull()
+
             if (weather != null) {
                 showWeatherInfo(weather)
             } else {
                 snackbar("无法获取天气信息")
                 result.exceptionOrNull()?.printStackTrace()
             }
-            binding.weatherSwipeRefresh.isRefreshing = false
+
+            weatherSwipeRefresh.isRefreshing = false
         }
 
-        binding.weatherSwipeRefresh.setColorSchemeColors(ResUtil.getColorPrimary(requireContext()))
+        weatherSwipeRefresh.setColorSchemeColors(ResUtil.getColorPrimary(requireContext()))
 
         refreshWeather()
 
-        binding.weatherSwipeRefresh.setOnRefreshListener {
+        weatherSwipeRefresh.setOnRefreshListener {
             refreshWeather()
         }
-
-        val recyclerView = containerHourly.hourlyRecyclerView
 
         // 设置 LayoutManager
         recyclerView.layoutManager = LinearLayoutManager(requireContext()).apply {
@@ -77,7 +94,7 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         // 设置 Adapter
         adapter = MultiTypeAdapter().apply {
             register(HourlyViewDelegate())
-            items = viewModel.hourlyList
+            items = weatherViewModel.hourlyList
         }
         recyclerView.adapter = adapter
     }
@@ -89,6 +106,9 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         containerHourly = binding.containerHourly
         containerForecast = binding.containerForecast
         containerLifeIndex = binding.containerLifeIndex
+
+        weatherSwipeRefresh = binding.weatherSwipeRefresh
+        recyclerView = containerHourly.hourlyRecyclerView
     }
 
     override fun initSystemBar() {
@@ -106,7 +126,7 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
         // Container Now
         val mainActivity = activity as MainActivity
-        mainActivity.binding.containerToolbar.toolbar.title = viewModel.placeName
+        mainActivity.binding.containerToolbar.toolbar.title = weatherViewModel.placeName
 
         val currentTempText = "${realtime.temperature.toInt()} ℃"
         containerNow.currentTemp.text = currentTempText
@@ -123,8 +143,8 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         containerHourly.hourlyDescription.text = hourly.description
 
         // Item Hourly
-        if (viewModel.hourlyList.isNotEmpty()) {
-            viewModel.hourlyList.clear()
+        if (weatherViewModel.hourlyList.isNotEmpty()) {
+            weatherViewModel.hourlyList.clear()
         }
 
         val hourlyDays = hourly.skycon.size
@@ -148,7 +168,7 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
                 temperature.value
             )
 
-            viewModel.hourlyList.add(hourlyItem)
+            weatherViewModel.hourlyList.add(hourlyItem)
         }
         adapter.notifyDataSetChanged()
 
@@ -198,8 +218,15 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
     }
 
     private fun refreshWeather() {
-        viewModel.refreshWeather(viewModel.locationLng, viewModel.locationLat)
-        binding.weatherSwipeRefresh.isRefreshing = true
+        if (weatherViewModel.locationLng.isNotEmpty() && weatherViewModel.locationLat.isNotEmpty()) {
+            weatherViewModel.refreshWeather(
+                weatherViewModel.locationLng, weatherViewModel.locationLat
+            )
+            weatherSwipeRefresh.isRefreshing = true
+        } else {
+            snackbar("数据为空")
+            weatherSwipeRefresh.isRefreshing = false
+        }
     }
 
 }

@@ -3,6 +3,7 @@ package me.atrin.humidweather
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import com.tencent.mmkv.MMKV
 
 class HumidWeatherApplication : Application() {
 
@@ -17,6 +18,7 @@ class HumidWeatherApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
+        MMKV.initialize(this)
     }
 
 }

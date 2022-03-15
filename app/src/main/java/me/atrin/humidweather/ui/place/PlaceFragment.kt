@@ -4,15 +4,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
 import com.dylanc.longan.design.snackbar
 import me.atrin.humidweather.databinding.FragmentPlaceBinding
 import me.atrin.humidweather.ui.base.BaseBindingFragment
+import me.atrin.humidweather.ui.main.MainViewModel
 
 class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
 
-    val viewModel: PlaceViewModel by activityViewModels()
+    val placeViewModel: PlaceViewModel by viewModels()
+    val mainViewModel: MainViewModel by activityViewModels()
 
     private lateinit var adapter: MultiTypeAdapter
 
@@ -34,7 +37,7 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
         // 设置 Adapter
         adapter = MultiTypeAdapter().apply {
             register(PlaceViewDelegate(this@PlaceFragment))
-            items = viewModel.placeList
+            items = placeViewModel.placeList
         }
         recyclerView.adapter = adapter
 
@@ -42,24 +45,24 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
             val content = editable.toString()
 
             if (content.isNotEmpty()) {
-                viewModel.searchPlaces(content)
+                placeViewModel.searchPlaces(content)
             } else {
                 recyclerView.visibility = View.GONE
                 bgImageView.visibility = View.VISIBLE
 
-                viewModel.placeList.clear()
+                placeViewModel.placeList.clear()
                 adapter.notifyDataSetChanged()
             }
 
-            viewModel.placeLiveData.observe(viewLifecycleOwner) { result ->
+            placeViewModel.placeLiveData.observe(viewLifecycleOwner) { result ->
                 val places = result.getOrNull()
 
                 if (places != null) {
                     recyclerView.visibility = View.VISIBLE
                     bgImageView.visibility = View.GONE
 
-                    viewModel.placeList.clear()
-                    viewModel.placeList.addAll(places)
+                    placeViewModel.placeList.clear()
+                    placeViewModel.placeList.addAll(places)
                     adapter.notifyDataSetChanged()
                 } else {
                     snackbar("未能查询到任何地点")
