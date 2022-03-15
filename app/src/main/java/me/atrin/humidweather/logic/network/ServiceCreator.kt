@@ -11,7 +11,7 @@ object ServiceCreator {
 
     private const val BASE_URL = "https://api.caiyunapp.com"
 
-    val moshi: Moshi = Moshi.Builder()
+    private val moshi: Moshi = Moshi.Builder()
         // TODO: 换掉 Date
         .addPlus<Date>(Rfc3339DateJsonAdapter())
         .build()
