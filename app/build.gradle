@@ -43,6 +43,7 @@ dependencies {
     def retrofit2_version = "2.9.0"
     def nav_version = "2.4.1"
     def longan_version = "1.0.5"
+    def moshi_version = "1.13.0"
 
     implementation 'com.google.android.material:material:1.5.0'
 
@@ -66,7 +67,7 @@ dependencies {
     // GitHub: https://github.com/square/retrofit
     // Docs: https://square.github.io/retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+    // implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit2_version"
 
     // GitHub: https://github.com/square/okio
@@ -78,8 +79,9 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
 
     // GitHub/Docs: https://github.com/square/moshi
-    implementation 'com.squareup.moshi:moshi:1.13.0'
-    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.13.0")
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    implementation "com.squareup.moshi:moshi-adapters:$moshi_version"
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:$moshi_version")
 
     // GitHub: https://github.com/DylanCaiCoding/ViewBindingKTX
     // Docs: https://dylancaicoding.github.io/ViewBindingKTX
@@ -105,7 +107,7 @@ dependencies {
 
     // GitHub: https://github.com/Tencent/MMKV
     // Docs: https://github.com/Tencent/MMKV/wiki/android_tutorial_cn
-    implementation 'com.tencent:mmkv:1.2.11'
+    // implementation 'com.tencent:mmkv:1.2.11'
     // GitHub: https://github.com/DylanCaiCoding/MMKV-KTX
     // Docs: https://github.com/DylanCaiCoding/MMKV-KTX/blob/master/README_CN.md
     implementation 'com.github.DylanCaiCoding:MMKV-KTX:1.2.11'

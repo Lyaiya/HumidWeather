@@ -60,9 +60,11 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
             val savedPlace = mainViewModel.getSavedPlace()
             Log.d(TAG, "onViewCreated: $savedPlace")
 
-            weatherViewModel.locationLng = savedPlace.location.lng
-            weatherViewModel.locationLat = savedPlace.location.lat
-            weatherViewModel.placeName = savedPlace.name
+            savedPlace!!.let {
+                weatherViewModel.locationLng = it.location.lng
+                weatherViewModel.locationLat = it.location.lat
+                weatherViewModel.placeName = it.name
+            }
         }
 
         weatherViewModel.weatherLiveData.observe(viewLifecycleOwner) { result ->
