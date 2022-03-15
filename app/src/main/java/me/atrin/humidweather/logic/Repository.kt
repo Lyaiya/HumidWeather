@@ -65,11 +65,14 @@ object Repository {
 
     fun savePlace(place: Place) = PlaceKvDao.savePlace(place)
 
-    fun getSavedPlace() = PlaceKvDao.getSavedPlace()
+    fun getSavedPlace() = PlaceKvDao.savedPlace
 
     fun isPlaceSaved() = PlaceKvDao.isPlaceSaved()
 
-    private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>) =
+    private fun <T> fire(
+        context: CoroutineContext,
+        block: suspend () -> Result<T>
+    ) =
         liveData(context) {
             val result = try {
                 block()

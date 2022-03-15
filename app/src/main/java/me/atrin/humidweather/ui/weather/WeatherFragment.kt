@@ -3,7 +3,6 @@ package me.atrin.humidweather.ui.weather
 import android.icu.text.SimpleDateFormat
 import android.icu.util.TimeZone
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -57,13 +56,10 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         // }
 
         if (mainViewModel.isPlaceSaved()) {
-            val savedPlace = mainViewModel.getSavedPlace()
-            Log.d(TAG, "onViewCreated: $savedPlace")
-
-            savedPlace!!.let {
-                weatherViewModel.locationLng = it.location.lng
-                weatherViewModel.locationLat = it.location.lat
-                weatherViewModel.placeName = it.name
+            mainViewModel.getSavedPlace().apply {
+                weatherViewModel.locationLng = this.location.lng
+                weatherViewModel.locationLat = this.location.lat
+                weatherViewModel.placeName = this.name
             }
         }
 
@@ -80,7 +76,11 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
             weatherSwipeRefresh.isRefreshing = false
         }
 
-        weatherSwipeRefresh.setColorSchemeColors(ResUtil.getColorPrimary(requireContext()))
+        weatherSwipeRefresh.setColorSchemeColors(
+            ResUtil.getColorPrimary(
+                requireContext()
+            )
+        )
 
         refreshWeather()
 
@@ -89,9 +89,10 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         }
 
         // 设置 LayoutManager
-        recyclerView.layoutManager = LinearLayoutManager(requireContext()).apply {
-            orientation = LinearLayoutManager.HORIZONTAL
-        }
+        recyclerView.layoutManager =
+            LinearLayoutManager(requireContext()).apply {
+                orientation = LinearLayoutManager.HORIZONTAL
+            }
 
         // 设置 Adapter
         adapter = MultiTypeAdapter().apply {
@@ -128,7 +129,8 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
         // Container Now
         val mainActivity = activity as MainActivity
-        mainActivity.binding.containerToolbar.toolbar.title = weatherViewModel.placeName
+        mainActivity.binding.containerToolbar.toolbar.title =
+            weatherViewModel.placeName
 
         val currentTempText = "${realtime.temperature.toInt()} ℃"
         containerNow.currentTemp.text = currentTempText
@@ -136,7 +138,8 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         val realtimeSky = getSky(realtime.skycon)
         containerNow.currentSky.text = realtimeSky.info
 
-        val currentAQIText = "AQI(CN) ${realtime.airQuality.aqi.chn.toInt()}"
+        val currentAQIText =
+            "AQI(CN) ${realtime.airQuality.aqi.chn.toInt()}"
         containerNow.currentAQI.text = currentAQIText
 
         containerNow.nowContainer.setBackgroundResource(realtimeSky.bg)
@@ -160,9 +163,10 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
                 continue
             }
 
-            val simpleDateFormat = SimpleDateFormat("a h 时", Locale.getDefault()).apply {
-                timeZone = TimeZone.getTimeZone("GMT+8:00")
-            }
+            val simpleDateFormat =
+                SimpleDateFormat("a h 时", Locale.getDefault()).apply {
+                    timeZone = TimeZone.getTimeZone("GMT+8:00")
+                }
 
             val hourlyItem = HourlyItem(
                 simpleDateFormat.format(skycon.datetime),
@@ -194,9 +198,11 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
             val dateInfo = view.findViewById<TextView>(R.id.dateInfo)
             val skyIcon = view.findViewById<ImageView>(R.id.skyIcon)
             val skyInfo = view.findViewById<TextView>(R.id.skyInfo)
-            val temperatureInfo = view.findViewById<TextView>(R.id.temperatureInfo)
+            val temperatureInfo =
+                view.findViewById<TextView>(R.id.temperatureInfo)
 
-            val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val simpleDateFormat =
+                SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
             dateInfo.text = simpleDateFormat.format(skycon.date)
             val sky = getSky(skycon.value)
@@ -204,7 +210,8 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
             skyIcon.setImageResource(sky.icon)
             skyInfo.text = sky.info
 
-            val tempText = "${temperature.min.toInt()} ~ ${temperature.max.toInt()} ℃"
+            val tempText =
+                "${temperature.min.toInt()} ~ ${temperature.max.toInt()} ℃"
             temperatureInfo.text = tempText
             containerForecast.forecastItemLayout.addView(view)
         }
@@ -214,8 +221,10 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
         containerLifeIndex.coldRiskText.text = lifeIndex.coldRisk[0].desc
         containerLifeIndex.dressingText.text = lifeIndex.dressing[0].desc
-        containerLifeIndex.ultravioletText.text = lifeIndex.ultraviolet[0].desc
-        containerLifeIndex.carWashingText.text = lifeIndex.carWashing[0].desc
+        containerLifeIndex.ultravioletText.text =
+            lifeIndex.ultraviolet[0].desc
+        containerLifeIndex.carWashingText.text =
+            lifeIndex.carWashing[0].desc
         binding.weatherScrollView.visibility = View.VISIBLE
     }
 
