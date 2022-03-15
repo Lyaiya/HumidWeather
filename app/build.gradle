@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'com.google.devtools.ksp' version '1.6.10-1.0.2'
+    id 'com.google.devtools.ksp'
 }
 
 android {
@@ -64,10 +64,11 @@ dependencies {
 
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
+
     // GitHub: https://github.com/square/retrofit
     // Docs: https://square.github.io/retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
-    // implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit2_version"
 
     // GitHub: https://github.com/square/okio
@@ -107,7 +108,6 @@ dependencies {
 
     // GitHub: https://github.com/Tencent/MMKV
     // Docs: https://github.com/Tencent/MMKV/wiki/android_tutorial_cn
-    // implementation 'com.tencent:mmkv:1.2.11'
     // GitHub: https://github.com/DylanCaiCoding/MMKV-KTX
     // Docs: https://github.com/DylanCaiCoding/MMKV-KTX/blob/master/README_CN.md
     implementation 'com.github.DylanCaiCoding:MMKV-KTX:1.2.11'

@@ -8,6 +8,7 @@
       <option name="LINE_COMMENT_ADD_SPACE" value="true" />
     </codeStyleSettings>
     <codeStyleSettings language="JAVA">
+      <option name="RIGHT_MARGIN" value="76" />
       <option name="LINE_COMMENT_AT_FIRST_COLUMN" value="false" />
       <option name="LINE_COMMENT_ADD_SPACE" value="true" />
     </codeStyleSettings>
