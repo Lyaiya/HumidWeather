@@ -1,9 +1,9 @@
 package me.atrin.humidweather.logic.dao
 
-import com.google.gson.Gson
 import com.tencent.mmkv.MMKV
 import me.atrin.humidweather.logic.model.place.Place
-import me.atrin.humidweather.util.fromJson
+import me.atrin.humidweather.logic.network.ServiceCreator
+import me.atrin.humidweather.util.adapterPlus
 
 object PlaceKvDao {
 
@@ -12,23 +12,16 @@ object PlaceKvDao {
 
     private val kv = MMKV.defaultMMKV()
 
-    fun savePlace(place: Place) =
-        kv.encode(KEY_SAVED_PLACE, Gson().toJson(place))
+    private val placeAdapter by lazy {
+        ServiceCreator.moshi.adapterPlus<Place>()
+    }
 
-    fun getSavedPlace(): Place =
-        Gson().fromJson<Place>(kv.decodeString(KEY_SAVED_PLACE) ?: "")
+    fun savePlace(place: Place) =
+        kv.encode(KEY_SAVED_PLACE, placeAdapter.toJson(place))
+
+    fun getSavedPlace(): Place? =
+        placeAdapter.fromJson(kv.decodeString(KEY_SAVED_PLACE))
 
     fun isPlaceSaved() = kv.contains(KEY_SAVED_PLACE)
-
-    fun savePlaceToList(placeList: List<Place>) =
-        kv.encode(KEY_SAVED_PLACE_LIST, Gson().toJson(placeList))
-
-    // fun getSavedPlaceList(): List<Place> {
-    //     val typeOf = object : TypeToken<List<Place>>() {}.type
-    //     return Gson().fromJson(kv.decodeStringSet(KEY_SAVED_PLACE_LIST), typeOf)
-    //
-    // }
-
-    fun isPlaceListEmpty() = kv.contains(KEY_SAVED_PLACE_LIST)
 
 }

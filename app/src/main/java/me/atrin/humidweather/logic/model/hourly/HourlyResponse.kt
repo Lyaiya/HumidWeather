@@ -1,12 +1,16 @@
 package me.atrin.humidweather.logic.model.hourly
 
+import com.squareup.moshi.JsonClass
 import me.atrin.humidweather.logic.model.common.Sky
 import java.util.*
 
+@JsonClass(generateAdapter = true)
 data class HourlyResponse(val status: String, val result: Result) {
 
+    @JsonClass(generateAdapter = true)
     data class Result(val hourly: Hourly)
 
+    @JsonClass(generateAdapter = true)
     data class Hourly(
         val skycon: List<Skycon>,
         val temperature: List<Temperature>,
@@ -19,6 +23,7 @@ data class HourlyResponse(val status: String, val result: Result) {
      * @property value 数值
      * @property datetime 时间
      */
+    @JsonClass(generateAdapter = true)
     data class Skycon(val value: String, val datetime: Date)
 
     /**
@@ -26,6 +31,7 @@ data class HourlyResponse(val status: String, val result: Result) {
      *
      * @property value 数值
      */
+    @JsonClass(generateAdapter = true)
     data class Temperature(val value: Float)
 
 }

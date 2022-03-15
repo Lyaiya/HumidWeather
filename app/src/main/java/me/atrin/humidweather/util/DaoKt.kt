@@ -1,6 +1,7 @@
 package me.atrin.humidweather.util
 
-import com.google.gson.Gson
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
 
-inline fun <reified T> Gson.fromJson(json: String) =
-    fromJson(json, T::class.java)
+inline fun <reified T> Moshi.adapterPlus(): JsonAdapter<T> =
+    adapter(T::class.java)

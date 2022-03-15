@@ -1,16 +1,20 @@
 package me.atrin.humidweather.logic.model.daily
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import java.util.*
 
+@JsonClass(generateAdapter = true)
 data class DailyResponse(val status: String, val result: Result) {
 
+    @JsonClass(generateAdapter = true)
     data class Result(val daily: Daily)
 
+    @JsonClass(generateAdapter = true)
     data class Daily(
         val temperature: List<Temperature>,
         val skycon: List<Skycon>,
-        @SerializedName("life_index") val lifeIndex: LifeIndex,
+        @Json(name = "life_index") val lifeIndex: LifeIndex,
         val astro: List<Astro>,
         val wind: List<Wind>,
         val precipitation: List<Precipitation>,
@@ -26,6 +30,7 @@ data class DailyResponse(val status: String, val result: Result) {
      * @param min 最小值
      * @param avg 平均值
      */
+    @JsonClass(generateAdapter = true)
     data class Temperature(val max: Float, val min: Float, val avg: Float)
 
     /**
@@ -34,6 +39,7 @@ data class DailyResponse(val status: String, val result: Result) {
      * @param value 数值
      * @param date 日期
      */
+    @JsonClass(generateAdapter = true)
     data class Skycon(val value: String, val date: Date)
 
     /**
@@ -45,6 +51,7 @@ data class DailyResponse(val status: String, val result: Result) {
      * @param dressing 穿衣指数
      * @param comfort 舒适度指数
      */
+    @JsonClass(generateAdapter = true)
     data class LifeIndex(
         val coldRisk: List<LifeDescription>,
         val carWashing: List<LifeDescription>,
@@ -53,6 +60,7 @@ data class DailyResponse(val status: String, val result: Result) {
         val comfort: List<LifeDescription>
     )
 
+    @JsonClass(generateAdapter = true)
     data class LifeDescription(val desc: String)
 
     /**
@@ -61,8 +69,10 @@ data class DailyResponse(val status: String, val result: Result) {
      * @param sunrise 日出时间
      * @param sunset 日落时间
      */
+    @JsonClass(generateAdapter = true)
     data class Astro(val sunrise: AstroTime, val sunset: AstroTime)
 
+    @JsonClass(generateAdapter = true)
     data class AstroTime(val time: String)
 
     /**
@@ -72,7 +82,9 @@ data class DailyResponse(val status: String, val result: Result) {
      * @property min 最小值
      * @property avg 平均值
      */
+    @JsonClass(generateAdapter = true)
     data class Wind(val max: WindDetail, val min: WindDetail, val avg: WindDetail)
+
 
     /**
      * 风的详情
@@ -80,6 +92,7 @@ data class DailyResponse(val status: String, val result: Result) {
      * @property speed 风力
      * @property direction 风向
      */
+    @JsonClass(generateAdapter = true)
     data class WindDetail(val speed: Float, val direction: Float)
 
     /**
@@ -89,6 +102,7 @@ data class DailyResponse(val status: String, val result: Result) {
      * @property min 最小值
      * @property avg 平均值
      */
+    @JsonClass(generateAdapter = true)
     data class Precipitation(val max: Float, val min: Float, val avg: Float)
 
     /**
@@ -98,6 +112,7 @@ data class DailyResponse(val status: String, val result: Result) {
      * @property min 最小值
      * @property avg 平均值
      */
+    @JsonClass(generateAdapter = true)
     data class Humidity(val max: Float, val min: Float, val avg: Float)
 
     /**
@@ -106,6 +121,7 @@ data class DailyResponse(val status: String, val result: Result) {
      * @property max 最大值
      * @property min 最小值
      * @property avg 平均值     */
+    @JsonClass(generateAdapter = true)
     data class Visibility(val max: Float, val min: Float, val avg: Float)
 
     /**
@@ -115,6 +131,7 @@ data class DailyResponse(val status: String, val result: Result) {
      * @property min 最小值
      * @property avg 平均值
      */
+    @JsonClass(generateAdapter = true)
     data class Pressure(val max: Float, val min: Float, val avg: Float)
 
 }
