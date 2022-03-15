@@ -1,11 +1,8 @@
 package me.atrin.humidweather.ui.place
 
-import androidx.core.os.bundleOf
 import me.atrin.humidweather.databinding.ItemPlaceBinding
 import me.atrin.humidweather.logic.model.place.Place
-import me.atrin.humidweather.logic.model.place.PlaceKey
 import me.atrin.humidweather.ui.base.BaseBindingViewDelegate
-import me.atrin.humidweather.ui.main.MainActivity
 
 class PlaceViewDelegate(private val fragment: PlaceFragment) :
     BaseBindingViewDelegate<Place, ItemPlaceBinding>() {
@@ -14,15 +11,9 @@ class PlaceViewDelegate(private val fragment: PlaceFragment) :
         val holder = BindingViewHolder(binding)
 
         holder.itemView.setOnClickListener {
-            fragment.viewModel.savePlace(item)
-
-            MainActivity.start(
-                bundleOf(
-                    PlaceKey.LOCATION_LNG to item.location.lng,
-                    PlaceKey.LOCATION_LAT to item.location.lat,
-                    PlaceKey.PLACE_NAME to item.name
-                )
-            )
+            fragment.mainViewModel.savePlace(item)
+            // TODO: 优雅地切换 Activity
+            // startActivity<MainActivity>()
             fragment.activity?.finish()
         }
 
