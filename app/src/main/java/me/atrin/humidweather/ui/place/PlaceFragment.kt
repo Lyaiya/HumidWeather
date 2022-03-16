@@ -1,11 +1,14 @@
 package me.atrin.humidweather.ui.place
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.drakeet.multitype.MultiTypeAdapter
 import com.dylanc.longan.design.snackbar
 import me.atrin.humidweather.databinding.FragmentPlaceBinding
@@ -14,10 +17,17 @@ import me.atrin.humidweather.ui.main.MainViewModel
 
 class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
 
-    val placeViewModel: PlaceViewModel by viewModels()
+    companion object {
+        private const val TAG = "PlaceFragment"
+    }
+
     val mainViewModel: MainViewModel by activityViewModels()
+    val placeViewModel: PlaceViewModel by viewModels()
 
     private lateinit var adapter: MultiTypeAdapter
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var bgImageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +36,6 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val recyclerView = binding.recyclerView
-        val searchPlaceEdit = binding.searchPlaceEdit
-        val bgImageView = binding.bgImageView
 
         // 设置 LayoutManager
         recyclerView.layoutManager = LinearLayoutManager(activity)
@@ -41,34 +47,58 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
         }
         recyclerView.adapter = adapter
 
-        searchPlaceEdit.addTextChangedListener { editable ->
-            val content = editable.toString()
+        // 搜索框文本监听
+        binding.searchBar.addTextChangedListener { text ->
+            placeViewModel.setPlaceName(text.toString())
+        }
 
-            if (content.isNotEmpty()) {
-                placeViewModel.searchPlaces(content)
-            } else {
-                recyclerView.visibility = View.GONE
-                bgImageView.visibility = View.VISIBLE
+        createObserver()
+    }
+
+    override fun defineView() {
+        super.defineView()
+
+        recyclerView = binding.recyclerView
+        bgImageView = binding.bgImageView
+    }
+
+    private fun createObserver() {
+        placeViewModel.placeNameLiveData.observe(viewLifecycleOwner) { placeName: String ->
+            Log.d(TAG, "onViewCreated: \"$placeName\"")
+            if (placeName.isBlank()) {
+                showPlaces(false)
 
                 placeViewModel.placeList.clear()
                 adapter.notifyDataSetChanged()
+            } else {
+                // TODO: 延迟响应数据
+                placeViewModel.searchPlaces(placeName)
             }
+        }
 
-            placeViewModel.placeLiveData.observe(viewLifecycleOwner) { result ->
-                val places = result.getOrNull()
+        placeViewModel.placeLiveData.observe(viewLifecycleOwner) { result ->
+            val places = result.getOrNull()
 
-                if (places != null) {
-                    recyclerView.visibility = View.VISIBLE
-                    bgImageView.visibility = View.GONE
+            if (places != null) {
+                showPlaces(true)
 
-                    placeViewModel.placeList.clear()
-                    placeViewModel.placeList.addAll(places)
-                    adapter.notifyDataSetChanged()
-                } else {
-                    snackbar("未能查询到任何地点")
-                    result.exceptionOrNull()?.printStackTrace()
-                }
+                placeViewModel.placeList.clear()
+                placeViewModel.placeList.addAll(places)
+                adapter.notifyDataSetChanged()
+            } else {
+                snackbar("未能查询到任何地点")
+                result.exceptionOrNull()?.printStackTrace()
             }
+        }
+    }
+
+    private fun showPlaces(boolean: Boolean) {
+        if (boolean) {
+            recyclerView.visibility = View.VISIBLE
+            bgImageView.visibility = View.GONE
+        } else {
+            recyclerView.visibility = View.GONE
+            bgImageView.visibility = View.VISIBLE
         }
     }
 
