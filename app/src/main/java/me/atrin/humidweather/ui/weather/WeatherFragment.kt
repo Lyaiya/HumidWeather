@@ -3,6 +3,7 @@ package me.atrin.humidweather.ui.weather
 import android.icu.text.SimpleDateFormat
 import android.icu.util.TimeZone
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -21,19 +22,18 @@ import me.atrin.humidweather.databinding.*
 import me.atrin.humidweather.logic.model.common.Weather
 import me.atrin.humidweather.logic.model.common.getSky
 import me.atrin.humidweather.logic.model.hourly.HourlyItem
+import me.atrin.humidweather.logic.model.place.PlaceKey
 import me.atrin.humidweather.ui.base.BaseBindingFragment
-import me.atrin.humidweather.ui.main.MainActivity
 import me.atrin.humidweather.ui.main.MainViewModel
 import me.atrin.humidweather.util.ResUtil
 import java.util.*
 
-class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
+class WeatherFragment(position: Int) :
+    BaseBindingFragment<FragmentWeatherBinding>() {
 
-    companion object {
-        private const val TAG = "WeatherFragment"
-    }
+    private val TAG = "WeatherFragment #$position"
 
-    private val weatherViewModel: WeatherViewModel by viewModels()
+    val weatherViewModel: WeatherViewModel by viewModels()
     private val mainViewModel: MainViewModel by activityViewModels()
 
     private lateinit var containerNow: ContainerNowBinding
@@ -55,13 +55,15 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         //     weatherViewModel.locationLat = result.location.lat
         // }
 
-        if (mainViewModel.isPlaceSaved()) {
-            mainViewModel.getSavedPlace().apply {
-                weatherViewModel.locationLng = this.location.lng
-                weatherViewModel.locationLat = this.location.lat
-                weatherViewModel.placeName = this.name
-            }
-        }
+        // if (mainViewModel.isPlaceSaved()) {
+        //     mainViewModel.getSavedPlace().apply {
+        //         weatherViewModel.locationLng = this.location.lng
+        //         weatherViewModel.locationLat = this.location.lat
+        //         weatherViewModel.placeName = this.name
+        //     }
+        // }
+
+        loadWeatherData()
 
         weatherViewModel.weatherLiveData.observe(viewLifecycleOwner) { result ->
             val weather = result.getOrNull()
@@ -122,16 +124,59 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         }
     }
 
+    private fun loadWeatherData() {
+        requireArguments().let {
+            if (it.containsKey(PlaceKey.LOCATION_LNG)) {
+                val newLng = it.getString(PlaceKey.LOCATION_LNG, "")
+
+                Log.d(TAG, "loadWeatherData: setLng")
+                Log.d(
+                    TAG,
+                    "loadWeatherData: oldLng = ${weatherViewModel.locationLng}"
+                )
+                Log.d(TAG, "loadWeatherData: newLng = $newLng")
+
+                weatherViewModel.locationLng = newLng
+            }
+            if (it.containsKey(PlaceKey.LOCATION_LAT)) {
+                val newLat = it.getString(PlaceKey.LOCATION_LAT, "")
+
+                Log.d(TAG, "loadWeatherData: setLat")
+                Log.d(
+                    TAG,
+                    "loadWeatherData: oldLat = ${weatherViewModel.locationLat}"
+                )
+                Log.d(
+                    TAG,
+                    "loadWeatherData: newLat = $newLat"
+                )
+
+                weatherViewModel.locationLat = newLat
+            }
+            if (it.containsKey(PlaceKey.PLACE_NAME)) {
+                val newPlaceName = it.getString(PlaceKey.PLACE_NAME, "")
+
+                Log.d(TAG, "loadWeatherData: setPlaceName")
+                Log.d(
+                    TAG,
+                    "loadWeatherData: oldPlaceName = ${weatherViewModel.placeName}"
+                )
+                Log.d(
+                    TAG,
+                    "loadWeatherData: newPlaceName = $newPlaceName"
+                )
+
+                weatherViewModel.placeName = newPlaceName
+            }
+        }
+    }
+
     private fun showWeatherInfo(weather: Weather) {
         val realtime = weather.realtime
         val daily = weather.daily
         val hourly = weather.hourly
 
         // Container Now
-        val mainActivity = activity as MainActivity
-        mainActivity.binding.containerToolbar.toolbar.title =
-            weatherViewModel.placeName
-
         val currentTempText = "${realtime.temperature.toInt()} ℃"
         containerNow.currentTemp.text = currentTempText
 
@@ -229,12 +274,16 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
     }
 
     private fun refreshWeather() {
-        if (weatherViewModel.locationLng.isNotEmpty() && weatherViewModel.locationLat.isNotEmpty()) {
+        // OPTIMIZE: 优化刷新机制
+        if (weatherViewModel.locationIsNotEmpty()) {
+            Log.d(TAG, "refreshWeather: true")
             weatherViewModel.refreshWeather(
-                weatherViewModel.locationLng, weatherViewModel.locationLat
+                weatherViewModel.locationLng,
+                weatherViewModel.locationLat
             )
             weatherSwipeRefresh.isRefreshing = true
         } else {
+            Log.d(TAG, "refreshWeather: false")
             snackbar("数据为空")
             weatherSwipeRefresh.isRefreshing = false
         }
