@@ -5,7 +5,7 @@ import com.dylanc.mmkv.mmkvParcelable
 import me.atrin.humidweather.logic.model.place.Location
 import me.atrin.humidweather.logic.model.place.Place
 
-object PlaceKvDao : MMKVOwner {
+object PlaceDao : MMKVOwner {
 
     var savedPlace by mmkvParcelable(
         default = Place(
