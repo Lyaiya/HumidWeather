@@ -4,7 +4,7 @@ import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import me.atrin.humidweather.logic.dao.PlaceKvDao
+import me.atrin.humidweather.logic.dao.PlaceDao
 import me.atrin.humidweather.logic.model.common.ResponseStatus
 import me.atrin.humidweather.logic.model.common.Weather
 import me.atrin.humidweather.logic.model.place.Place
@@ -63,23 +63,22 @@ object Repository {
         }
     }
 
-    fun savePlace(place: Place) = PlaceKvDao.savePlace(place)
+    fun savePlace(place: Place) = PlaceDao.savePlace(place)
 
-    fun getSavedPlace() = PlaceKvDao.savedPlace
+    fun getSavedPlace() = PlaceDao.savedPlace
 
-    fun isPlaceSaved() = PlaceKvDao.isPlaceSaved()
+    fun isPlaceSaved() = PlaceDao.isPlaceSaved()
 
     private fun <T> fire(
         context: CoroutineContext,
         block: suspend () -> Result<T>
-    ) =
-        liveData(context) {
-            val result = try {
-                block()
-            } catch (e: Exception) {
-                Result.failure(e)
-            }
-            emit(result)
+    ) = liveData(context) {
+        val result = try {
+            block()
+        } catch (e: Exception) {
+            Result.failure(e)
         }
+        emit(result)
+    }
 
 }
