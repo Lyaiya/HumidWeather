@@ -3,31 +3,42 @@ package me.atrin.humidweather.ui.main
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.dylanc.longan.logDebug
 import me.atrin.humidweather.logic.model.place.PlaceKey
 import me.atrin.humidweather.ui.weather.WeatherFragment
+
 
 class PagerAdapter(activity: MainActivity) :
     FragmentStateAdapter(activity) {
 
-    companion object {
-        private const val TAG = "PagerAdapter"
-    }
-
     private val mainViewModel = activity.mainViewModel
+    private var isSavedPlaceListEmpty = false
 
-    val fragments by lazy {
-        mutableMapOf<Int, WeatherFragment>()
+    override fun getItemCount(): Int {
+        val size = mainViewModel.savedPlaceList.size
+
+        if (size == 0) {
+            isSavedPlaceListEmpty = true
+            logDebug("getItemCount() returned: 0, savedPlaceList is empty")
+            return 1
+        }
+
+        isSavedPlaceListEmpty = false
+        logDebug("getItemCount() returned: $size")
+        return size
     }
-
-    override fun getItemCount() = mainViewModel.places.size
 
     override fun createFragment(position: Int): Fragment {
-        val place = mainViewModel.places[position]
-        val fragment = fragments[position]
-
-        if (fragment != null) {
-            return fragment
+        if (isSavedPlaceListEmpty) {
+            // TODO: 初次打开时的默认页
+            return WeatherFragment(-1)
         }
+
+        logDebug("createFragment() called with: position = $position")
+
+        val place = mainViewModel.savedPlaceList.toList()[position]
+
+        logDebug("createFragment: place = $place")
 
         val newFragment = WeatherFragment(position).apply {
             arguments = bundleOf(
@@ -36,7 +47,6 @@ class PagerAdapter(activity: MainActivity) :
                 PlaceKey.PLACE_NAME to place.name
             )
         }
-        fragments[position] = newFragment
         return newFragment
     }
 

@@ -7,14 +7,23 @@ import me.atrin.humidweather.ui.base.BaseBindingViewDelegate
 class PlaceViewDelegate(private val fragment: PlaceFragment) :
     BaseBindingViewDelegate<Place, ItemPlaceBinding>() {
 
-    override fun onBindViewHolder(binding: ItemPlaceBinding, item: Place, position: Int) {
+    override fun onBindViewHolder(
+        binding: ItemPlaceBinding,
+        item: Place,
+        position: Int
+    ) {
         val holder = BindingViewHolder(binding)
 
         holder.itemView.setOnClickListener {
-            fragment.mainViewModel.savePlace(item)
-            // TODO: 优雅地切换 Activity
-            // startActivity<MainActivity>()
-            fragment.activity?.finish()
+            fragment.apply {
+                mainViewModel.apply {
+                    savePlace(item)
+                    refresh()
+                }
+                // TODO: 优雅地切换 Activity
+                // startActivity<MainActivity>()
+                activity?.finish()
+            }
         }
 
         binding.apply {

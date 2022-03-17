@@ -9,14 +9,14 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:outlineProvider="none">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/managementToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/Theme.HumidWeather.AppBarTheme"
+            app:menu="@menu/activity_management_toolbar"
             app:title="地址" />
 
     </com.google.android.material.appbar.AppBarLayout>

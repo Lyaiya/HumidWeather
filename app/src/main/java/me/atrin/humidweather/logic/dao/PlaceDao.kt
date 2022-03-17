@@ -1,27 +1,37 @@
 package me.atrin.humidweather.logic.dao
 
+import com.dylanc.longan.logInfo
 import com.dylanc.mmkv.MMKVOwner
-import com.dylanc.mmkv.mmkvParcelable
-import me.atrin.humidweather.logic.model.place.Location
+import com.dylanc.mmkv.mmkvStringSet
+import com.squareup.moshi.adapter
 import me.atrin.humidweather.logic.model.place.Place
+import me.atrin.humidweather.logic.network.ServiceCreator
 
 object PlaceDao : MMKVOwner {
 
-    var savedPlace by mmkvParcelable(
-        default = Place(
-            "",
-            Location("", ""),
-            ""
-        )
+    val adapter = ServiceCreator.moshi.adapter<Place>()
+
+    var savedPlaceSet by mmkvStringSet(
+        default = emptySet()
     )
 
-    fun savePlace(place: Place) {
-        savedPlace = place
+    fun savePlace(newPlace: Place) {
+        val newPlaceText = adapter.toJson(newPlace)
+
+        logInfo("savePlace: newSavedPlace: $newPlaceText")
+
+        savedPlaceSet.forEachIndexed { index, place ->
+            logInfo("savePlace: oldSavedPlaces #$index: $place")
+        }
+
+        // FIXME: 顺序问题
+        savedPlaceSet = savedPlaceSet + newPlaceText
+
+        savedPlaceSet.forEachIndexed { index, place ->
+            logInfo("savePlace: newSavedPlaces #$index: $place")
+        }
     }
 
-    fun isPlaceSaved(): Boolean = !(savedPlace.name.isEmpty()
-            || savedPlace.location.lng.isEmpty()
-            || savedPlace.location.lat.isEmpty()
-            || savedPlace.address.isEmpty())
+    fun deleteAllSavedPlaces() = kv.clearAll()
 
 }
