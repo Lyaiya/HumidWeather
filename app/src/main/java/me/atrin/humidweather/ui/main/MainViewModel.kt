@@ -1,45 +1,33 @@
 package me.atrin.humidweather.ui.main
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.dylanc.longan.logDebug
 import me.atrin.humidweather.logic.Repository
-import me.atrin.humidweather.logic.model.place.Location
 import me.atrin.humidweather.logic.model.place.Place
 
 class MainViewModel : ViewModel() {
 
-    // private val _savedPlaceLiveData by lazy {
-    //     MutableLiveData<Place>()
-    // }
-    //
-    // val savedPlaceLiveData =
-    //     Transformations.switchMap(_savedPlaceLiveData) {
-    //         liveData<Place> { getSavedPlace() }
-    //     }
+    private val refreshLiveData by lazy {
+        MutableLiveData<Any?>()
+    }
 
-    fun savePlace(place: Place) = Repository.savePlace(place)
-
-    fun getSavedPlace() = Repository.getSavedPlace()
-
-    fun isPlaceSaved() = Repository.isPlaceSaved()
-
-    private val _placesCountLiveData by lazy {
-        MutableLiveData<Int>().also {
-            it.value = getPlacesCount()
+    // 2. 监听
+    val savedPlacesLiveData = Transformations.switchMap(refreshLiveData) {
+        MutableLiveData<Set<Place>>().also {
+            it.value = Repository.getSavedPlaceSet()
         }
     }
 
-    val placesCountLiveData: LiveData<Int>
-        get() = _placesCountLiveData
+    val savedPlaceList = ArrayList<Place>()
 
-    private fun getPlacesCount() = 3
+    fun savePlace(place: Place) = Repository.savePlace(place)
 
-    val places by lazy {
-        mutableListOf<Place>().also {
-            it.add(Place("珠海市", Location("113.57", "22.27"), ""))
-            it.add(Place("广州市", Location("113.27", "23.13"), ""))
-        }
+    // 1. 调用
+    fun refresh() {
+        logDebug("refresh: start")
+        refreshLiveData.value = refreshLiveData.value
     }
 
 }

@@ -3,19 +3,19 @@ package me.atrin.humidweather.ui.weather
 import android.icu.text.SimpleDateFormat
 import android.icu.util.TimeZone
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isNotEmpty
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.drakeet.multitype.MultiTypeAdapter
+import com.dylanc.longan.Logger
 import com.dylanc.longan.design.snackbar
+import com.dylanc.longan.logDebug
 import com.zackratos.ultimatebarx.ultimatebarx.statusBar
 import me.atrin.humidweather.R
 import me.atrin.humidweather.databinding.*
@@ -24,17 +24,16 @@ import me.atrin.humidweather.logic.model.common.getSky
 import me.atrin.humidweather.logic.model.hourly.HourlyItem
 import me.atrin.humidweather.logic.model.place.PlaceKey
 import me.atrin.humidweather.ui.base.BaseBindingFragment
-import me.atrin.humidweather.ui.main.MainViewModel
 import me.atrin.humidweather.util.ResUtil
 import java.util.*
 
-class WeatherFragment(position: Int) :
-    BaseBindingFragment<FragmentWeatherBinding>() {
+class WeatherFragment(private val position: Int) :
+    BaseBindingFragment<FragmentWeatherBinding>(), Logger {
 
-    private val TAG = "WeatherFragment #$position"
+    override val loggerTag: String
+        get() = "${super.loggerTag} #${position}"
 
     val weatherViewModel: WeatherViewModel by viewModels()
-    private val mainViewModel: MainViewModel by activityViewModels()
 
     private lateinit var containerNow: ContainerNowBinding
     private lateinit var containerHourly: ContainerHourlyBinding
@@ -48,20 +47,7 @@ class WeatherFragment(position: Int) :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // mainViewModel.savedPlaceLiveData.observe(viewLifecycleOwner) { result ->
-        //     weatherViewModel.placeName = result.address
-        //     weatherViewModel.locationLng = result.location.lng
-        //     weatherViewModel.locationLat = result.location.lat
-        // }
-
-        // if (mainViewModel.isPlaceSaved()) {
-        //     mainViewModel.getSavedPlace().apply {
-        //         weatherViewModel.locationLng = this.location.lng
-        //         weatherViewModel.locationLat = this.location.lat
-        //         weatherViewModel.placeName = this.name
-        //     }
-        // }
+        logDebug("onViewCreated: start")
 
         loadWeatherData()
 
@@ -120,51 +106,38 @@ class WeatherFragment(position: Int) :
         super.initSystemBar()
         statusBar {
             transparent()
-            // light = true
         }
     }
 
     private fun loadWeatherData() {
+        if (position == -1) {
+            return
+        }
         requireArguments().let {
             if (it.containsKey(PlaceKey.LOCATION_LNG)) {
                 val newLng = it.getString(PlaceKey.LOCATION_LNG, "")
 
-                Log.d(TAG, "loadWeatherData: setLng")
-                Log.d(
-                    TAG,
-                    "loadWeatherData: oldLng = ${weatherViewModel.locationLng}"
-                )
-                Log.d(TAG, "loadWeatherData: newLng = $newLng")
+                logDebug("loadWeatherData: setLng")
+                logDebug("loadWeatherData: oldLng = ${weatherViewModel.locationLng}")
+                logDebug("loadWeatherData: newLng = $newLng")
 
                 weatherViewModel.locationLng = newLng
             }
             if (it.containsKey(PlaceKey.LOCATION_LAT)) {
                 val newLat = it.getString(PlaceKey.LOCATION_LAT, "")
 
-                Log.d(TAG, "loadWeatherData: setLat")
-                Log.d(
-                    TAG,
-                    "loadWeatherData: oldLat = ${weatherViewModel.locationLat}"
-                )
-                Log.d(
-                    TAG,
-                    "loadWeatherData: newLat = $newLat"
-                )
+                logDebug("loadWeatherData: setLat")
+                logDebug("loadWeatherData: oldLat = ${weatherViewModel.locationLat}")
+                logDebug("loadWeatherData: newLat = $newLat")
 
                 weatherViewModel.locationLat = newLat
             }
             if (it.containsKey(PlaceKey.PLACE_NAME)) {
                 val newPlaceName = it.getString(PlaceKey.PLACE_NAME, "")
 
-                Log.d(TAG, "loadWeatherData: setPlaceName")
-                Log.d(
-                    TAG,
-                    "loadWeatherData: oldPlaceName = ${weatherViewModel.placeName}"
-                )
-                Log.d(
-                    TAG,
-                    "loadWeatherData: newPlaceName = $newPlaceName"
-                )
+                logDebug("loadWeatherData: setPlaceName")
+                logDebug("loadWeatherData: oldPlaceName = ${weatherViewModel.placeName}")
+                logDebug("loadWeatherData: newPlaceName = $newPlaceName")
 
                 weatherViewModel.placeName = newPlaceName
             }
@@ -172,6 +145,7 @@ class WeatherFragment(position: Int) :
     }
 
     private fun showWeatherInfo(weather: Weather) {
+        logDebug("showWeatherInfo: start")
         val realtime = weather.realtime
         val daily = weather.daily
         val hourly = weather.hourly
@@ -276,14 +250,14 @@ class WeatherFragment(position: Int) :
     private fun refreshWeather() {
         // OPTIMIZE: 优化刷新机制
         if (weatherViewModel.locationIsNotEmpty()) {
-            Log.d(TAG, "refreshWeather: true")
+            logDebug("refreshWeather: true")
             weatherViewModel.refreshWeather(
                 weatherViewModel.locationLng,
                 weatherViewModel.locationLat
             )
             weatherSwipeRefresh.isRefreshing = true
         } else {
-            Log.d(TAG, "refreshWeather: false")
+            logDebug("refreshWeather: false")
             snackbar("数据为空")
             weatherSwipeRefresh.isRefreshing = false
         }

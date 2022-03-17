@@ -14,7 +14,7 @@
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/drawable/ic_settings_rounded_black.xml" value="0.2155" />
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/drawable/ic_ultraviolet_black.xml" value="0.196" />
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/layout/activity_main.xml" value="0.2390625" />
-        <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/layout/activity_management.xml" value="0.13269927536231885" />
+        <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/layout/activity_management.xml" value="0.1" />
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/layout/activity_setting.xml" value="0.25364583333333335" />
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/layout/activity_weather.xml" value="0.25364583333333335" />
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/layout/container_forecast.xml" value="0.16847826086956522" />
@@ -39,6 +39,8 @@
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/layout/place_item.xml" value="0.25364583333333335" />
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/layout/settings_activity.xml" value="0.13269927536231885" />
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/menu/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/menu/activity_main_toolbar.xml" value="0.25364583333333335" />
+        <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/menu/activity_management_toolbar.xml" value="0.25364583333333335" />
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/menu/weather_menu_nav.xml" value="0.25364583333333335" />
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.196" />
         <entry key="..\:/Workspace/AndroidProjects/HumidWeather/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.207" />
