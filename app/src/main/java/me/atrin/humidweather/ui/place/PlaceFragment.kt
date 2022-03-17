@@ -67,7 +67,7 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
                 placeViewModel.searchedPlaceList.clear()
                 adapter.notifyDataSetChanged()
             } else {
-                // TODO: 延迟响应数据
+                // OPTIMIZE: 延迟响应数据
                 placeViewModel.searchPlaces(placeName)
             }
         }
