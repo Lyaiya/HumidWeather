@@ -20,7 +20,7 @@ class PlaceViewDelegate(private val fragment: PlaceFragment) :
                     savePlace(item)
                     refresh()
                 }
-                // TODO: 优雅地切换 Activity
+                // OPTIMIZE: 优雅地切换 Activity
                 // startActivity<MainActivity>()
                 activity?.finish()
             }

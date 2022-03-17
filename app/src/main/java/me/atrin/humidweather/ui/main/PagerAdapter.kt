@@ -30,7 +30,7 @@ class PagerAdapter(activity: MainActivity) :
 
     override fun createFragment(position: Int): Fragment {
         if (isSavedPlaceListEmpty) {
-            // TODO: 初次打开时的默认页
+            // OPTIMIZE: 初次打开时的默认页
             return WeatherFragment(-1)
         }
 
