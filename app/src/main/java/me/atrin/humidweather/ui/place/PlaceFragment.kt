@@ -22,8 +22,8 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
         private const val TAG = "PlaceFragment"
     }
 
-    val mainViewModel: MainViewModel by activityViewModels()
-    val placeViewModel: PlaceViewModel by viewModels()
+    val mainViewModel by activityViewModels<MainViewModel>()
+    val placeViewModel by viewModels<PlaceViewModel>()
 
     private lateinit var adapter: MultiTypeAdapter
 

@@ -33,7 +33,7 @@ class WeatherFragment(private val position: Int) :
     override val loggerTag: String
         get() = "${super.loggerTag} #${position}"
 
-    val weatherViewModel: WeatherViewModel by viewModels()
+    val weatherViewModel by viewModels<WeatherViewModel>()
 
     private lateinit var containerNow: ContainerNowBinding
     private lateinit var containerHourly: ContainerHourlyBinding
