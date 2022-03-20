@@ -15,7 +15,7 @@ import me.atrin.humidweather.ui.place.PlaceFragment
 class ManagementActivity :
     BaseBindingActivity<ActivityManagementBinding>() {
 
-    val managementViewModel: ManagementViewModel by viewModels()
+    val managementViewModel by viewModels<ManagementViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

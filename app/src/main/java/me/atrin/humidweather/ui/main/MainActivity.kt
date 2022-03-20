@@ -16,7 +16,7 @@ import me.atrin.humidweather.ui.weather.WeatherFragment
 
 class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
 
-    val mainViewModel: MainViewModel by viewModels()
+    val mainViewModel by viewModels<MainViewModel>()
 
     private lateinit var viewPager: ViewPager2
     private lateinit var pagerAdapter: PagerAdapter
