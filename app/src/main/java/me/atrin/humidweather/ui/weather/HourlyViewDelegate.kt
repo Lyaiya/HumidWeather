@@ -14,7 +14,7 @@ class HourlyViewDelegate : BaseBindingViewDelegate<HourlyItem, ItemHourlyBinding
         binding.apply {
             hourlyDateInfo.text = item.date
             hourlySkyIcon.setBackgroundResource(item.skyIcon.icon)
-            hourlyTemperatureInfo.text = "${item.temperature} ℃"
+            hourlyTemperatureInfo.text = "${item.temperature}°C"
         }
     }
 

@@ -18,12 +18,8 @@ import me.atrin.humidweather.ui.main.MainViewModel
 
 class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
 
-    companion object {
-        private const val TAG = "PlaceFragment"
-    }
-
-    val mainViewModel by activityViewModels<MainViewModel>()
-    val placeViewModel by viewModels<PlaceViewModel>()
+    val placeViewModel: PlaceViewModel by viewModels()
+    val mainViewModel: MainViewModel by activityViewModels()
 
     private lateinit var adapter: MultiTypeAdapter
 
@@ -33,22 +29,14 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 设置 LayoutManager
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-
-        // 设置 Adapter
-        adapter = MultiTypeAdapter().apply {
-            register(PlaceViewDelegate(this@PlaceFragment))
-            items = placeViewModel.searchedPlaceList
-        }
-        recyclerView.adapter = adapter
+        initRecyclerView()
 
         // 搜索框文本监听
         binding.searchBar.addTextChangedListener { text ->
             placeViewModel.setPlaceName(text.toString())
         }
 
-        createObserver()
+        initObserver()
     }
 
     override fun defineView() {
@@ -58,13 +46,25 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
         bgImageView = binding.bgImageView
     }
 
-    private fun createObserver() {
+    private fun initRecyclerView() {
+        // 设置 LayoutManager
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        // 设置 Adapter
+        adapter = MultiTypeAdapter().apply {
+            register(PlaceViewDelegate(this@PlaceFragment))
+            items = placeViewModel.searchResultPlaceList
+        }
+        recyclerView.adapter = adapter
+    }
+
+    private fun initObserver() {
         placeViewModel.placeNameLiveData.observe(viewLifecycleOwner) { placeName: String ->
             logDebug("onViewCreated: placeName = $placeName")
             if (placeName.isBlank()) {
                 showSearchedPlaces(false)
 
-                placeViewModel.searchedPlaceList.clear()
+                placeViewModel.searchResultPlaceList.clear()
                 adapter.notifyDataSetChanged()
             } else {
                 // OPTIMIZE: 延迟响应数据
@@ -79,8 +79,8 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
             if (places != null) {
                 showSearchedPlaces(true)
 
-                placeViewModel.searchedPlaceList.clear()
-                placeViewModel.searchedPlaceList.addAll(places)
+                placeViewModel.searchResultPlaceList.clear()
+                placeViewModel.searchResultPlaceList.addAll(places)
                 adapter.notifyDataSetChanged()
             } else {
                 snackbar("未能查询到任何地点")

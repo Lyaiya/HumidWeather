@@ -8,10 +8,10 @@ import me.atrin.humidweather.logic.model.place.PlaceKey
 import me.atrin.humidweather.ui.weather.WeatherFragment
 
 
-class PagerAdapter(activity: MainActivity) :
-    FragmentStateAdapter(activity) {
+class PagerAdapter(mainActivity: MainActivity) :
+    FragmentStateAdapter(mainActivity) {
 
-    private val mainViewModel = activity.mainViewModel
+    private val mainViewModel = mainActivity.mainViewModel
     private var isSavedPlaceListEmpty = false
 
     override fun getItemCount(): Int {

@@ -33,7 +33,7 @@ class WeatherFragment(private val position: Int) :
     override val loggerTag: String
         get() = "${super.loggerTag} #${position}"
 
-    val weatherViewModel by viewModels<WeatherViewModel>()
+    val weatherViewModel: WeatherViewModel by viewModels()
 
     private lateinit var containerNow: ContainerNowBinding
     private lateinit var containerHourly: ContainerHourlyBinding
@@ -50,49 +50,15 @@ class WeatherFragment(private val position: Int) :
         logDebug("onViewCreated: start")
 
         loadWeatherData()
-
-        weatherViewModel.weatherLiveData.observe(viewLifecycleOwner) { result ->
-            val weather = result.getOrNull()
-
-            if (weather != null) {
-                showWeatherInfo(weather)
-            } else {
-                snackbar("无法获取天气信息")
-                result.exceptionOrNull()?.printStackTrace()
-            }
-
-            weatherSwipeRefresh.isRefreshing = false
-        }
-
-        weatherSwipeRefresh.setColorSchemeColors(
-            ResUtil.getColorPrimary(
-                requireContext()
-            )
-        )
-
+        initObserver()
+        initSwipeRefresh()
+        initRecyclerView()
         refreshWeather()
 
-        weatherSwipeRefresh.setOnRefreshListener {
-            refreshWeather()
-        }
-
-        // 设置 LayoutManager
-        recyclerView.layoutManager =
-            LinearLayoutManager(requireContext()).apply {
-                orientation = LinearLayoutManager.HORIZONTAL
-            }
-
-        // 设置 Adapter
-        adapter = MultiTypeAdapter().apply {
-            register(HourlyViewDelegate())
-            items = weatherViewModel.hourlyList
-        }
-        recyclerView.adapter = adapter
+        logDebug("onViewCreated: end")
     }
 
     override fun defineView() {
-        super.defineView()
-
         containerNow = binding.containerNow
         containerHourly = binding.containerHourly
         containerForecast = binding.containerForecast
@@ -110,6 +76,7 @@ class WeatherFragment(private val position: Int) :
     }
 
     private fun loadWeatherData() {
+        logDebug("loadWeatherData: start")
         if (position == -1) {
             return
         }
@@ -142,6 +109,49 @@ class WeatherFragment(private val position: Int) :
                 weatherViewModel.placeName = newPlaceName
             }
         }
+        logDebug("loadWeatherData: end")
+    }
+
+    private fun initObserver() {
+        weatherViewModel.weatherLiveData.observe(viewLifecycleOwner) { result ->
+            val weather = result.getOrNull()
+
+            if (weather != null) {
+                showWeatherInfo(weather)
+            } else {
+                snackbar("无法获取天气信息")
+                result.exceptionOrNull()?.printStackTrace()
+            }
+
+            weatherSwipeRefresh.isRefreshing = false
+        }
+    }
+
+    private fun initSwipeRefresh() {
+        weatherSwipeRefresh.setColorSchemeColors(
+            ResUtil.getColorPrimary(
+                requireContext()
+            )
+        )
+
+        weatherSwipeRefresh.setOnRefreshListener {
+            refreshWeather()
+        }
+    }
+
+    private fun initRecyclerView() {
+        // 设置 LayoutManager
+        recyclerView.layoutManager =
+            LinearLayoutManager(requireContext()).apply {
+                orientation = LinearLayoutManager.HORIZONTAL
+            }
+
+        // 设置 Adapter
+        adapter = MultiTypeAdapter().apply {
+            register(HourlyViewDelegate())
+            items = weatherViewModel.hourlyList
+        }
+        recyclerView.adapter = adapter
     }
 
     private fun showWeatherInfo(weather: Weather) {
@@ -151,7 +161,7 @@ class WeatherFragment(private val position: Int) :
         val hourly = weather.hourly
 
         // Container Now
-        val currentTempText = "${realtime.temperature.toInt()} ℃"
+        val currentTempText = "${realtime.temperature.toInt()}°C"
         containerNow.currentTemp.text = currentTempText
 
         val realtimeSky = getSky(realtime.skycon)
@@ -230,7 +240,7 @@ class WeatherFragment(private val position: Int) :
             skyInfo.text = sky.info
 
             val tempText =
-                "${temperature.min.toInt()} ~ ${temperature.max.toInt()} ℃"
+                "${temperature.min.toInt()} ~ ${temperature.max.toInt()}°C"
             temperatureInfo.text = tempText
             containerForecast.forecastItemLayout.addView(view)
         }
