@@ -4,7 +4,7 @@ import me.atrin.humidweather.databinding.ItemPlaceBinding
 import me.atrin.humidweather.logic.model.place.Place
 import me.atrin.humidweather.ui.base.BaseBindingViewDelegate
 
-class PlaceViewDelegate(private val fragment: PlaceFragment) :
+class PlaceViewDelegate(private val placeFragment: PlaceFragment) :
     BaseBindingViewDelegate<Place, ItemPlaceBinding>() {
 
     override fun onBindViewHolder(
@@ -15,7 +15,7 @@ class PlaceViewDelegate(private val fragment: PlaceFragment) :
         val holder = BindingViewHolder(binding)
 
         holder.itemView.setOnClickListener {
-            fragment.apply {
+            placeFragment.apply {
                 mainViewModel.apply {
                     savePlace(item)
                     refresh()

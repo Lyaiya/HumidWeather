@@ -1,5 +1,6 @@
 package me.atrin.humidweather.ui.place
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
@@ -12,7 +13,7 @@ class PlaceViewModel : ViewModel() {
         MutableLiveData<String>()
     }
 
-    val searchedPlaceList = ArrayList<Place>()
+    val searchResultPlaceList = ArrayList<Place>()
 
     // 2. 监听
     val placeLiveData =
@@ -29,7 +30,7 @@ class PlaceViewModel : ViewModel() {
         MutableLiveData<String>()
     }
 
-    val placeNameLiveData
+    val placeNameLiveData: LiveData<String>
         get() = _placeNameLiveData
 
     fun setPlaceName(placeName: String) {
