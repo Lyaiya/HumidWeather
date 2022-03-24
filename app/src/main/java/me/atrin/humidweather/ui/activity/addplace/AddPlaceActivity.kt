@@ -12,6 +12,8 @@ import com.dylanc.longan.context
 import com.dylanc.longan.design.snackbar
 import com.dylanc.longan.lifecycleOwner
 import com.dylanc.longan.logDebug
+import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
+import com.zackratos.ultimatebarx.ultimatebarx.statusBar
 import me.atrin.humidweather.databinding.ActivityAddplaceBinding
 import me.atrin.humidweather.ui.base.BaseBindingActivity
 
@@ -37,6 +39,14 @@ class AddPlaceActivity : BaseBindingActivity<ActivityAddplaceBinding>() {
 
         recyclerView = binding.recyclerView
         bgImageView = binding.bgImageView
+    }
+
+    override fun initSystemBar() {
+        super.initSystemBar()
+        statusBar {
+            transparent()
+        }
+        binding.actionBarLayout.addStatusBarTopPadding()
     }
 
     private fun initRecyclerView() {
