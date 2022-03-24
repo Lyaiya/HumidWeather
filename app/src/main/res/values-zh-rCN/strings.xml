@@ -2,8 +2,11 @@
 <resources>
     <string name="app_name">HumidWeather</string>
 
-    <string name="toolbar_menu_setting_title">设置</string>
+    <string name="main_toolbar_menu_addplace_title">添加地点</string>
+    <string name="main_toolbar_menu_deleteplace_title">删除地点</string>
+    <string name="main_toolbar_menu_setting_title">设置</string>
 
+    <string name="setting_toolbar_title">设置</string>
     <string name="setting_appearance_title">外观</string>
     <string name="setting_dark_theme_title">深色主题</string>
     <string-array name="setting_dark_theme_entries">
@@ -14,4 +17,24 @@
 
     <string name="setting_basis_title">基础</string>
     <string name="setting_unit_title">单位</string>
+
+    <string name="addplace_searchbar_hint">请输入地址…</string>
+    <string name="addplace_bg_desc">背景图片</string>
+
+    <string name="forecast_title">5 日天气预报</string>
+
+    <string name="lifeindex_title">生活指数</string>
+    <string name="lifeindex_coldrisk_title">感冒</string>
+    <string name="lifeindex_coldrisk_desc">感冒图标</string>
+
+    <string name="lifeindex_dressing_title">穿衣</string>
+    <string name="lifeindex_dressing_desc">穿衣图标</string>
+
+    <string name="lifeindex_ultraviolet_title">紫外线</string>
+    <string name="lifeindex_ultraviolet_desc">紫外线图标</string>
+
+    <string name="lifeindex_carwashing_title">洗车</string>
+    <string name="lifeindex_carwashing_desc">洗车图标</string>
+
+    <string name="item_forecast_skyicon_desc">天气图标</string>
 </resources>

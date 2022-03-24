@@ -5,19 +5,19 @@
     <item
         android:id="@+id/add_place"
         android:icon="@drawable/ic_add_black"
-        android:title="Add place"
+        android:title="@string/main_toolbar_menu_addplace_title"
         app:showAsAction="collapseActionView" />
 
     <item
         android:id="@+id/delete_place"
         android:icon="@drawable/ic_delete_black"
-        android:title="Delete place"
+        android:title="@string/main_toolbar_menu_deleteplace_title"
         app:showAsAction="collapseActionView" />
 
     <item
         android:id="@+id/setting"
         android:icon="@drawable/ic_setting_rounded_black"
-        android:title="@string/toolbar_menu_setting_title"
+        android:title="@string/main_toolbar_menu_setting_title"
         app:showAsAction="collapseActionView" />
 
 </menu>
