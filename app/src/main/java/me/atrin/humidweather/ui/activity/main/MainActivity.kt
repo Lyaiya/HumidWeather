@@ -1,4 +1,4 @@
-package me.atrin.humidweather.ui.main
+package me.atrin.humidweather.ui.activity.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -9,10 +9,10 @@ import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
 import com.zackratos.ultimatebarx.ultimatebarx.statusBar
 import me.atrin.humidweather.R
 import me.atrin.humidweather.databinding.ActivityMainBinding
+import me.atrin.humidweather.ui.activity.management.ManagementActivity
+import me.atrin.humidweather.ui.activity.setting.SettingActivity
 import me.atrin.humidweather.ui.base.BaseBindingActivity
-import me.atrin.humidweather.ui.management.ManagementActivity
-import me.atrin.humidweather.ui.setting.SettingActivity
-import me.atrin.humidweather.ui.weather.WeatherFragment
+import me.atrin.humidweather.ui.fragment.weather.WeatherFragment
 
 class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
 

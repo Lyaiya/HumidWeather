@@ -1,4 +1,4 @@
-package me.atrin.humidweather.ui.place
+package me.atrin.humidweather.ui.fragment.place
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

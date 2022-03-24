@@ -1,4 +1,4 @@
-package me.atrin.humidweather.ui.weather
+package me.atrin.humidweather.ui.fragment.weather
 
 import me.atrin.humidweather.databinding.ItemHourlyBinding
 import me.atrin.humidweather.logic.model.hourly.HourlyItem

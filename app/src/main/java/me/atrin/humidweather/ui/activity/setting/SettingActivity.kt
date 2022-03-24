@@ -1,4 +1,4 @@
-package me.atrin.humidweather.ui.setting
+package me.atrin.humidweather.ui.activity.setting
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat

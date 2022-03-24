@@ -1,4 +1,4 @@
-package me.atrin.humidweather.ui.main
+package me.atrin.humidweather.ui.activity.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
