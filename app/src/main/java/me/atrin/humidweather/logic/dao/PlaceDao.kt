@@ -28,10 +28,6 @@ object PlaceDao : MMKVOwner {
         savedPlaceList = placeListAdapter.toJson(newList)
     }
 
-    fun clearSavedPlaceList() {
-        savedPlaceList = ""
-    }
-
     fun savePlace(newPlace: Place) {
         val tempSavedPlaceList = getSavedPlaceList().toMutableList()
 
@@ -54,6 +50,13 @@ object PlaceDao : MMKVOwner {
                 logDebug("savePlace: newSavedPlaceList #$index = $place")
             }
         }
+    }
+
+    fun deletePlaceByPosition(position: Int) {
+        val tempSavedPlaceList = getSavedPlaceList().toMutableList()
+
+        tempSavedPlaceList.removeAt(position)
+        updateSavedPlaceList(tempSavedPlaceList)
     }
 
 }
