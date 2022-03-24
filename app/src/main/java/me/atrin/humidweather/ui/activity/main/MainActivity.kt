@@ -3,13 +3,14 @@ package me.atrin.humidweather.ui.activity.main
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
+import com.dylanc.longan.lifecycleOwner
 import com.dylanc.longan.logDebug
 import com.dylanc.longan.startActivity
 import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
 import com.zackratos.ultimatebarx.ultimatebarx.statusBar
 import me.atrin.humidweather.R
 import me.atrin.humidweather.databinding.ActivityMainBinding
-import me.atrin.humidweather.ui.activity.management.ManagementActivity
+import me.atrin.humidweather.ui.activity.addplace.AddPlaceActivity
 import me.atrin.humidweather.ui.activity.setting.SettingActivity
 import me.atrin.humidweather.ui.base.BaseBindingActivity
 import me.atrin.humidweather.ui.fragment.weather.WeatherFragment
@@ -62,8 +63,8 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
     private fun initToolbar() {
         binding.containerToolbar.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.place_management -> {
-                    startActivity<ManagementActivity>()
+                R.id.add_place -> {
+                    startActivity<AddPlaceActivity>()
                     true
                 }
                 R.id.setting -> {
@@ -85,7 +86,7 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
 
     private fun initObserver() {
         // 3. 观察
-        mainViewModel.savedPlaceListLiveData.observe(this) { newList ->
+        mainViewModel.savedPlaceListLiveData.observe(lifecycleOwner) { newList ->
             if (newList.isEmpty()) {
                 logDebug("initObserver: newList is empty")
             } else {

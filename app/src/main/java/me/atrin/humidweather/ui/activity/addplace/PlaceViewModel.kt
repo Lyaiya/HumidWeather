@@ -1,4 +1,4 @@
-package me.atrin.humidweather.ui.fragment.place
+package me.atrin.humidweather.ui.activity.addplace
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -36,5 +36,7 @@ class PlaceViewModel : ViewModel() {
     fun setPlaceName(placeName: String) {
         _placeNameLiveData.value = placeName
     }
+
+    fun savePlace(place: Place) = Repository.savePlace(place)
 
 }

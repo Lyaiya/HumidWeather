@@ -1,33 +1,31 @@
-package me.atrin.humidweather.ui.fragment.place
+package me.atrin.humidweather.ui.activity.addplace
 
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.drakeet.multitype.MultiTypeAdapter
+import com.dylanc.longan.context
 import com.dylanc.longan.design.snackbar
+import com.dylanc.longan.lifecycleOwner
 import com.dylanc.longan.logDebug
-import me.atrin.humidweather.databinding.FragmentPlaceBinding
-import me.atrin.humidweather.ui.activity.main.MainViewModel
-import me.atrin.humidweather.ui.base.BaseBindingFragment
+import me.atrin.humidweather.databinding.ActivityAddplaceBinding
+import me.atrin.humidweather.ui.base.BaseBindingActivity
 
-class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
+class AddPlaceActivity : BaseBindingActivity<ActivityAddplaceBinding>() {
 
     val placeViewModel: PlaceViewModel by viewModels()
-    val mainViewModel: MainViewModel by activityViewModels()
 
     private lateinit var adapter: MultiTypeAdapter
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var bgImageView: ImageView
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        logDebug("onViewCreated: start")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         initRecyclerView()
         initSearchBar()
@@ -43,11 +41,11 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
 
     private fun initRecyclerView() {
         // 设置 LayoutManager
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = LinearLayoutManager(context)
 
         // 设置 Adapter
         adapter = MultiTypeAdapter().apply {
-            register(PlaceViewDelegate(this@PlaceFragment))
+            register(PlaceViewDelegate(this@AddPlaceActivity))
             items = placeViewModel.searchResultPlaceList
         }
         recyclerView.adapter = adapter
@@ -61,7 +59,7 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
     }
 
     private fun initObserver() {
-        placeViewModel.placeNameLiveData.observe(viewLifecycleOwner) { placeName: String ->
+        placeViewModel.placeNameLiveData.observe(lifecycleOwner) { placeName: String ->
             logDebug("onViewCreated: placeName = $placeName")
             if (placeName.isBlank()) {
                 showSearchedPlaces(false)
@@ -75,7 +73,7 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
         }
 
         // 3. 观察到改动
-        placeViewModel.placeLiveData.observe(viewLifecycleOwner) { result ->
+        placeViewModel.placeLiveData.observe(lifecycleOwner) { result ->
             val places = result.getOrNull()
 
             if (places != null) {

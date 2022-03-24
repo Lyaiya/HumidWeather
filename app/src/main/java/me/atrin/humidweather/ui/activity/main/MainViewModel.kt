@@ -21,7 +21,8 @@ class MainViewModel : ViewModel() {
 
     val savedPlaceList = ArrayList<Place>()
 
-    fun savePlace(place: Place) = Repository.savePlace(place)
+    fun savedPlaceListSize() = savedPlaceList.size
+
 
     // 1. 调用
     fun refresh() {

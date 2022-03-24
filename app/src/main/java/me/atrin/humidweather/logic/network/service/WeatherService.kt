@@ -22,7 +22,6 @@ interface WeatherService {
         @Path("lat") lat: String
     ): Call<DailyResponse>
 
-
     @GET("v2.5/${HumidWeatherApplication.TOKEN}/{lng},{lat}/hourly.json")
     fun getHourlyWeather(
         @Path("lng") lng: String,
