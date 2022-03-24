@@ -54,8 +54,6 @@ class WeatherFragment(private val position: Int) :
         initSwipeRefresh()
         initRecyclerView()
         refreshWeather()
-
-        logDebug("onViewCreated: end")
     }
 
     override fun defineView() {
@@ -109,7 +107,6 @@ class WeatherFragment(private val position: Int) :
                 weatherViewModel.placeName = newPlaceName
             }
         }
-        logDebug("loadWeatherData: end")
     }
 
     private fun initObserver() {

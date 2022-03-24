@@ -17,7 +17,6 @@ import me.atrin.humidweather.logic.model.place.Place
 import me.atrin.humidweather.ui.base.BaseBindingActivity
 import me.atrin.humidweather.ui.place.PlaceFragment
 
-
 class ManagementActivity :
     BaseBindingActivity<ActivityManagementBinding>() {
 
@@ -33,22 +32,9 @@ class ManagementActivity :
         // setSupportActionBar(binding.managementToolbar)
         // supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.fab.setOnClickListener {
-            showPlaceFragment()
-        }
-
-        binding.managementToolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.delete -> {
-                    managementViewModel.clearSavedPlaceList()
-                    true
-                }
-                else -> false
-            }
-        }
-
+        initFab()
+        initToolbar()
         loadSavedPlaceData()
-
         initRecyclerView()
     }
 
@@ -80,6 +66,24 @@ class ManagementActivity :
         }
 
         recyclerView.adapter = adapter
+    }
+
+    private fun initFab() {
+        binding.fab.setOnClickListener {
+            showPlaceFragment()
+        }
+    }
+
+    private fun initToolbar() {
+        binding.managementToolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.delete -> {
+                    managementViewModel.clearSavedPlaceList()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun loadSavedPlaceData() {

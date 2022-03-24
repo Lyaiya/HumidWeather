@@ -15,7 +15,6 @@ import me.atrin.humidweather.databinding.FragmentPlaceBinding
 import me.atrin.humidweather.ui.base.BaseBindingFragment
 import me.atrin.humidweather.ui.main.MainViewModel
 
-
 class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
 
     val placeViewModel: PlaceViewModel by viewModels()
@@ -28,14 +27,10 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        logDebug("onViewCreated: start")
 
         initRecyclerView()
-
-        // 搜索框文本监听
-        binding.searchBar.addTextChangedListener { text ->
-            placeViewModel.setPlaceName(text.toString())
-        }
-
+        initSearchBar()
         initObserver()
     }
 
@@ -56,6 +51,13 @@ class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
             items = placeViewModel.searchResultPlaceList
         }
         recyclerView.adapter = adapter
+    }
+
+    private fun initSearchBar() {
+        // 搜索框文本监听
+        binding.searchBar.addTextChangedListener { text ->
+            placeViewModel.setPlaceName(text.toString())
+        }
     }
 
     private fun initObserver() {
