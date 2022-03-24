@@ -26,7 +26,40 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
         logDebug("onCreate: start")
 
         initViewPager()
+        initToolbar()
+        initObserver()
+    }
 
+    override fun onStart() {
+        super.onStart()
+
+        // 刷新已保存的地址
+        refreshSavedPlaceList()
+    }
+
+    override fun initSystemBar() {
+        super.initSystemBar()
+        statusBar {
+            transparent()
+        }
+        binding.containerToolbar.appBarLayout.addStatusBarTopPadding()
+    }
+
+    private fun initViewPager() {
+        viewPager = binding.viewPager
+        pagerAdapter = PagerAdapter(this)
+        viewPager.adapter = pagerAdapter
+
+        // 页面滑动完毕后设置 Toolbar 名称
+        viewPager.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                setToolbarTitle(position)
+            }
+        })
+    }
+
+    private fun initToolbar() {
         binding.containerToolbar.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.place_management -> {
@@ -40,43 +73,6 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
                 else -> false
             }
         }
-
-        initObserver()
-
-        logDebug("onCreate: end")
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        // 刷新已保存的地址
-        refreshSavedPlaceList()
-    }
-
-    private fun initViewPager() {
-        logDebug("initViewPager: start")
-
-        viewPager = binding.viewPager
-        pagerAdapter = PagerAdapter(this)
-        viewPager.adapter = pagerAdapter
-
-        // 页面滑动完毕后设置 Toolbar 名称
-        viewPager.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                setToolbarTitle(position)
-            }
-        })
-
-        logDebug("initViewPager: end")
-    }
-
-    override fun initSystemBar() {
-        super.initSystemBar()
-        statusBar {
-            transparent()
-        }
-        binding.containerToolbar.appBarLayout.addStatusBarTopPadding()
     }
 
     private fun setToolbarTitle(position: Int) {
