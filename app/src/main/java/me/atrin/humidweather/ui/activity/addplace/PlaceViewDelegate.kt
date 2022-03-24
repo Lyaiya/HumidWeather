@@ -1,10 +1,10 @@
-package me.atrin.humidweather.ui.fragment.place
+package me.atrin.humidweather.ui.activity.addplace
 
 import me.atrin.humidweather.databinding.ItemPlaceBinding
 import me.atrin.humidweather.logic.model.place.Place
 import me.atrin.humidweather.ui.base.BaseBindingViewDelegate
 
-class PlaceViewDelegate(private val placeFragment: PlaceFragment) :
+class PlaceViewDelegate(private val addPlaceActivity: AddPlaceActivity) :
     BaseBindingViewDelegate<Place, ItemPlaceBinding>() {
 
     override fun onBindViewHolder(
@@ -15,14 +15,11 @@ class PlaceViewDelegate(private val placeFragment: PlaceFragment) :
         val holder = BindingViewHolder(binding)
 
         holder.itemView.setOnClickListener {
-            placeFragment.apply {
-                mainViewModel.apply {
+            addPlaceActivity.apply {
+                placeViewModel.apply {
                     savePlace(item)
-                    refresh()
                 }
-                // OPTIMIZE: 优雅地切换 Activity
-                // startActivity<MainActivity>()
-                activity?.finish()
+                finish()
             }
         }
 
@@ -30,7 +27,6 @@ class PlaceViewDelegate(private val placeFragment: PlaceFragment) :
             placeName.text = item.name
             placeAddress.text = item.address
         }
-
     }
 
 }

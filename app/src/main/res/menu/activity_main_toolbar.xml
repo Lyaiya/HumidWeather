@@ -3,15 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/place_management"
-        android:icon="@drawable/ic_place_management_rounded_black"
-        android:title="@string/toolbar_menu_management_title"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/add_place"
+        android:icon="@drawable/ic_add_black"
+        android:title="Add place"
+        app:showAsAction="collapseActionView" />
+
+    <item
+        android:id="@+id/delete_place"
+        android:icon="@drawable/ic_delete_black"
+        android:title="Delete place"
+        app:showAsAction="collapseActionView" />
 
     <item
         android:id="@+id/setting"
         android:icon="@drawable/ic_setting_rounded_black"
         android:title="@string/toolbar_menu_setting_title"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="collapseActionView" />
 
 </menu>

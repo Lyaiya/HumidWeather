@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">HumidWeather</string>
 
-    <string name="toolbar_menu_management_title">地址管理</string>
     <string name="toolbar_menu_setting_title">设置</string>
 
     <string name="setting_appearance_title">外观</string>
