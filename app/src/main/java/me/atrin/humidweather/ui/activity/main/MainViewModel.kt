@@ -23,6 +23,8 @@ class MainViewModel : ViewModel() {
 
     fun savedPlaceListSize() = savedPlaceList.size
 
+    fun deletePlaceByPosition(position: Int) =
+        Repository.deletePlaceByPosition(position)
 
     // 1. 调用
     fun refresh() {

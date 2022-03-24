@@ -67,9 +67,10 @@ object Repository {
         emit(PlaceDao.getSavedPlaceList())
     }
 
-    fun clearSavedPlaceList() = PlaceDao.clearSavedPlaceList()
-
     fun savePlace(place: Place) = PlaceDao.savePlace(place)
+
+    fun deletePlaceByPosition(position: Int) =
+        PlaceDao.deletePlaceByPosition(position)
 
     private fun <T> fire(
         context: CoroutineContext,

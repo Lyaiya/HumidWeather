@@ -7,8 +7,7 @@
             app:entries="@array/setting_dark_theme_entries"
             app:entryValues="@array/pref_entry_values_dark_theme"
             app:key="@string/pref_key_dark_theme"
-            app:title="@string/setting_dark_theme_title"
-            app:useSimpleSummaryProvider="true" />
+            app:title="@string/setting_dark_theme_title" />
 
     </PreferenceCategory>
 

@@ -67,6 +67,10 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
                     startActivity<AddPlaceActivity>()
                     true
                 }
+                R.id.delete_place -> {
+                    deletePlace()
+                    true
+                }
                 R.id.setting -> {
                     startActivity<SettingActivity>()
                     true
@@ -119,6 +123,11 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
     private fun refreshSavedPlaceList() {
         logDebug("refreshSavedPlaceList: start")
         mainViewModel.refresh()
+    }
+
+    private fun deletePlace() {
+        mainViewModel.deletePlaceByPosition(viewPager.currentItem)
+        refreshSavedPlaceList()
     }
 
 }
