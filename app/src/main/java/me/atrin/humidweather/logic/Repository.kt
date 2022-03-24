@@ -1,7 +1,6 @@
 package me.atrin.humidweather.logic
 
 import androidx.lifecycle.liveData
-import com.dylanc.longan.logDebug
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -64,26 +63,13 @@ object Repository {
         }
     }
 
-    fun getSavedPlaceSet(): Set<Place> {
-        logDebug("getSavedPlaceSetLiveData: start")
-
-        val mutableSet = mutableSetOf<Place>()
-
-        PlaceDao.savedPlaceSet.forEach { savedPlace ->
-            PlaceDao.adapter.fromJson(savedPlace)?.let { place ->
-                logDebug("getSavedPlaceSetLiveData: place = $place")
-                mutableSet.add(place)
-            }
-        }
-
-        logDebug("getSavedPlaceSetLiveData: end")
-
-        return mutableSet.toSet()
+    fun getSavedPlaceList() = liveData {
+        emit(PlaceDao.getSavedPlaceList())
     }
 
-    fun savePlace(place: Place) = PlaceDao.savePlace(place)
+    fun clearSavedPlaceList() = PlaceDao.clearSavedPlaceList()
 
-    fun deleteAllSavedPlaces() = PlaceDao.deleteAllSavedPlaces()
+    fun savePlace(place: Place) = PlaceDao.savePlace(place)
 
     private fun <T> fire(
         context: CoroutineContext,

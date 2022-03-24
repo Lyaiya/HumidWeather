@@ -1,37 +1,59 @@
 package me.atrin.humidweather.logic.dao
 
-import com.dylanc.longan.logInfo
+import com.dylanc.longan.logDebug
 import com.dylanc.mmkv.MMKVOwner
-import com.dylanc.mmkv.mmkvStringSet
+import com.dylanc.mmkv.mmkvString
 import com.squareup.moshi.adapter
 import me.atrin.humidweather.logic.model.place.Place
 import me.atrin.humidweather.logic.network.ServiceCreator
 
 object PlaceDao : MMKVOwner {
 
-    val adapter = ServiceCreator.moshi.adapter<Place>()
-
-    var savedPlaceSet by mmkvStringSet(
-        default = emptySet()
+    private var savedPlaceList by mmkvString(
+        default = ""
     )
 
-    fun savePlace(newPlace: Place) {
-        val newPlaceText = adapter.toJson(newPlace)
+    private val placeListAdapter =
+        ServiceCreator.moshi.adapter<List<Place>>()
 
-        logInfo("savePlace: newSavedPlace: $newPlaceText")
-
-        savedPlaceSet.forEachIndexed { index, place ->
-            logInfo("savePlace: oldSavedPlaces #$index: $place")
-        }
-
-        // FIXME: 顺序问题
-        savedPlaceSet = savedPlaceSet + newPlaceText
-
-        savedPlaceSet.forEachIndexed { index, place ->
-            logInfo("savePlace: newSavedPlaces #$index: $place")
+    fun getSavedPlaceList(): List<Place> {
+        return if (savedPlaceList.isEmpty()) {
+            emptyList()
+        } else {
+            placeListAdapter.fromJson(savedPlaceList)!!
         }
     }
 
-    fun deleteAllSavedPlaces() = kv.clearAll()
+    private fun updateSavedPlaceList(newList: List<Place>) {
+        savedPlaceList = placeListAdapter.toJson(newList)
+    }
+
+    fun clearSavedPlaceList() {
+        savedPlaceList = ""
+    }
+
+    fun savePlace(newPlace: Place) {
+        val tempSavedPlaceList = getSavedPlaceList().toMutableList()
+
+        if (tempSavedPlaceList.isEmpty()) {
+            logDebug("savePlace: oldSavedPlaceList is empty")
+        } else {
+            tempSavedPlaceList.forEachIndexed { index, place ->
+                logDebug("savePlace: oldSavedPlaceList #$index = $place")
+            }
+        }
+
+        logDebug("savePlace: newSavedPlace = $newPlace")
+
+        if (tempSavedPlaceList.contains(newPlace)) {
+            logDebug("savePlace: oldSavedPlaceList is contains newPlace, skip savePlace")
+        } else {
+            tempSavedPlaceList.add(newPlace)
+            updateSavedPlaceList(tempSavedPlaceList)
+            tempSavedPlaceList.forEachIndexed { index, place ->
+                logDebug("savePlace: newSavedPlaceList #$index = $place")
+            }
+        }
+    }
 
 }

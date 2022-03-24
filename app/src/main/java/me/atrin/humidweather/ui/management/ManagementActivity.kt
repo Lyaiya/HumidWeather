@@ -40,7 +40,7 @@ class ManagementActivity :
         binding.managementToolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.delete -> {
-                    managementViewModel.deleteAllSavedPlaces()
+                    managementViewModel.clearSavedPlaceList()
                     true
                 }
                 else -> false
