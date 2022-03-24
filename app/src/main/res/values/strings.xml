@@ -1,8 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">HumidWeather</string>
 
-    <string name="toolbar_menu_setting_title">Setting</string>
+    <string name="main_toolbar_menu_addplace_title">Add place</string>
+    <string name="main_toolbar_menu_deleteplace_title">Delete place</string>
+    <string name="main_toolbar_menu_setting_title">Setting</string>
 
+    <string name="setting_toolbar_title">Setting</string>
     <string name="setting_appearance_title">Appearance</string>
     <string name="setting_dark_theme_title">Night theme</string>
     <string-array name="setting_dark_theme_entries">
@@ -13,4 +17,25 @@
 
     <string name="setting_basis_title">Basis</string>
     <string name="setting_unit_title">Unit</string>
+
+    <string name="addplace_searchbar_hint">Please enter a place…</string>
+    <string name="addplace_bg_desc">Background image</string>
+
+    <string name="forecast_title">5 day weather forecast</string>
+
+    <string name="lifeindex_title">Life Index</string>
+    <string name="lifeindex_coldrisk_title">Cold Risk</string>
+    <string name="lifeindex_coldrisk_desc">Cold risk icon</string>
+
+    <string name="lifeindex_dressing_title">Dressing</string>
+    <string name="lifeindex_dressing_desc">Dressing icon</string>
+
+    <string name="lifeindex_ultraviolet_title">Ultraviolet</string>
+    <string name="lifeindex_ultraviolet_desc">Ultraviolet icon</string>
+
+    <string name="lifeindex_carwashing_title">Car washing</string>
+    <string name="lifeindex_carwashing_desc">Car washing icon</string>
+
+    <string name="item_forecast_skyicon_desc">Weather icon</string>
+
 </resources>

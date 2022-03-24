@@ -17,7 +17,7 @@
         android:id="@+id/skyIcon"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:contentDescription="天气图标"
+        android:contentDescription="@string/item_forecast_skyicon_desc"
         tools:src="@drawable/ic_clear_day" />
 
     <TextView
