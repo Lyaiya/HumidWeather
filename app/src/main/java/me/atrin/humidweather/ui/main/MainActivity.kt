@@ -50,7 +50,7 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
         super.onStart()
 
         // 刷新已保存的地址
-        refreshSavedPlaces()
+        refreshSavedPlaceList()
     }
 
     private fun initViewPager() {
@@ -89,33 +89,38 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
 
     private fun initObserver() {
         // 3. 观察
-        mainViewModel.savedPlacesLiveData.observe(this) { newSet ->
-            if (newSet.isEmpty()) {
-                logDebug("initObserver: newSet is empty")
+        mainViewModel.savedPlaceListLiveData.observe(this) { newList ->
+            if (newList.isEmpty()) {
+                logDebug("initObserver: newList is empty")
             } else {
-                newSet.forEachIndexed { index, place ->
-                    logDebug("initObserver: newSet #$index = $place")
+                newList.forEachIndexed { index, place ->
+                    logDebug("initObserver: newList #$index = $place")
                 }
             }
 
             mainViewModel.savedPlaceList.apply {
-                forEachIndexed { index, place ->
-                    logDebug("initObserver: oldSet #$index = $place")
+                if (isEmpty()) {
+                    logDebug("initObserver: oldList is empty")
+                } else {
+                    forEachIndexed { index, place ->
+                        logDebug("initObserver: oldList #$index = $place")
+                    }
                 }
 
+                // OPTIMIZE: 或许还有优化的余地
                 clear()
-                addAll(newSet)
+                addAll(newList)
                 pagerAdapter.notifyDataSetChanged()
 
                 forEachIndexed { index, place ->
-                    logDebug("initObserver: finalSet #$index = $place")
+                    logDebug("initObserver: finalList #$index = $place")
                 }
-
             }
         }
     }
 
-    private fun refreshSavedPlaces() {
+    private fun refreshSavedPlaceList() {
+        logDebug("refreshSavedPlaceList: start")
         mainViewModel.refresh()
     }
 

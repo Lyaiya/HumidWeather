@@ -8,6 +8,6 @@ class ManagementViewModel : ViewModel() {
 
     val savedPlaceList = ArrayList<Place>()
 
-    fun deleteAllSavedPlaces() = Repository.deleteAllSavedPlaces()
+    fun clearSavedPlaceList() = Repository.clearSavedPlaceList()
 
 }
