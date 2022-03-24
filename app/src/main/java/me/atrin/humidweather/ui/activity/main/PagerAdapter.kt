@@ -1,11 +1,11 @@
-package me.atrin.humidweather.ui.main
+package me.atrin.humidweather.ui.activity.main
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.dylanc.longan.logDebug
 import me.atrin.humidweather.logic.model.place.PlaceKey
-import me.atrin.humidweather.ui.weather.WeatherFragment
+import me.atrin.humidweather.ui.fragment.weather.WeatherFragment
 
 
 class PagerAdapter(mainActivity: MainActivity) :

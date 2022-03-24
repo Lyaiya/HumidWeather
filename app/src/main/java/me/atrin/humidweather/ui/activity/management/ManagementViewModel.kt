@@ -1,4 +1,4 @@
-package me.atrin.humidweather.ui.management
+package me.atrin.humidweather.ui.activity.management
 
 import androidx.lifecycle.ViewModel
 import me.atrin.humidweather.logic.Repository

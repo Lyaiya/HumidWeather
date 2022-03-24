@@ -1,4 +1,4 @@
-package me.atrin.humidweather.ui.management
+package me.atrin.humidweather.ui.activity.management
 
 import me.atrin.humidweather.databinding.ItemSavedPlaceBinding
 import me.atrin.humidweather.logic.model.place.Place

@@ -1,4 +1,4 @@
-package me.atrin.humidweather.ui.place
+package me.atrin.humidweather.ui.fragment.place
 
 import android.os.Bundle
 import android.view.View
@@ -12,8 +12,8 @@ import com.drakeet.multitype.MultiTypeAdapter
 import com.dylanc.longan.design.snackbar
 import com.dylanc.longan.logDebug
 import me.atrin.humidweather.databinding.FragmentPlaceBinding
+import me.atrin.humidweather.ui.activity.main.MainViewModel
 import me.atrin.humidweather.ui.base.BaseBindingFragment
-import me.atrin.humidweather.ui.main.MainViewModel
 
 class PlaceFragment : BaseBindingFragment<FragmentPlaceBinding>() {
 

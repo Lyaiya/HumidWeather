@@ -14,13 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HumidWeather">
         <activity
-            android:name=".ui.setting.SettingActivity"
+            android:name="me.atrin.humidweather.ui.activity.setting.SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.management.ManagementActivity"
+            android:name="me.atrin.humidweather.ui.activity.management.ManagementActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name="me.atrin.humidweather.ui.activity.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

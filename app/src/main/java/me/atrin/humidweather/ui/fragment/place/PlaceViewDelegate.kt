@@ -1,4 +1,4 @@
-package me.atrin.humidweather.ui.place
+package me.atrin.humidweather.ui.fragment.place
 
 import me.atrin.humidweather.databinding.ItemPlaceBinding
 import me.atrin.humidweather.logic.model.place.Place

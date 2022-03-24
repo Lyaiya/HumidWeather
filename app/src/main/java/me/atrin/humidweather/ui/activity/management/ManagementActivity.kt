@@ -1,4 +1,4 @@
-package me.atrin.humidweather.ui.management
+package me.atrin.humidweather.ui.activity.management
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -15,7 +15,7 @@ import me.atrin.humidweather.databinding.ActivityManagementBinding
 import me.atrin.humidweather.logic.model.place.Location
 import me.atrin.humidweather.logic.model.place.Place
 import me.atrin.humidweather.ui.base.BaseBindingActivity
-import me.atrin.humidweather.ui.place.PlaceFragment
+import me.atrin.humidweather.ui.fragment.place.PlaceFragment
 
 class ManagementActivity :
     BaseBindingActivity<ActivityManagementBinding>() {

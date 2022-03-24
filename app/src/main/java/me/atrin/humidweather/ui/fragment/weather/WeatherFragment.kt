@@ -1,4 +1,4 @@
-package me.atrin.humidweather.ui.weather
+package me.atrin.humidweather.ui.fragment.weather
 
 import android.icu.text.SimpleDateFormat
 import android.icu.util.TimeZone
