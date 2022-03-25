@@ -40,4 +40,27 @@
     <string name="lifeindex_carwashing_desc">Car washing icon</string>
 
     <string name="item_forecast_skyicon_desc">Weather icon</string>
+    <string name="item_hourly_date_pattern">a h</string>
+
+    <string name="sky_clear_info">Clear</string>
+    <string name="sky_partly_cloudy_info">Partly cloudy</string>
+    <string name="sky_cloudy_info">Cloudy</string>
+    <string name="sky_wind_info">Wind</string>
+    <string name="sky_light_rain_info">Light rain</string>
+    <string name="sky_moderate_rain_info">Moderate rain</string>
+    <string name="sky_heavy_rain_info">Heavy rain</string>
+    <string name="sky_storm_rain_info">Storm rain</string>
+    <string name="sky_thunder_shower_info">Thunder shower</string>
+    <string name="sky_sleet_info">Sleet</string>
+    <string name="sky_light_snow_info">Light snow</string>
+    <string name="sky_moderate_snow_info">Moderate snow</string>
+    <string name="sky_heavy_snow_info">Heavy snow</string>
+    <string name="sky_storm_snow_info">Storm snow</string>
+    <string name="sky_hail_info">Hail</string>
+    <string name="sky_light_haze_info">Light haze</string>
+    <string name="sky_moderate_haze_info">Moderate haze</string>
+    <string name="sky_heavy_haze_info">Heavy haze</string>
+    <string name="sky_fog_info">Fog</string>
+    <string name="sky_dust_info">Dust</string>
+
 </resources>

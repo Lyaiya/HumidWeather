@@ -7,13 +7,13 @@
     android:background="@android:color/transparent"
     android:outlineProvider="none">
 
-    <!-- TODO: PopupTheme -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:theme="@style/Theme.HumidWeather.AppBarTheme"
-        app:menu="@menu/activity_main_toolbar" />
+        app:menu="@menu/activity_main_toolbar"
+        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
 
 </com.google.android.material.appbar.AppBarLayout>
 
