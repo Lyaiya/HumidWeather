@@ -4,10 +4,14 @@ import com.dylanc.longan.logDebug
 import com.dylanc.mmkv.MMKVOwner
 import com.dylanc.mmkv.mmkvString
 import com.squareup.moshi.adapter
+import com.tencent.mmkv.MMKV
 import me.atrin.humidweather.logic.model.place.Place
 import me.atrin.humidweather.logic.network.ServiceCreator
 
 object PlaceDao : MMKVOwner {
+
+    override val kv: MMKV
+        get() = MMKV.mmkvWithID("place.default")
 
     private var savedPlaceList by mmkvString(
         default = ""

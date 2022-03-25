@@ -1,4 +1,4 @@
-package me.atrin.humidweather.logic
+package me.atrin.humidweather.logic.repository
 
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers

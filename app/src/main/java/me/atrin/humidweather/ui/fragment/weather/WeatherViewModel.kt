@@ -3,9 +3,9 @@ package me.atrin.humidweather.ui.fragment.weather
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import me.atrin.humidweather.logic.Repository
 import me.atrin.humidweather.logic.model.hourly.HourlyItem
 import me.atrin.humidweather.logic.model.place.Location
+import me.atrin.humidweather.logic.repository.Repository
 
 class WeatherViewModel : ViewModel() {
 
