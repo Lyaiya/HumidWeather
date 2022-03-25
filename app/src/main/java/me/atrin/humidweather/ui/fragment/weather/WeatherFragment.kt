@@ -191,7 +191,10 @@ class WeatherFragment(private val position: Int) :
             }
 
             val simpleDateFormat =
-                SimpleDateFormat("a h 时", Locale.getDefault()).apply {
+                SimpleDateFormat(
+                    ResUtil.getStringByResId(R.string.item_hourly_date_pattern),
+                    Locale.getDefault()
+                ).apply {
                     timeZone = TimeZone.getTimeZone("GMT+8:00")
                 }
 

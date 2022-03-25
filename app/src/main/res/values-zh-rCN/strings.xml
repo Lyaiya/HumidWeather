@@ -39,4 +39,27 @@
     <string name="lifeindex_carwashing_desc">洗车图标</string>
 
     <string name="item_forecast_skyicon_desc">天气图标</string>
+    <string name="item_hourly_date_pattern">a h 时</string>
+
+    <string name="sky_clear_info">晴</string>
+    <string name="sky_partly_cloudy_info">多云</string>
+    <string name="sky_cloudy_info">阴</string>
+    <string name="sky_wind_info">大风</string>
+    <string name="sky_light_rain_info">小雨</string>
+    <string name="sky_moderate_rain_info">中雨</string>
+    <string name="sky_heavy_rain_info">大雨</string>
+    <string name="sky_storm_rain_info">暴雨</string>
+    <string name="sky_thunder_shower_info">雷阵雨</string>
+    <string name="sky_sleet_info">雨夹雪</string>
+    <string name="sky_light_snow_info">小雪</string>
+    <string name="sky_moderate_snow_info">中雪</string>
+    <string name="sky_heavy_snow_info">大雪</string>
+    <string name="sky_storm_snow_info">暴雪</string>
+    <string name="sky_hail_info">冰雹</string>
+    <string name="sky_light_haze_info">轻度雾霾</string>
+    <string name="sky_moderate_haze_info">中度雾霾</string>
+    <string name="sky_heavy_haze_info">重度雾霾</string>
+    <string name="sky_fog_info">雾</string>
+    <string name="sky_dust_info">浮尘</string>
+
 </resources>

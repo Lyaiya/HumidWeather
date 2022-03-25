@@ -32,7 +32,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         temperatureUnitPref.summary =
             ResUtil.getStringArrayByResId(R.array.setting_temperature_unit_entries)[temperatureUnitPref.value.toInt()]
 
-        temperatureUnitPref.setOnPreferenceChangeListener { preference, newValue ->
+        temperatureUnitPref.setOnPreferenceChangeListener { _, newValue ->
             val value = newValue as String
             logDebug("onCreatePreferences: TemperatureUnit newValue = $value")
             temperatureUnitPref.summary =
