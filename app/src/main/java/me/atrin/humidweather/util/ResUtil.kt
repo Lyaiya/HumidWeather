@@ -23,5 +23,4 @@ object ResUtil {
     fun getStringArrayByResId(resId: Int): Array<String> =
         HumidWeatherApplication.context.resources.getStringArray(resId)
 
-
 }

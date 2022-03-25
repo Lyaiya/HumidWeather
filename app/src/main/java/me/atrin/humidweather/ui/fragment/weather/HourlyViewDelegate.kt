@@ -17,7 +17,7 @@ class HourlyViewDelegate :
             hourlyDateInfo.text = item.date
             hourlySkyIcon.setBackgroundResource(item.skyIcon.icon)
             hourlyTemperatureInfo.text =
-                WeatherUtil.getTemperatureText(item.temperature)
+                WeatherUtil.getTemperatureText(item.temperature, true)
         }
     }
 
