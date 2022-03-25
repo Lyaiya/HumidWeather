@@ -238,9 +238,15 @@ class WeatherFragment(private val position: Int) :
             skyInfo.text = sky.info
 
             val tempText =
-                "${WeatherUtil.c2t(temperature.min)} ~ ${
-                    WeatherUtil.c2t(
-                        temperature.max
+                "${
+                    WeatherUtil.getTemperatureText(
+                        temperature.min,
+                        false
+                    )
+                } ~ ${
+                    WeatherUtil.getTemperatureText(
+                        temperature.max,
+                        false
                     )
                 }${WeatherUtil.getTemperatureUnitText()}"
             temperatureInfo.text = tempText
