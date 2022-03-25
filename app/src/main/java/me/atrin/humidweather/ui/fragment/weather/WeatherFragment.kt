@@ -25,6 +25,7 @@ import me.atrin.humidweather.logic.model.hourly.HourlyItem
 import me.atrin.humidweather.logic.model.place.PlaceKey
 import me.atrin.humidweather.ui.base.BaseBindingFragment
 import me.atrin.humidweather.util.ResUtil
+import me.atrin.humidweather.util.WeatherUtil
 import java.util.*
 
 class WeatherFragment(private val position: Int) :
@@ -237,7 +238,11 @@ class WeatherFragment(private val position: Int) :
             skyInfo.text = sky.info
 
             val tempText =
-                "${temperature.min.toInt()} ~ ${temperature.max.toInt()}°C"
+                "${WeatherUtil.c2t(temperature.min)} ~ ${
+                    WeatherUtil.c2t(
+                        temperature.max
+                    )
+                }${WeatherUtil.getTemperatureUnitText()}"
             temperatureInfo.text = tempText
             containerForecast.forecastItemLayout.addView(view)
         }

@@ -3,7 +3,6 @@
     <PreferenceCategory app:title="@string/setting_basis_title">
 
         <rikka.preference.SimpleMenuPreference
-            app:defaultValue="@string/pref_default_value_temperature_unit"
             app:entries="@array/setting_temperature_unit_entries"
             app:entryValues="@array/pref_entry_values_temperature_unit"
             app:key="@string/pref_key_temperature_unit"

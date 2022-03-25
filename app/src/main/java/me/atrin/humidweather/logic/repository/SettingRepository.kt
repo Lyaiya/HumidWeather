@@ -7,6 +7,14 @@ import me.atrin.humidweather.util.ResUtil
 
 class SettingRepository : PreferenceDataStore() {
 
+    companion object {
+        fun getTemperatureUnitString() =
+            SettingDao.getTemperatureUnitString()
+
+        fun setTemperatureUnitString(string: String) =
+            SettingDao.setTemperatureUnitString(string)
+    }
+
     override fun putString(key: String?, value: String?) {
         if (key == null || value == null) {
             return
@@ -14,7 +22,7 @@ class SettingRepository : PreferenceDataStore() {
 
         when (key) {
             ResUtil.getStringByResId(R.string.pref_key_temperature_unit) -> {
-                SettingDao.temperatureUnit = value
+                SettingDao.setTemperatureUnitString(value)
             }
         }
     }
@@ -26,7 +34,7 @@ class SettingRepository : PreferenceDataStore() {
 
         return when (key) {
             ResUtil.getStringByResId(R.string.pref_key_temperature_unit) -> {
-                SettingDao.temperatureUnit
+                SettingDao.getTemperatureUnitString()
             }
             else -> defValue
         }
