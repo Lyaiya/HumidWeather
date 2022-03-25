@@ -17,7 +17,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:text="5 日天气预报"
+            android:text="@string/forecast_title"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="20sp" />
 

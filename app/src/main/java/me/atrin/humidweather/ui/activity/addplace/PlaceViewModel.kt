@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import me.atrin.humidweather.logic.Repository
 import me.atrin.humidweather.logic.model.place.Place
+import me.atrin.humidweather.logic.repository.Repository
 
 class PlaceViewModel : ViewModel() {
 

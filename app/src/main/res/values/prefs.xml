@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="pref_key_dark_theme" translatable="false">pref_key_dark_theme</string>
-    <string-array name="pref_entry_values_dark_theme">
+    <string name="pref_key_temperature_unit" translatable="false">pref_key_temperature_unit</string>
+    <string-array name="pref_entry_values_temperature_unit">
         <item>0</item>
         <item>1</item>
-        <item>2</item>
     </string-array>
-    <string name="pref_default_value_dark_theme" translatable="false">0</string>
-    <string name="pref_key_unit" translatable="false">pref_key_unit</string>
+    <string name="pref_default_value_temperature_unit" translatable="false">0</string>
+
 </resources>

@@ -7,16 +7,21 @@
     <string name="main_toolbar_menu_setting_title">Setting</string>
 
     <string name="setting_toolbar_title">Setting</string>
-    <string name="setting_appearance_title">Appearance</string>
-    <string name="setting_dark_theme_title">Night theme</string>
-    <string-array name="setting_dark_theme_entries">
-        <item>Follow system</item>
-        <item>Off</item>
-        <item>On</item>
-    </string-array>
+
+    <string name="setting_customization_title">Customization</string>
 
     <string name="setting_basis_title">Basis</string>
-    <string name="setting_unit_title">Unit</string>
+
+    <string name="setting_temperature_unit_title">Temperature Unit</string>
+    <string-array name="setting_temperature_unit_entries">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+    </string-array>
+
+    <string name="setting_about_title">About</string>
+
+    <string name="setting_version_title">Version</string>
+    <string name="setting_version_summary" translatable="false">1.2.0</string>
 
     <string name="addplace_searchbar_hint">Please enter a place…</string>
     <string name="addplace_bg_desc">Background image</string>
@@ -37,5 +42,4 @@
     <string name="lifeindex_carwashing_desc">Car washing icon</string>
 
     <string name="item_forecast_skyicon_desc">Weather icon</string>
-
 </resources>
