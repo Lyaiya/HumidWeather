@@ -14,8 +14,14 @@ object ResUtil {
         return color
     }
 
-    fun getStringByResId(resId: Int): String {
-        return HumidWeatherApplication.context.getString(resId)
-    }
+    fun getStringByResId(resId: Int) =
+        HumidWeatherApplication.context.getString(resId)
+
+    fun getIntByResId(resId: Int) =
+        HumidWeatherApplication.context.resources.getInteger(resId)
+
+    fun getStringArrayByResId(resId: Int): Array<String> =
+        HumidWeatherApplication.context.resources.getStringArray(resId)
+
 
 }
