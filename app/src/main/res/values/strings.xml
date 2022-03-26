@@ -19,7 +19,6 @@
     <string name="setting_about_title">About</string>
 
     <string name="setting_version_title">Version</string>
-    <string name="setting_version_summary" translatable="false">1.2.0</string>
 
     <string name="addplace_searchbar_hint">Please enter a place…</string>
     <string name="addplace_bg_desc">Background image</string>

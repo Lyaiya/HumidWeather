@@ -13,8 +13,8 @@
     <PreferenceCategory app:title="@string/setting_about_title">
 
         <Preference
+            app:key="@string/pref_key_version"
             app:selectable="false"
-            app:summary="@string/setting_version_summary"
             app:title="@string/setting_version_title" />
 
     </PreferenceCategory>
