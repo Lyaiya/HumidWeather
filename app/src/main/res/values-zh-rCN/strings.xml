@@ -62,4 +62,8 @@
     <string name="sky_fog_info">雾</string>
     <string name="sky_dust_info">浮尘</string>
 
+    <string name="snack_no_place">无法查询相关地点</string>
+    <string name="snack_no_weather">无法获取天气信息</string>
+    <string name="snack_empty_data">数据为空</string>
+
 </resources>

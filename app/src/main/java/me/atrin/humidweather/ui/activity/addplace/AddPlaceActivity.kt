@@ -14,8 +14,10 @@ import com.dylanc.longan.lifecycleOwner
 import com.dylanc.longan.logDebug
 import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
 import com.zackratos.ultimatebarx.ultimatebarx.statusBar
+import me.atrin.humidweather.R
 import me.atrin.humidweather.databinding.ActivityAddplaceBinding
 import me.atrin.humidweather.ui.base.BaseBindingActivity
+import me.atrin.humidweather.util.ResUtil
 
 class AddPlaceActivity : BaseBindingActivity<ActivityAddplaceBinding>() {
 
@@ -93,7 +95,7 @@ class AddPlaceActivity : BaseBindingActivity<ActivityAddplaceBinding>() {
                 placeViewModel.searchResultPlaceList.addAll(places)
                 adapter.notifyDataSetChanged()
             } else {
-                snackbar("未能查询到任何地点")
+                snackbar(ResUtil.getStringByResId(R.string.snack_no_place))
                 result.exceptionOrNull()?.printStackTrace()
             }
         }

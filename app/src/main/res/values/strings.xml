@@ -62,4 +62,8 @@
     <string name="sky_fog_info">Fog</string>
     <string name="sky_dust_info">Dust</string>
 
+    <string name="snack_no_place">Unable to search for relevant places</string>
+    <string name="snack_no_weather">Unable to get weather information</string>
+    <string name="snack_empty_data">Data is empty</string>
+
 </resources>

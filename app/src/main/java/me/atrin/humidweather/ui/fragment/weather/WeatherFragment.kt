@@ -117,7 +117,7 @@ class WeatherFragment(private val position: Int) :
             if (weather != null) {
                 showWeatherInfo(weather)
             } else {
-                snackbar("无法获取天气信息")
+                snackbar(ResUtil.getStringByResId(R.string.snack_no_weather))
                 result.exceptionOrNull()?.printStackTrace()
             }
 
@@ -279,7 +279,7 @@ class WeatherFragment(private val position: Int) :
             weatherSwipeRefresh.isRefreshing = true
         } else {
             logDebug("refreshWeather: false")
-            snackbar("数据为空")
+            snackbar(ResUtil.getStringByResId(R.string.snack_empty_data))
             weatherSwipeRefresh.isRefreshing = false
         }
     }
