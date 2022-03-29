@@ -159,7 +159,7 @@ class WeatherFragment(private val position: Int) :
         val hourly = weather.hourly
 
         // Container Now
-        val currentTempText = "${realtime.temperature.toInt()}°C"
+        val currentTempText = WeatherUtil.getTemperatureText(realtime.temperature, true)
         containerNow.currentTemp.text = currentTempText
 
         val realtimeSky = getSky(realtime.skycon)

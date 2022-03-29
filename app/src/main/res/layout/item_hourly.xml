@@ -10,17 +10,17 @@
         android:id="@+id/hourlyDateInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         tools:text="下午 10 时" />
 
     <ImageView
         android:id="@+id/hourlySkyIcon"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
         android:contentDescription="@string/item_forecast_skyicon_desc"
+        android:scaleType="fitCenter"
         tools:src="@drawable/ic_clear_day" />
 
     <TextView
@@ -28,6 +28,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        tools:text="16 ℃" />
+        tools:text="16°C" />
 
 </LinearLayout>

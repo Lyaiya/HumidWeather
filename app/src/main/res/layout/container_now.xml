@@ -15,7 +15,7 @@
         android:layout_marginStart="16dp"
         android:textColor="@color/white"
         android:textSize="70sp"
-        tools:text="19 ℃" />
+        tools:text="19°C" />
 
     <LinearLayout
         android:id="@+id/nowDetailLayout"
