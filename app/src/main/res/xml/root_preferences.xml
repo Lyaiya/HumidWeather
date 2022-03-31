@@ -6,7 +6,8 @@
             app:entries="@array/setting_temperature_unit_entries"
             app:entryValues="@array/pref_entry_values_temperature_unit"
             app:key="@string/pref_key_temperature_unit"
-            app:title="@string/setting_temperature_unit_title" />
+            app:title="@string/setting_temperature_unit_title"
+            app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
 

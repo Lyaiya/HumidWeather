@@ -1,6 +1,7 @@
 package me.atrin.humidweather.ui.activity.setting
 
 import android.os.Bundle
+import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceDataStore
 import androidx.preference.PreferenceFragmentCompat
@@ -11,7 +12,7 @@ import me.atrin.humidweather.util.CommonUtil
 import me.atrin.humidweather.util.ResUtil
 import rikka.preference.SimpleMenuPreference
 
-class SettingsFragment : PreferenceFragmentCompat() {
+class SettingFragment : PreferenceFragmentCompat() {
 
     private lateinit var settingRepository: PreferenceDataStore
 
@@ -32,29 +33,17 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun initPrefDataStore() {
-        preferenceManager.preferenceDataStore = SettingRepository()
-        settingRepository = preferenceManager.preferenceDataStore!!
+        settingRepository = SettingRepository()
+        preferenceManager.preferenceDataStore = settingRepository
     }
 
     private fun defineView() {
-        temperatureUnitPref =
-            findPreference(getString(R.string.pref_key_temperature_unit))!!
+        temperatureUnitPref = findPreference(getString(R.string.pref_key_temperature_unit))!!
         versionPref = findPreference(getString(R.string.pref_key_version))!!
     }
 
     private fun initTemperatureUnitPref() {
-        temperatureUnitPref.value =
-            SettingRepository.getTemperatureUnitString()
-        temperatureUnitPref.summary =
-            ResUtil.getStringArrayByResId(R.array.setting_temperature_unit_entries)[temperatureUnitPref.value.toInt()]
-
-        temperatureUnitPref.setOnPreferenceChangeListener { _, newValue ->
-            val value = newValue as String
-            logDebug("onCreatePreferences: TemperatureUnit newValue = $value")
-            temperatureUnitPref.summary =
-                ResUtil.getStringArrayByResId(R.array.setting_temperature_unit_entries)[value.toInt()]
-            true
-        }
+        temperatureUnitPref.value = SettingRepository.getTemperatureUnitString()
     }
 
     private fun initVersionPref() {

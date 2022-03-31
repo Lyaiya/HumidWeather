@@ -14,7 +14,7 @@ class SettingActivity : BaseBindingActivity<ActivitySettingBinding>() {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.settings, SettingsFragment())
+                .replace(R.id.settings, SettingFragment())
                 .commit()
         }
         setSupportActionBar(binding.settingToolbar)
