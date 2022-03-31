@@ -5,7 +5,9 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="8dp"
     android:layout_marginTop="8dp"
-    android:layout_marginRight="8dp">
+    android:layout_marginRight="8dp"
+    android:clickable="true"
+    android:focusable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +34,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/hourlyRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:contextClickable="true" />
 
     </LinearLayout>
 

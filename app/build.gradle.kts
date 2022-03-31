@@ -36,13 +36,17 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
-        freeCompilerArgs = listOf(
+        freeCompilerArgs = freeCompilerArgs + listOf(
             "-opt-in=kotlin.ExperimentalStdlibApi"
         )
     }
 
     buildFeatures {
         viewBinding = true
+    }
+
+    lint {
+        checkDependencies = true
     }
 }
 
