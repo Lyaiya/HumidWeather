@@ -21,8 +21,11 @@ import me.atrin.humidweather.R
 import me.atrin.humidweather.databinding.*
 import me.atrin.humidweather.logic.model.common.Weather
 import me.atrin.humidweather.logic.model.common.getSky
+import me.atrin.humidweather.logic.model.daily.DailyResponse
 import me.atrin.humidweather.logic.model.hourly.HourlyItem
+import me.atrin.humidweather.logic.model.hourly.HourlyResponse
 import me.atrin.humidweather.logic.model.place.PlaceKey
+import me.atrin.humidweather.logic.model.realtime.RealtimeResponse
 import me.atrin.humidweather.ui.base.BaseBindingFragment
 import me.atrin.humidweather.util.ResUtil
 import me.atrin.humidweather.util.WeatherUtil
@@ -159,6 +162,21 @@ class WeatherFragment(private val position: Int) :
         val hourly = weather.hourly
 
         // Container Now
+        showNowContainer(realtime)
+
+        // Container Hourly
+        showHourlyContainer(hourly)
+
+        // Container Forecast
+        showForecastContainer(daily)
+
+        // Container LifeIndex
+        showLifeIndexContainer(daily)
+
+        binding.weatherScrollView.visibility = View.VISIBLE
+    }
+
+    private fun showNowContainer(realtime: RealtimeResponse.Realtime) {
         val currentTempText = WeatherUtil.getTemperatureText(realtime.temperature, true)
         containerNow.currentTemp.text = currentTempText
 
@@ -170,20 +188,20 @@ class WeatherFragment(private val position: Int) :
         containerNow.currentAQI.text = currentAQIText
 
         containerNow.nowContainer.setBackgroundResource(realtimeSky.bg)
+    }
 
-        // Container Hourly
+    private fun showHourlyContainer(hourly: HourlyResponse.Hourly) {
         containerHourly.hourlyDescription.text = hourly.description
 
-        // Item Hourly
         if (weatherViewModel.hourlyList.isNotEmpty()) {
             weatherViewModel.hourlyList.clear()
         }
 
         val hourlyDays = hourly.skycon.size
 
-        for (i in 0 until hourlyDays) {
-            val skycon = hourly.skycon[i]
-            val temperature = hourly.temperature[i]
+        for (index in 0 until hourlyDays) {
+            val skycon = hourly.skycon[index]
+            val temperature = hourly.temperature[index]
             val nowDate = Date()
 
             if (skycon.datetime.before(nowDate)) {
@@ -207,8 +225,9 @@ class WeatherFragment(private val position: Int) :
             weatherViewModel.hourlyList.add(hourlyItem)
         }
         adapter.notifyDataSetChanged()
+    }
 
-        // Container Forecast
+    private fun showForecastContainer(daily: DailyResponse.Daily) {
         if (containerForecast.forecastItemLayout.isNotEmpty()) {
             containerForecast.forecastItemLayout.removeAllViews()
         }
@@ -228,11 +247,9 @@ class WeatherFragment(private val position: Int) :
             val dateInfo = view.findViewById<TextView>(R.id.dateInfo)
             val skyIcon = view.findViewById<ImageView>(R.id.skyIcon)
             val skyInfo = view.findViewById<TextView>(R.id.skyInfo)
-            val temperatureInfo =
-                view.findViewById<TextView>(R.id.temperatureInfo)
+            val temperatureInfo = view.findViewById<TextView>(R.id.temperatureInfo)
 
-            val simpleDateFormat =
-                SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
             dateInfo.text = simpleDateFormat.format(skycon.date)
             val sky = getSky(skycon.value)
@@ -240,23 +257,17 @@ class WeatherFragment(private val position: Int) :
             skyIcon.setImageResource(sky.icon)
             skyInfo.text = sky.info
 
-            val tempText =
-                "${
-                    WeatherUtil.getTemperatureText(
-                        temperature.min,
-                        false
-                    )
-                } ~ ${
-                    WeatherUtil.getTemperatureText(
-                        temperature.max,
-                        false
-                    )
-                }${WeatherUtil.getTemperatureUnitText()}"
-            temperatureInfo.text = tempText
+            val minTemperatureText = WeatherUtil.getTemperatureText(temperature.min, false)
+            val maxTemperatureText = WeatherUtil.getTemperatureText(temperature.max, false)
+
+            val temperatureText =
+                "$minTemperatureText ~ $maxTemperatureText}${WeatherUtil.getTemperatureUnitText()}"
+            temperatureInfo.text = temperatureText
             containerForecast.forecastItemLayout.addView(view)
         }
+    }
 
-        // Container LifeIndex
+    private fun showLifeIndexContainer(daily: DailyResponse.Daily) {
         val lifeIndex = daily.lifeIndex
 
         containerLifeIndex.coldRiskText.text = lifeIndex.coldRisk[0].desc
@@ -265,8 +276,8 @@ class WeatherFragment(private val position: Int) :
             lifeIndex.ultraviolet[0].desc
         containerLifeIndex.carWashingText.text =
             lifeIndex.carWashing[0].desc
-        binding.weatherScrollView.visibility = View.VISIBLE
     }
+
 
     private fun refreshWeather() {
         // OPTIMIZE: 优化刷新机制
