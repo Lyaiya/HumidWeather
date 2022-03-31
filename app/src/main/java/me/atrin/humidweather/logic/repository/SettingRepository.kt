@@ -14,6 +14,9 @@ class SettingRepository : PreferenceDataStore() {
         fun setTemperatureUnitString(string: String) = SettingDao.setTemperatureUnitString(string)
     }
 
+    private val prefKeyTemperatureUnit =
+        ResUtil.getStringByResId(R.string.pref_key_temperature_unit)
+
     override fun putString(key: String?, value: String?) {
         logDebug("putString: start")
         if (key == null || value == null) {
@@ -21,9 +24,7 @@ class SettingRepository : PreferenceDataStore() {
         }
 
         when (key) {
-            ResUtil.getStringByResId(R.string.pref_key_temperature_unit) -> {
-                setTemperatureUnitString(value)
-            }
+            prefKeyTemperatureUnit -> setTemperatureUnitString(value)
         }
     }
 
@@ -34,9 +35,7 @@ class SettingRepository : PreferenceDataStore() {
         }
 
         return when (key) {
-            ResUtil.getStringByResId(R.string.pref_key_temperature_unit) -> {
-                getTemperatureUnitString()
-            }
+            prefKeyTemperatureUnit -> getTemperatureUnitString()
             else -> defValue
         }
     }

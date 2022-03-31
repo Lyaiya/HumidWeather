@@ -13,9 +13,7 @@ object PlaceDao : MMKVOwner {
     override val kv: MMKV
         get() = MMKV.mmkvWithID("place.default")
 
-    private var savedPlaceList by mmkvString(
-        default = ""
-    )
+    private var savedPlaceList by mmkvString("")
 
     private val placeListAdapter =
         ServiceCreator.moshi.adapter<List<Place>>()

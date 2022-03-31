@@ -6,18 +6,13 @@ import java.util.*
 
 object CommonUtil {
 
-    fun getLanguage(): String {
-        return if (LocaleListCompat.getDefault().get(0).language
-            == Locale.CHINA.language
-        ) {
+    fun getLanguage() =
+        if (LocaleListCompat.getDefault().get(0).language == Locale.CHINA.language) {
             "zh_CN"
         } else {
             "en_US"
         }
-    }
 
-    fun getVersionName(): String {
-        return BuildConfig.VERSION_NAME
-    }
+    fun getVersionName() = BuildConfig.VERSION_NAME
 
 }
