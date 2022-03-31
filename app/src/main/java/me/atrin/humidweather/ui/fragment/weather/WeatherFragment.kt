@@ -261,7 +261,7 @@ class WeatherFragment(private val position: Int) :
             val maxTemperatureText = WeatherUtil.getTemperatureText(temperature.max, false)
 
             val temperatureText =
-                "$minTemperatureText ~ $maxTemperatureText}${WeatherUtil.getTemperatureUnitText()}"
+                "$minTemperatureText ~ $maxTemperatureText${WeatherUtil.getTemperatureUnitText()}"
             temperatureInfo.text = temperatureText
             containerForecast.forecastItemLayout.addView(view)
         }
