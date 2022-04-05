@@ -77,7 +77,7 @@ dependencies {
 
     implementation("androidx.viewpager2:viewpager2:1.0.0")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
 
     // GitHub: https://github.com/square/retrofit
     // Docs: https://square.github.io/retrofit
