@@ -12,8 +12,8 @@ android {
         applicationId = "me.atrin.humidweather"
         minSdk = 24
         targetSdk = 32
-        versionCode = 5
-        versionName = "1.2.3"
+        versionCode = 6
+        versionName = "1.2.5"
 
         testInstrumentationRunner =
             "androidx.test.runner.AndroidJUnitRunner"
