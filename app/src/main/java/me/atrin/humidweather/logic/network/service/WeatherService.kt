@@ -4,7 +4,9 @@ import me.atrin.humidweather.HumidWeatherApplication
 import me.atrin.humidweather.logic.model.daily.DailyResponse
 import me.atrin.humidweather.logic.model.hourly.HourlyResponse
 import me.atrin.humidweather.logic.model.realtime.RealtimeResponse
+import me.atrin.humidweather.logic.repository.SettingRepository
 import me.atrin.humidweather.util.CommonUtil
+import me.atrin.humidweather.util.WeatherUtil
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -23,7 +25,8 @@ interface WeatherService {
     fun getDailyWeather(
         @Path("lng") lng: String,
         @Path("lat") lat: String,
-        @Query("lang") lang: String = CommonUtil.getLanguage()
+        @Query("lang") lang: String = CommonUtil.getLanguage(),
+        @Query("dailysteps") dailyStep: Int = WeatherUtil.getDailyStep()
     ): Call<DailyResponse>
 
     @GET("v2.5/${HumidWeatherApplication.TOKEN}/{lng},{lat}/hourly.json")

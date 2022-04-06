@@ -25,7 +25,7 @@ class PagerAdapter(mainActivity: MainActivity) :
 
         logDebug("createFragment: place = $place")
 
-        return WeatherFragment(position).apply {
+        return WeatherFragment().apply {
             arguments = bundleOf(
                 PlaceKey.LOCATION_LNG to place.location.lng,
                 PlaceKey.LOCATION_LAT to place.location.lat,

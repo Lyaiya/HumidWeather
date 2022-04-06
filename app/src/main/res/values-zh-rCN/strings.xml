@@ -16,6 +16,8 @@
         <item>华氏度</item>
     </string-array>
 
+    <string name="setting_daily_step_title">预报天数</string>
+
     <string name="setting_about_title">关于</string>
 
     <string name="setting_version_title">版本</string>
@@ -23,7 +25,7 @@
     <string name="addplace_searchbar_hint">请输入地址…</string>
     <string name="addplace_bg_desc">背景图片</string>
 
-    <string name="forecast_title">5 日天气预报</string>
+    <string name="forecast_title">未来 %d 天预报</string>
 
     <string name="lifeindex_title">生活指数</string>
     <string name="lifeindex_coldrisk_title">感冒</string>

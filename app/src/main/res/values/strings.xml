@@ -16,6 +16,8 @@
         <item>Fahrenheit</item>
     </string-array>
 
+    <string name="setting_daily_step_title">Daily step</string>
+
     <string name="setting_about_title">About</string>
 
     <string name="setting_version_title">Version</string>
@@ -23,7 +25,7 @@
     <string name="addplace_searchbar_hint">Please enter a place…</string>
     <string name="addplace_bg_desc">Background image</string>
 
-    <string name="forecast_title">5 day weather forecast</string>
+    <string name="forecast_title">Forecast for the next %d days</string>
 
     <string name="lifeindex_title">Life Index</string>
     <string name="lifeindex_coldrisk_title">Cold Risk</string>

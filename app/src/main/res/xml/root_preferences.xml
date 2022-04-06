@@ -1,4 +1,5 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="@string/setting_basis_title">
 
@@ -8,6 +9,12 @@
             app:key="@string/pref_key_temperature_unit"
             app:title="@string/setting_temperature_unit_title"
             app:useSimpleSummaryProvider="true" />
+
+        <SeekBarPreference
+            android:max="15"
+            app:key="@string/pref_key_daily_step"
+            app:min="2"
+            app:title="@string/setting_daily_step_title" />
 
     </PreferenceCategory>
 

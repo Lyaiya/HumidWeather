@@ -99,7 +99,7 @@ dependencies {
 
     // GitHub: https://github.com/DylanCaiCoding/ViewBindingKTX
     // Docs: https://dylancaicoding.github.io/ViewBindingKTX
-    implementation("com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base:2.0.2")
+    implementation("com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base:2.0.3")
 
     // GitHub/Docs: https://github.com/drakeet/MultiType
     implementation("com.drakeet.multitype:multitype:4.3.0")

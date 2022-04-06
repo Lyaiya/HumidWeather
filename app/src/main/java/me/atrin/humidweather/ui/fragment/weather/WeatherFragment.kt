@@ -31,11 +31,7 @@ import me.atrin.humidweather.util.ResUtil
 import me.atrin.humidweather.util.WeatherUtil
 import java.util.*
 
-class WeatherFragment(private val position: Int) :
-    BaseBindingFragment<FragmentWeatherBinding>(), Logger {
-
-    override val loggerTag: String
-        get() = "${super.loggerTag} #${position}"
+class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
     val weatherViewModel: WeatherViewModel by viewModels()
 
@@ -79,9 +75,6 @@ class WeatherFragment(private val position: Int) :
 
     private fun loadWeatherData() {
         logDebug("loadWeatherData: start")
-        if (position == -1) {
-            return
-        }
         requireArguments().let {
             if (it.containsKey(PlaceKey.LOCATION_LNG)) {
                 val newLng = it.getString(PlaceKey.LOCATION_LNG, "")
@@ -233,6 +226,8 @@ class WeatherFragment(private val position: Int) :
         }
 
         val days = daily.skycon.size
+
+        containerForecast.forecastTitle.text = getString(R.string.forecast_title).format(days)
 
         for (i in 0 until days) {
             val skycon = daily.skycon[i]

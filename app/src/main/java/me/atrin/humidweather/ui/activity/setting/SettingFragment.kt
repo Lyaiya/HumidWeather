@@ -1,10 +1,7 @@
 package me.atrin.humidweather.ui.activity.setting
 
 import android.os.Bundle
-import androidx.preference.ListPreference
-import androidx.preference.Preference
-import androidx.preference.PreferenceDataStore
-import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.*
 import com.dylanc.longan.logDebug
 import me.atrin.humidweather.R
 import me.atrin.humidweather.logic.repository.SettingRepository
@@ -17,6 +14,7 @@ class SettingFragment : PreferenceFragmentCompat() {
     private lateinit var settingRepository: PreferenceDataStore
 
     private lateinit var temperatureUnitPref: SimpleMenuPreference
+    private lateinit var dailyStepPref: SeekBarPreference
     private lateinit var versionPref: Preference
 
     override fun onCreatePreferences(
@@ -29,6 +27,7 @@ class SettingFragment : PreferenceFragmentCompat() {
         defineView()
 
         initTemperatureUnitPref()
+        initDailyStepPref()
         initVersionPref()
     }
 
@@ -39,11 +38,21 @@ class SettingFragment : PreferenceFragmentCompat() {
 
     private fun defineView() {
         temperatureUnitPref = findPreference(getString(R.string.pref_key_temperature_unit))!!
+        dailyStepPref = findPreference(getString(R.string.pref_key_daily_step))!!
         versionPref = findPreference(getString(R.string.pref_key_version))!!
     }
 
     private fun initTemperatureUnitPref() {
         temperatureUnitPref.value = SettingRepository.getTemperatureUnitString()
+    }
+
+    private fun initDailyStepPref() {
+        dailyStepPref.value = SettingRepository.getDailyStepInt()
+        dailyStepPref.summary = dailyStepPref.value.toString()
+        dailyStepPref.setOnPreferenceChangeListener { preference, newValue ->
+            preference.summary = newValue.toString()
+            true
+        }
     }
 
     private fun initVersionPref() {

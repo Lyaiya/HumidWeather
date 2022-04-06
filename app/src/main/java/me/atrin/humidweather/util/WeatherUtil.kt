@@ -1,6 +1,7 @@
 package me.atrin.humidweather.util
 
 import me.atrin.humidweather.logic.dao.SettingDao
+import me.atrin.humidweather.logic.repository.SettingRepository
 
 object WeatherUtil {
 
@@ -36,5 +37,7 @@ object WeatherUtil {
             "1" -> FAHRENHEIT_UNIT
             else -> ""
         }
+
+    fun getDailyStep() = SettingRepository.getDailyStepInt()
 
 }
