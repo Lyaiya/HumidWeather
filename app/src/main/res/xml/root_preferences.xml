@@ -6,12 +6,14 @@
         <rikka.preference.SimpleMenuPreference
             app:entries="@array/setting_temperature_unit_entries"
             app:entryValues="@array/pref_entry_values_temperature_unit"
+            app:icon="@drawable/ic_straighten_black"
             app:key="@string/pref_key_temperature_unit"
             app:title="@string/setting_temperature_unit_title"
             app:useSimpleSummaryProvider="true" />
 
         <SeekBarPreference
             android:max="15"
+            app:icon="@drawable/ic_date_range_black"
             app:key="@string/pref_key_daily_step"
             app:min="2"
             app:title="@string/setting_daily_step_title" />
@@ -21,6 +23,7 @@
     <PreferenceCategory app:title="@string/setting_about_title">
 
         <Preference
+            app:icon="@drawable/ic_error_outline_black"
             app:key="@string/pref_key_version"
             app:selectable="false"
             app:title="@string/setting_version_title" />

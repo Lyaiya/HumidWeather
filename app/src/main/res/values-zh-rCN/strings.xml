@@ -25,7 +25,7 @@
     <string name="addplace_searchbar_hint">请输入地址…</string>
     <string name="addplace_bg_desc">背景图片</string>
 
-    <string name="forecast_title">未来 %d 天预报</string>
+    <string name="forecast_title">近 %d 天预报</string>
 
     <string name="lifeindex_title">生活指数</string>
     <string name="lifeindex_coldrisk_title">感冒</string>
