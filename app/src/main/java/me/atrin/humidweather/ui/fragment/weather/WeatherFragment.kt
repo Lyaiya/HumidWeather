@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.drakeet.multitype.MultiTypeAdapter
-import com.dylanc.longan.Logger
 import com.dylanc.longan.design.snackbar
 import com.dylanc.longan.logDebug
 import com.zackratos.ultimatebarx.ultimatebarx.statusBar
@@ -122,11 +121,7 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
     }
 
     private fun initSwipeRefresh() {
-        weatherSwipeRefresh.setColorSchemeColors(
-            ResUtil.getColorPrimary(
-                requireContext()
-            )
-        )
+        weatherSwipeRefresh.setColorSchemeColors(ResUtil.getColorPrimary())
 
         weatherSwipeRefresh.setOnRefreshListener {
             refreshWeather()
@@ -272,7 +267,6 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         containerLifeIndex.carWashingText.text =
             lifeIndex.carWashing[0].desc
     }
-
 
     private fun refreshWeather() {
         // OPTIMIZE: 优化刷新机制

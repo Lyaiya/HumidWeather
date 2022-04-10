@@ -1,9 +1,10 @@
 package me.atrin.humidweather.ui.activity.addplace
 
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -102,13 +103,8 @@ class AddPlaceActivity : BaseBindingActivity<ActivityAddplaceBinding>() {
     }
 
     private fun showSearchedPlaces(boolean: Boolean) {
-        if (boolean) {
-            recyclerView.visibility = View.VISIBLE
-            bgImageView.visibility = View.GONE
-        } else {
-            recyclerView.visibility = View.GONE
-            bgImageView.visibility = View.VISIBLE
-        }
+        recyclerView.isVisible = boolean
+        bgImageView.isGone = boolean
     }
 
 }

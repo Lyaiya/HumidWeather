@@ -1,26 +1,26 @@
 package me.atrin.humidweather.util
 
-import android.content.Context
 import android.graphics.Color
-import me.atrin.humidweather.HumidWeatherApplication
+import com.dylanc.longan.application
+import com.dylanc.longan.context
 
 object ResUtil {
 
-    fun getColorPrimary(context: Context): Int {
+    fun getColorPrimary(): Int {
         val obtainStyledAttributes =
-            context.obtainStyledAttributes(intArrayOf(android.R.attr.colorPrimary))
+            application.context.obtainStyledAttributes(intArrayOf(android.R.attr.colorPrimary))
         val color = obtainStyledAttributes.getColor(0, Color.BLACK)
         obtainStyledAttributes.recycle()
         return color
     }
 
     fun getStringByResId(resId: Int) =
-        HumidWeatherApplication.context.getString(resId)
+        application.context.getString(resId)
 
     fun getIntByResId(resId: Int) =
-        HumidWeatherApplication.context.resources.getInteger(resId)
+        application.context.resources.getInteger(resId)
 
     fun getStringArrayByResId(resId: Int): Array<String> =
-        HumidWeatherApplication.context.resources.getStringArray(resId)
+        application.context.resources.getStringArray(resId)
 
 }
