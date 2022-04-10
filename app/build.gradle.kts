@@ -99,17 +99,13 @@ dependencies {
 
     // GitHub: https://github.com/DylanCaiCoding/ViewBindingKTX
     // Docs: https://dylancaicoding.github.io/ViewBindingKTX
-    implementation("com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base:2.0.3")
+    implementation("com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base:2.0.5")
 
     // GitHub/Docs: https://github.com/drakeet/MultiType
     implementation("com.drakeet.multitype:multitype:4.3.0")
 
     // GitHub/Docs: https://github.com/Zackratos/UltimateBarX
     implementation("com.gitee.zackratos:UltimateBarX:0.8.0")
-
-    // GitHub: https://github.com/DylanCaiCoding/ActivityResultLauncher
-    // Docs: https://dylancaicoding.github.io/ActivityResultLauncher
-    implementation("com.github.DylanCaiCoding:ActivityResultLauncher:1.1.2")
 
     // GitHub: https://github.com/DylanCaiCoding/Longan
     // Docs: https://dylancaicoding.github.io/Longan
@@ -123,7 +119,7 @@ dependencies {
     // Docs: https://github.com/Tencent/MMKV/wiki/android_tutorial_cn
     // GitHub: https://github.com/DylanCaiCoding/MMKV-KTX
     // Docs: https://github.com/DylanCaiCoding/MMKV-KTX/blob/master/README_CN.md
-    implementation("com.github.DylanCaiCoding:MMKV-KTX:1.2.11")
+    implementation("com.github.DylanCaiCoding:MMKV-KTX:1.2.13")
 
     testImplementation("junit:junit:4.13.2")
 
