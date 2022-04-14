@@ -1,18 +1,18 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.devtools.ksp)
 }
 
 android {
-    compileSdk = 32
+    compileSdk = libs.versions.targetSdk.get().toInt()
 
     defaultConfig {
         applicationId = "me.atrin.humidweather"
-        minSdk = 24
-        targetSdk = 32
-        versionCode = 6
-        versionName = "1.2.5"
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
 
         testInstrumentationRunner =
             "androidx.test.runner.AndroidJUnitRunner"
@@ -50,72 +50,21 @@ android {
 }
 
 dependencies {
-    val lifecycleVersion = "2.4.1"
-    val retrofitVersion = "2.9.0"
-    val longanVersion = "1.0.5"
-    val moshiVersion = "1.13.0"
+    implementation(libs.bundles.androidx.main)
+    implementation(libs.bundles.androidx.design)
+    implementation(libs.bundles.androidx.lifecycle)
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.activity:activity-ktx:1.4.0")
-    implementation("androidx.appcompat:appcompat:1.4.1")
+    testImplementation(libs.bundles.test)
+    androidTestImplementation(libs.bundles.androidx.test)
 
-    implementation("com.google.android.material:material:1.5.0")
-    implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
-    implementation("androidx.transition:transition-ktx:1.4.1")
-    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation(libs.bundles.coroutines)
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    implementation(libs.bundles.network.main)
+    implementation(libs.bundles.network.moshi)
+    ksp(libs.bundles.network.moshi.ksp)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    implementation(libs.bundles.design)
+    implementation(libs.bundles.longan)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
-
-    // GitHub: https://github.com/square/retrofit
-    // Docs: https://square.github.io/retrofit
-    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
-
-    // GitHub: https://github.com/square/okhttp
-    // Docs: https://square.github.io/okhttp
-    implementation("com.squareup.okhttp3:okhttp:4.9.3")
-
-    // GitHub: https://github.com/square/okio
-    // Docs: https://square.github.io/okio
-    implementation("com.squareup.okio:okio:3.0.0")
-
-    // GitHub/Docs: https://github.com/square/moshi
-    implementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
-    implementation("com.squareup.moshi:moshi-adapters:$moshiVersion")
-    ksp("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
-
-    // GitHub: https://github.com/DylanCaiCoding/ViewBindingKTX
-    // Docs: https://dylancaicoding.github.io/ViewBindingKTX
-    implementation("com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base:2.0.5")
-
-    // GitHub/Docs: https://github.com/drakeet/MultiType
-    implementation("com.drakeet.multitype:multitype:4.3.0")
-
-    // GitHub/Docs: https://github.com/Zackratos/UltimateBarX
-    implementation("com.gitee.zackratos:UltimateBarX:0.8.0")
-
-    // GitHub: https://github.com/DylanCaiCoding/Longan
-    // Docs: https://dylancaicoding.github.io/Longan
-    implementation("com.github.DylanCaiCoding.Longan:longan:$longanVersion")
-    implementation("com.github.DylanCaiCoding.Longan:longan-design:$longanVersion")
-
-    // GitHub: https://github.com/RikkaApps/RikkaX
-    implementation("dev.rikka.rikkax.preference:simplemenu-preference:1.0.3")
-
-    // GitHub: https://github.com/Tencent/MMKV
-    // Docs: https://github.com/Tencent/MMKV/wiki/android_tutorial_cn
-    // GitHub: https://github.com/DylanCaiCoding/MMKV-KTX
-    // Docs: https://github.com/DylanCaiCoding/MMKV-KTX/blob/master/README_CN.md
-    implementation("com.github.DylanCaiCoding:MMKV-KTX:1.2.13")
-
+    implementation(libs.bundles.storage)
 }
