@@ -52,29 +52,27 @@ android {
 dependencies {
     val lifecycleVersion = "2.4.1"
     val retrofitVersion = "2.9.0"
-    val navVersion = "2.4.1"
     val longanVersion = "1.0.5"
     val moshiVersion = "1.13.0"
-
-    implementation("com.google.android.material:material:1.5.0")
 
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.activity:activity-ktx:1.4.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
 
+    implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
     implementation("androidx.transition:transition-ktx:1.4.1")
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
 
-    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
-
-    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
 
@@ -83,13 +81,13 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
 
-    // GitHub: https://github.com/square/okio
-    // Docs: https://square.github.io/okio
-    implementation("com.squareup.okio:okio:3.0.0")
-
     // GitHub: https://github.com/square/okhttp
     // Docs: https://square.github.io/okhttp
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
+
+    // GitHub: https://github.com/square/okio
+    // Docs: https://square.github.io/okio
+    implementation("com.squareup.okio:okio:3.0.0")
 
     // GitHub/Docs: https://github.com/square/moshi
     implementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
@@ -120,8 +118,4 @@ dependencies {
     // Docs: https://github.com/DylanCaiCoding/MMKV-KTX/blob/master/README_CN.md
     implementation("com.github.DylanCaiCoding:MMKV-KTX:1.2.13")
 
-    testImplementation("junit:junit:4.13.2")
-
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }
