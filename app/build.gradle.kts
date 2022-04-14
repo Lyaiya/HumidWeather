@@ -52,7 +52,7 @@ android {
 dependencies {
     val lifecycleVersion = "2.4.1"
     val retrofitVersion = "2.9.0"
-    val navVersion = "2.4.1"
+    val navVersion = "2.4.2"
     val longanVersion = "1.0.5"
     val moshiVersion = "1.13.0"
 
