@@ -118,7 +118,7 @@ dependencies {
     // Docs: https://github.com/Tencent/MMKV/wiki/android_tutorial_cn
     // GitHub: https://github.com/DylanCaiCoding/MMKV-KTX
     // Docs: https://github.com/DylanCaiCoding/MMKV-KTX/blob/master/README_CN.md
-    implementation("com.github.DylanCaiCoding:MMKV-KTX:1.2.13")
+    implementation("com.github.DylanCaiCoding:MMKV-KTX:1.12.0")
 
     testImplementation("junit:junit:4.13.2")
 
