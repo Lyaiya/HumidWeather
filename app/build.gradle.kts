@@ -87,7 +87,7 @@ dependencies {
 
     // GitHub: https://github.com/square/okio
     // Docs: https://square.github.io/okio
-    implementation("com.squareup.okio:okio:3.0.0")
+    implementation("com.squareup.okio:okio:3.1.0")
 
     // GitHub/Docs: https://github.com/square/moshi
     implementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
