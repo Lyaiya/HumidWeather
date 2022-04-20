@@ -59,7 +59,7 @@ okhttp3 = { module = "com.squareup.okhttp3:okhttp", version = "4.9.3" }
 
 # GitHub: https://github.com/square/okio
 # Docs: https://square.github.io/okio
-okio = { module = "com.squareup.okio:okio", version = "3.0.0" }
+okio = { module = "com.squareup.okio:okio", version = "3.1.0" }
 
 # GitHub/Docs: https://github.com/square/moshi
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiVersion" }
