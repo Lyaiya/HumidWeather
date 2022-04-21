@@ -52,8 +52,7 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
         viewPager.adapter = pagerAdapter
 
         // 页面滑动完毕后设置 Toolbar 名称
-        viewPager.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 setToolbarTitle(position)
             }
