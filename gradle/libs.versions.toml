@@ -89,7 +89,7 @@ longan-design = { module = "com.github.DylanCaiCoding.Longan:longan-design", ver
 # Docs: https://github.com/Tencent/MMKV/wiki/android_tutorial_cn
 # GitHub: https://github.com/DylanCaiCoding/MMKV-KTX
 # Docs: https://github.com/DylanCaiCoding/MMKV-KTX/blob/master/README_CN.md
-mmkv-ktx = { module = "com.github.DylanCaiCoding:MMKV-KTX", version = "1.2.13" }
+mmkv-ktx = { module = "com.github.DylanCaiCoding:MMKV-KTX", version = "1.12.0" }
 
 [bundles]
 androidx-main = ["androidx-core", "androidx-activity", "androidx-appcompat"]
