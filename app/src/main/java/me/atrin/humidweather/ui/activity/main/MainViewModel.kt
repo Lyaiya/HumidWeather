@@ -14,17 +14,15 @@ class MainViewModel : ViewModel() {
     }
 
     // 2. 监听
-    val savedPlaceListLiveData =
-        Transformations.switchMap(refreshLiveData) {
-            Repository.getSavedPlaceList()
-        }
+    val savedPlaceListLiveData = Transformations.switchMap(refreshLiveData) {
+        Repository.getSavedPlaceList()
+    }
 
     val savedPlaceList = ArrayList<Place>()
 
     fun savedPlaceListSize() = savedPlaceList.size
 
-    fun deletePlaceByPosition(position: Int) =
-        Repository.deletePlaceByPosition(position)
+    fun deletePlaceByPosition(position: Int) = Repository.deletePlaceByPosition(position)
 
     // 1. 调用
     fun refresh() {

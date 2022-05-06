@@ -11,8 +11,8 @@ object WeatherUtil {
     // 摄氏度转为华氏度
     private fun c2t(c: Float) = c * 9 / 5 + 32
 
-    fun getTemperatureText(temperature: Float, withUnit: Boolean): String {
-        return when (getTemperatureUnitText()) {
+    fun getTemperatureText(temperature: Float, withUnit: Boolean) =
+        when (getTemperatureUnitText()) {
             CELSIUS_UNIT -> temperature.toInt().toString().run {
                 if (withUnit) {
                     this + CELSIUS_UNIT
@@ -29,7 +29,7 @@ object WeatherUtil {
             }
             else -> ""
         }
-    }
+
 
     fun getTemperatureUnitText() =
         when (SettingDao.getTemperatureUnitString()) {

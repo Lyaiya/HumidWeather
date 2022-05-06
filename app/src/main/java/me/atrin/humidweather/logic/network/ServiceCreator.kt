@@ -2,10 +2,9 @@ package me.atrin.humidweather.logic.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
-import me.atrin.humidweather.util.addPlus
+import com.squareup.moshi.addAdapter
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.*
 
 object ServiceCreator {
 
@@ -13,7 +12,7 @@ object ServiceCreator {
 
     val moshi: Moshi = Moshi.Builder()
         // OPTIMIZE: 换掉 Date
-        .addPlus<Date>(Rfc3339DateJsonAdapter())
+        .addAdapter(Rfc3339DateJsonAdapter())
         .build()
 
     private val retrofit = Retrofit.Builder()
@@ -21,8 +20,7 @@ object ServiceCreator {
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
-    fun <T> create(serviceClass: Class<T>): T =
-        retrofit.create(serviceClass)
+    fun <T> create(serviceClass: Class<T>): T = retrofit.create(serviceClass)
 
     inline fun <reified T> create(): T = create(T::class.java)
 

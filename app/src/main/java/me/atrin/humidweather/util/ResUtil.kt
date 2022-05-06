@@ -14,11 +14,9 @@ object ResUtil {
         return color
     }
 
-    fun getStringByResId(resId: Int) =
-        application.context.getString(resId)
+    fun getStringByResId(resId: Int) = application.context.getString(resId)
 
-    fun getIntByResId(resId: Int) =
-        application.context.resources.getInteger(resId)
+    fun getIntByResId(resId: Int) = application.context.resources.getInteger(resId)
 
     fun getStringArrayByResId(resId: Int): Array<String> =
         application.context.resources.getStringArray(resId)

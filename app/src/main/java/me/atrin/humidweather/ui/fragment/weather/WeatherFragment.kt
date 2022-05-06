@@ -74,34 +74,34 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
     private fun loadWeatherData() {
         logDebug("loadWeatherData: start")
-        requireArguments().let {
-            if (it.containsKey(PlaceKey.LOCATION_LNG)) {
-                val newLng = it.getString(PlaceKey.LOCATION_LNG, "")
+        val args = requireArguments()
 
-                logDebug("loadWeatherData: setLng")
-                logDebug("loadWeatherData: oldLng = ${weatherViewModel.locationLng}")
-                logDebug("loadWeatherData: newLng = $newLng")
+        if (args.containsKey(PlaceKey.LOCATION_LNG)) {
+            val newLng = args.getString(PlaceKey.LOCATION_LNG, "")
 
-                weatherViewModel.locationLng = newLng
-            }
-            if (it.containsKey(PlaceKey.LOCATION_LAT)) {
-                val newLat = it.getString(PlaceKey.LOCATION_LAT, "")
+            logDebug("loadWeatherData: setLng")
+            logDebug("loadWeatherData: oldLng = ${weatherViewModel.locationLng}")
+            logDebug("loadWeatherData: newLng = $newLng")
 
-                logDebug("loadWeatherData: setLat")
-                logDebug("loadWeatherData: oldLat = ${weatherViewModel.locationLat}")
-                logDebug("loadWeatherData: newLat = $newLat")
+            weatherViewModel.locationLng = newLng
+        }
+        if (args.containsKey(PlaceKey.LOCATION_LAT)) {
+            val newLat = args.getString(PlaceKey.LOCATION_LAT, "")
 
-                weatherViewModel.locationLat = newLat
-            }
-            if (it.containsKey(PlaceKey.PLACE_NAME)) {
-                val newPlaceName = it.getString(PlaceKey.PLACE_NAME, "")
+            logDebug("loadWeatherData: setLat")
+            logDebug("loadWeatherData: oldLat = ${weatherViewModel.locationLat}")
+            logDebug("loadWeatherData: newLat = $newLat")
 
-                logDebug("loadWeatherData: setPlaceName")
-                logDebug("loadWeatherData: oldPlaceName = ${weatherViewModel.placeName}")
-                logDebug("loadWeatherData: newPlaceName = $newPlaceName")
+            weatherViewModel.locationLat = newLat
+        }
+        if (args.containsKey(PlaceKey.PLACE_NAME)) {
+            val newPlaceName = args.getString(PlaceKey.PLACE_NAME, "")
 
-                weatherViewModel.placeName = newPlaceName
-            }
+            logDebug("loadWeatherData: setPlaceName")
+            logDebug("loadWeatherData: oldPlaceName = ${weatherViewModel.placeName}")
+            logDebug("loadWeatherData: newPlaceName = $newPlaceName")
+
+            weatherViewModel.placeName = newPlaceName
         }
     }
 
@@ -112,7 +112,7 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
             if (weather != null) {
                 showWeatherInfo(weather)
             } else {
-                snackbar(ResUtil.getStringByResId(R.string.snack_no_weather))
+                snackbar(getString(R.string.snack_no_weather))
                 result.exceptionOrNull()?.printStackTrace()
             }
 
@@ -130,10 +130,9 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
     private fun initRecyclerView() {
         // 设置 LayoutManager
-        recyclerView.layoutManager =
-            LinearLayoutManager(requireContext()).apply {
-                orientation = LinearLayoutManager.HORIZONTAL
-            }
+        recyclerView.layoutManager = LinearLayoutManager(requireContext()).apply {
+            orientation = LinearLayoutManager.HORIZONTAL
+        }
 
         // 设置 Adapter
         adapter = MultiTypeAdapter().apply {
@@ -171,8 +170,7 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
         val realtimeSky = getSky(realtime.skycon)
         containerNow.currentSky.text = realtimeSky.info
 
-        val currentAQIText =
-            "AQI(CN) ${realtime.airQuality.aqi.chn.toInt()}"
+        val currentAQIText = "AQI(CN) ${realtime.airQuality.aqi.chn.toInt()}"
         containerNow.currentAQI.text = currentAQIText
 
         containerNow.nowContainer.setBackgroundResource(realtimeSky.bg)
@@ -187,6 +185,14 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
         val hourlyDays = hourly.skycon.size
 
+        // OPTIMIZE: 时间处理改进 1
+        val simpleDateFormat = SimpleDateFormat(
+            getString(R.string.item_hourly_date_pattern),
+            Locale.getDefault()
+        ).apply {
+            timeZone = TimeZone.getTimeZone("GMT+8:00")
+        }
+
         for (index in 0 until hourlyDays) {
             val skycon = hourly.skycon[index]
             val temperature = hourly.temperature[index]
@@ -195,14 +201,6 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
             if (skycon.datetime.before(nowDate)) {
                 continue
             }
-
-            val simpleDateFormat =
-                SimpleDateFormat(
-                    ResUtil.getStringByResId(R.string.item_hourly_date_pattern),
-                    Locale.getDefault()
-                ).apply {
-                    timeZone = TimeZone.getTimeZone("GMT+8:00")
-                }
 
             val hourlyItem = HourlyItem(
                 simpleDateFormat.format(skycon.datetime),
@@ -222,6 +220,9 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
         val days = daily.skycon.size
 
+        // OPTIMIZE: 时间处理改进 2
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
         containerForecast.forecastTitle.text = getString(R.string.forecast_title).format(days)
 
         for (i in 0 until days) {
@@ -238,12 +239,9 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
             val skyIcon = view.findViewById<ImageView>(R.id.skyIcon)
             val skyInfo = view.findViewById<TextView>(R.id.skyInfo)
             val temperatureInfo = view.findViewById<TextView>(R.id.temperatureInfo)
-
-            val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-
-            dateInfo.text = simpleDateFormat.format(skycon.date)
             val sky = getSky(skycon.value)
 
+            dateInfo.text = simpleDateFormat.format(skycon.date)
             skyIcon.setImageResource(sky.icon)
             skyInfo.text = sky.info
 
@@ -262,10 +260,8 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
         containerLifeIndex.coldRiskText.text = lifeIndex.coldRisk[0].desc
         containerLifeIndex.dressingText.text = lifeIndex.dressing[0].desc
-        containerLifeIndex.ultravioletText.text =
-            lifeIndex.ultraviolet[0].desc
-        containerLifeIndex.carWashingText.text =
-            lifeIndex.carWashing[0].desc
+        containerLifeIndex.ultravioletText.text = lifeIndex.ultraviolet[0].desc
+        containerLifeIndex.carWashingText.text = lifeIndex.carWashing[0].desc
     }
 
     private fun refreshWeather() {
@@ -279,7 +275,7 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
             weatherSwipeRefresh.isRefreshing = true
         } else {
             logDebug("refreshWeather: false")
-            snackbar(ResUtil.getStringByResId(R.string.snack_empty_data))
+            snackbar(getString(R.string.snack_empty_data))
             weatherSwipeRefresh.isRefreshing = false
         }
     }

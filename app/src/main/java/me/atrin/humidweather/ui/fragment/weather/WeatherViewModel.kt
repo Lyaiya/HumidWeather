@@ -22,10 +22,9 @@ class WeatherViewModel : ViewModel() {
     val hourlyList = ArrayList<HourlyItem>()
 
     // 2. 监测到 locationLiveData 发生变动
-    val weatherLiveData =
-        Transformations.switchMap(locationLiveData) { location ->
-            Repository.refreshWeather(location.lng, location.lat)
-        }
+    val weatherLiveData = Transformations.switchMap(locationLiveData) { location ->
+        Repository.refreshWeather(location.lng, location.lat)
+    }
 
     // 1. 经纬度数值发生变动
     fun refreshWeather(lng: String, lat: String) {

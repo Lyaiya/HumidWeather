@@ -1,6 +1,7 @@
 package me.atrin.humidweather.ui.activity.setting
 
 import android.os.Bundle
+import androidx.fragment.app.commit
 import com.zackratos.ultimatebarx.ultimatebarx.addStatusBarTopPadding
 import com.zackratos.ultimatebarx.ultimatebarx.statusBar
 import me.atrin.humidweather.R
@@ -12,10 +13,9 @@ class SettingActivity : BaseBindingActivity<ActivitySettingBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.settings, SettingFragment())
-                .commit()
+            supportFragmentManager.commit {
+                replace(R.id.settings, SettingFragment())
+            }
         }
         setSupportActionBar(binding.settingToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

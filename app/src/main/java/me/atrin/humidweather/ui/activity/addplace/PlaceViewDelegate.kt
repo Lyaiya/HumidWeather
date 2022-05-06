@@ -16,9 +16,7 @@ class PlaceViewDelegate(private val addPlaceActivity: AddPlaceActivity) :
 
         holder.itemView.setOnClickListener {
             addPlaceActivity.apply {
-                placeViewModel.apply {
-                    savePlace(item)
-                }
+                placeViewModel.savePlace(item)
                 finish()
             }
         }

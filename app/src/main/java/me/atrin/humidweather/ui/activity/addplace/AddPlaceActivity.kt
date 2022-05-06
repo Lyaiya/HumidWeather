@@ -96,7 +96,7 @@ class AddPlaceActivity : BaseBindingActivity<ActivityAddplaceBinding>() {
                 placeViewModel.searchResultPlaceList.addAll(places)
                 adapter.notifyDataSetChanged()
             } else {
-                snackbar(ResUtil.getStringByResId(R.string.snack_no_place))
+                snackbar(getString(R.string.snack_no_place))
                 result.exceptionOrNull()?.printStackTrace()
             }
         }
