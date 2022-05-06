@@ -49,6 +49,12 @@ android {
     }
 }
 
+kotlin {
+    sourceSets.debug {
+        kotlin.srcDir("build/generated/ksp/debug/kotlin")
+    }
+}
+
 dependencies {
     implementation(libs.bundles.androidx.main)
     implementation(libs.bundles.androidx.design)
