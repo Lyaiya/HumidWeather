@@ -2,7 +2,7 @@
 minSdk = "24"
 targetSdk = "32"
 versionCode = "7"
-versionName = "1.2.6"
+versionName = "1.2.7"
 
 lifecycleVersion = "2.4.1"
 retrofitVersion = "2.9.0"
