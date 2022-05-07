@@ -2,7 +2,7 @@ package me.atrin.humidweather.logic.model.daily
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import java.util.*
+import java.time.OffsetDateTime
 
 @JsonClass(generateAdapter = true)
 data class DailyResponse(val status: String, val result: Result) {
@@ -37,10 +37,10 @@ data class DailyResponse(val status: String, val result: Result) {
      * 天气状况
      *
      * @param value 数值
-     * @param date 日期
+     * @param dateTime 日期
      */
     @JsonClass(generateAdapter = true)
-    data class Skycon(val value: String, val date: Date)
+    data class Skycon(val value: String, @Json(name = "date") val dateTime: OffsetDateTime)
 
     /**
      * 生活指数

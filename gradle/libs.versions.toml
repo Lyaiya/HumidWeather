@@ -1,5 +1,5 @@
 [versions]
-minSdk = "24"
+minSdk = "26"
 targetSdk = "32"
 versionCode = "7"
 versionName = "1.2.7"
@@ -20,6 +20,25 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVer
 
 # GitHub: https://github.com/google/ksp
 devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
+
+[bundles]
+androidx-main = ["androidx-core", "androidx-activity", "androidx-appcompat"]
+androidx-design = ["material", "androidx-constraintlayout", "androidx-swiperefreshlayout", "androidx-coordinatorlayout", "androidx-preference", "androidx-transition", "androidx-viewpager2"]
+androidx-lifecycle = ["androidx-lifecycle-viewmodel", "androidx-lifecycle-livedata", "androidx-lifecycle-runtime", "androidx-lifecycle-viewmodel-savedstate"]
+androidx-test = ["androidx-test-junit", "androidx-test-espresso"]
+test = ["junit"]
+
+coroutines = ["kotlinx-coroutines"]
+
+network-main = ["retrofit2-main", "retrofit2-converter-moshi", "okio", "okhttp3"]
+network-moshi = ["moshi-kotlin", "moshi-adapters"]
+network-moshi-ksp = ["moshi-kotlin-codegen"]
+
+design = ["viewbinding-ktx", "multitype", "ultimatebarx", "simplemenu-preference"]
+
+longan = ["longan-main", "longan-design"]
+
+storage = ["mmkv-ktx"]
 
 [libraries]
 androidx-core = { module = "androidx.core:core-ktx", version = "1.7.0" }
@@ -89,22 +108,3 @@ longan-design = { module = "com.github.DylanCaiCoding.Longan:longan-design", ver
 # GitHub: https://github.com/DylanCaiCoding/MMKV-KTX
 # Docs: https://github.com/DylanCaiCoding/MMKV-KTX/blob/master/README_CN.md
 mmkv-ktx = { module = "com.github.DylanCaiCoding:MMKV-KTX", version = "1.2.13" }
-
-[bundles]
-androidx-main = ["androidx-core", "androidx-activity", "androidx-appcompat"]
-androidx-design = ["material", "androidx-constraintlayout", "androidx-swiperefreshlayout", "androidx-coordinatorlayout", "androidx-preference", "androidx-transition", "androidx-viewpager2"]
-androidx-lifecycle = ["androidx-lifecycle-viewmodel", "androidx-lifecycle-livedata", "androidx-lifecycle-runtime", "androidx-lifecycle-viewmodel-savedstate"]
-androidx-test = ["androidx-test-junit", "androidx-test-espresso"]
-test = ["junit"]
-
-coroutines = ["kotlinx-coroutines"]
-
-network-main = ["retrofit2-main", "retrofit2-converter-moshi", "okio", "okhttp3"]
-network-moshi = ["moshi-kotlin", "moshi-adapters"]
-network-moshi-ksp = ["moshi-kotlin-codegen"]
-
-design = ["viewbinding-ktx", "multitype", "ultimatebarx", "simplemenu-preference"]
-
-longan = ["longan-main", "longan-design"]
-
-storage = ["mmkv-ktx"]

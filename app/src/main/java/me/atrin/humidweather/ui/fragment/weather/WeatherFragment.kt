@@ -1,7 +1,5 @@
 package me.atrin.humidweather.ui.fragment.weather
 
-import android.icu.text.SimpleDateFormat
-import android.icu.util.TimeZone
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +27,7 @@ import me.atrin.humidweather.ui.base.BaseBindingFragment
 import me.atrin.humidweather.util.getColorPrimary
 import me.atrin.humidweather.util.getTemperatureText
 import me.atrin.humidweather.util.temperatureUnitText
-import java.util.*
+import java.time.format.DateTimeFormatter
 
 class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
@@ -186,28 +184,11 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
         val hourlyDays = hourly.skycon.size
 
-        // OPTIMIZE: 时间处理改进 1
-        val simpleDateFormat = SimpleDateFormat(
-            getString(R.string.item_hourly_date_pattern),
-            Locale.getDefault()
-        ).apply {
-            timeZone = TimeZone.getTimeZone("GMT+8:00")
-        }
-
         for (index in 0 until hourlyDays) {
             val skycon = hourly.skycon[index]
             val temperature = hourly.temperature[index]
-            val nowDate = Date()
 
-            if (skycon.datetime.before(nowDate)) {
-                continue
-            }
-
-            val hourlyItem = HourlyItem(
-                simpleDateFormat.format(skycon.datetime),
-                getSky(skycon.value),
-                temperature.value
-            )
+            val hourlyItem = HourlyItem(skycon.dateTime, getSky(skycon.value), temperature.value)
 
             weatherViewModel.hourlyList.add(hourlyItem)
         }
@@ -221,8 +202,7 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
 
         val days = daily.skycon.size
 
-        // OPTIMIZE: 时间处理改进 2
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
         containerForecast.forecastTitle.text = getString(R.string.forecast_title).format(days)
 
@@ -242,7 +222,7 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
             val temperatureInfo = view.findViewById<TextView>(R.id.temperatureInfo)
             val sky = getSky(skycon.value)
 
-            dateInfo.text = simpleDateFormat.format(skycon.date)
+            dateInfo.text = skycon.dateTime.format(dateTimeFormatter)
             skyIcon.setImageResource(sky.icon)
             skyInfo.text = sky.info
 

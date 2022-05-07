@@ -1,8 +1,6 @@
 package me.atrin.humidweather.logic.network
 
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
-import com.squareup.moshi.addAdapter
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -11,8 +9,7 @@ object ServiceCreator {
     private const val BASE_URL = "https://api.caiyunapp.com"
 
     val moshi: Moshi = Moshi.Builder()
-        // OPTIMIZE: 换掉 Date
-        .addAdapter(Rfc3339DateJsonAdapter())
+        .add(OffsetDateTimeJsonAdapter())
         .build()
 
     private val retrofit = Retrofit.Builder()
