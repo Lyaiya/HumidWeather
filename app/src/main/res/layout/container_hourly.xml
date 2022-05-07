@@ -3,9 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="8dp"
+    android:layout_marginHorizontal="8dp"
     android:layout_marginTop="8dp"
-    android:layout_marginRight="8dp"
     android:clickable="true"
     android:focusable="true">
 
@@ -18,17 +17,15 @@
             android:id="@+id/hourlyDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
             android:textColor="?android:attr/textColorPrimary"
             tools:text="多云，今天凌晨5点钟后转小雨，其后多云" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginHorizontal="12dp"
             android:background="@color/grey_300" />
 
         <androidx.recyclerview.widget.RecyclerView

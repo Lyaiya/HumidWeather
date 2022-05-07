@@ -26,14 +26,12 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginHorizontal="12dp"
             android:background="@drawable/search_bg"
             android:hint="@string/addplace_searchbar_hint"
             android:importantForAutofill="no"
             android:inputType="text"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
+            android:paddingHorizontal="10dp"
             android:textColor="?android:attr/textColorPrimary"
             android:textColorHint="?android:attr/textColorPrimary" />
 
