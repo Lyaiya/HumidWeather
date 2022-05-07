@@ -26,8 +26,9 @@ import me.atrin.humidweather.logic.model.hourly.HourlyResponse
 import me.atrin.humidweather.logic.model.place.PlaceKey
 import me.atrin.humidweather.logic.model.realtime.RealtimeResponse
 import me.atrin.humidweather.ui.base.BaseBindingFragment
-import me.atrin.humidweather.util.ResUtil
-import me.atrin.humidweather.util.WeatherUtil
+import me.atrin.humidweather.util.getColorPrimary
+import me.atrin.humidweather.util.getTemperatureText
+import me.atrin.humidweather.util.temperatureUnitText
 import java.util.*
 
 class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
@@ -121,7 +122,7 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
     }
 
     private fun initSwipeRefresh() {
-        weatherSwipeRefresh.setColorSchemeColors(ResUtil.getColorPrimary())
+        weatherSwipeRefresh.setColorSchemeColors(getColorPrimary())
 
         weatherSwipeRefresh.setOnRefreshListener {
             refreshWeather()
@@ -164,7 +165,7 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
     }
 
     private fun showNowContainer(realtime: RealtimeResponse.Realtime) {
-        val currentTempText = WeatherUtil.getTemperatureText(realtime.temperature, true)
+        val currentTempText = getTemperatureText(realtime.temperature, true)
         containerNow.currentTemp.text = currentTempText
 
         val realtimeSky = getSky(realtime.skycon)
@@ -245,11 +246,11 @@ class WeatherFragment : BaseBindingFragment<FragmentWeatherBinding>() {
             skyIcon.setImageResource(sky.icon)
             skyInfo.text = sky.info
 
-            val minTemperatureText = WeatherUtil.getTemperatureText(temperature.min, false)
-            val maxTemperatureText = WeatherUtil.getTemperatureText(temperature.max, false)
+            val minTemperatureText = getTemperatureText(temperature.min, false)
+            val maxTemperatureText = getTemperatureText(temperature.max, false)
 
             val temperatureText =
-                "$minTemperatureText ~ $maxTemperatureText${WeatherUtil.getTemperatureUnitText()}"
+                "$minTemperatureText ~ $maxTemperatureText${temperatureUnitText}"
             temperatureInfo.text = temperatureText
             containerForecast.forecastItemLayout.addView(view)
         }

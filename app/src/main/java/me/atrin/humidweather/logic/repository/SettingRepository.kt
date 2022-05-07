@@ -4,7 +4,7 @@ import androidx.preference.PreferenceDataStore
 import com.dylanc.longan.logDebug
 import me.atrin.humidweather.R
 import me.atrin.humidweather.logic.dao.SettingDao
-import me.atrin.humidweather.util.ResUtil
+import me.atrin.humidweather.util.getStringByResId
 
 class SettingRepository : PreferenceDataStore() {
 
@@ -18,11 +18,9 @@ class SettingRepository : PreferenceDataStore() {
         fun setDailyStepInt(int: Int) = SettingDao.setDailyStepInt(int)
     }
 
-    private val prefKeyTemperatureUnit =
-        ResUtil.getStringByResId(R.string.pref_key_temperature_unit)
+    private val prefKeyTemperatureUnit = getStringByResId(R.string.pref_key_temperature_unit)
 
-    private val prefKeyDailyStep =
-        ResUtil.getStringByResId(R.string.pref_key_daily_step)
+    private val prefKeyDailyStep = getStringByResId(R.string.pref_key_daily_step)
 
     override fun putString(key: String?, value: String?) {
         logDebug("putString: start")

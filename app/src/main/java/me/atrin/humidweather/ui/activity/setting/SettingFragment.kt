@@ -1,12 +1,13 @@
 package me.atrin.humidweather.ui.activity.setting
 
 import android.os.Bundle
-import androidx.preference.*
-import com.dylanc.longan.logDebug
+import androidx.preference.Preference
+import androidx.preference.PreferenceDataStore
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SeekBarPreference
 import me.atrin.humidweather.R
 import me.atrin.humidweather.logic.repository.SettingRepository
-import me.atrin.humidweather.util.CommonUtil
-import me.atrin.humidweather.util.ResUtil
+import me.atrin.humidweather.util.appVersionName
 import rikka.preference.SimpleMenuPreference
 
 class SettingFragment : PreferenceFragmentCompat() {
@@ -56,7 +57,7 @@ class SettingFragment : PreferenceFragmentCompat() {
     }
 
     private fun initVersionPref() {
-        versionPref.summary = CommonUtil.getVersionName()
+        versionPref.summary = appVersionName
     }
 
 }

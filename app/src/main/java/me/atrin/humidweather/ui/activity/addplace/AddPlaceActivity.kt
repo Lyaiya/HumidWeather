@@ -18,7 +18,6 @@ import com.zackratos.ultimatebarx.ultimatebarx.statusBar
 import me.atrin.humidweather.R
 import me.atrin.humidweather.databinding.ActivityAddplaceBinding
 import me.atrin.humidweather.ui.base.BaseBindingActivity
-import me.atrin.humidweather.util.ResUtil
 
 class AddPlaceActivity : BaseBindingActivity<ActivityAddplaceBinding>() {
 
