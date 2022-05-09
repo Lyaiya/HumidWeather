@@ -18,10 +18,7 @@ class SettingFragment : PreferenceFragmentCompat() {
     private lateinit var dailyStepPref: SeekBarPreference
     private lateinit var versionPref: Preference
 
-    override fun onCreatePreferences(
-        savedInstanceState: Bundle?,
-        rootKey: String?
-    ) {
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
         initPrefDataStore()

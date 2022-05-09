@@ -15,8 +15,7 @@ object PlaceDao : MMKVOwner {
 
     private var savedPlaceList by mmkvString("")
 
-    private val placeListAdapter =
-        ServiceCreator.moshi.adapter<List<Place>>()
+    private val placeListAdapter = ServiceCreator.moshi.adapter<List<Place>>()
 
     fun getSavedPlaceList(): List<Place> {
         return if (savedPlaceList.isEmpty()) {
