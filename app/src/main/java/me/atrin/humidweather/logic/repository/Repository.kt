@@ -69,19 +69,16 @@ object Repository {
 
     fun savePlace(place: Place) = PlaceDao.savePlace(place)
 
-    fun deletePlaceByPosition(position: Int) =
-        PlaceDao.deletePlaceByPosition(position)
+    fun deletePlaceByPosition(position: Int) = PlaceDao.deletePlaceByPosition(position)
 
-    private fun <T> fire(
-        context: CoroutineContext,
-        block: suspend () -> Result<T>
-    ) = liveData(context) {
-        val result = try {
-            block()
-        } catch (e: Exception) {
-            Result.failure(e)
+    private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>) =
+        liveData(context) {
+            val result = try {
+                block()
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+            emit(result)
         }
-        emit(result)
-    }
 
 }
