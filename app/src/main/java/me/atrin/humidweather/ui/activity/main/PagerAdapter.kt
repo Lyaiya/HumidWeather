@@ -7,9 +7,7 @@ import com.dylanc.longan.logDebug
 import me.atrin.humidweather.logic.model.place.PlaceKey
 import me.atrin.humidweather.ui.fragment.weather.WeatherFragment
 
-
-class PagerAdapter(mainActivity: MainActivity) :
-    FragmentStateAdapter(mainActivity) {
+class PagerAdapter(mainActivity: MainActivity) : FragmentStateAdapter(mainActivity) {
 
     private val mainViewModel = mainActivity.mainViewModel
 
