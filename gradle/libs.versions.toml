@@ -87,7 +87,7 @@ moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", ver
 
 # GitHub: https://github.com/DylanCaiCoding/ViewBindingKTX
 # Docs: https://dylancaicoding.github.io/ViewBindingKTX
-viewbinding-ktx = { module = "com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base", version = "2.0.5" }
+viewbinding-ktx = { module = "com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base", version = "2.0.6" }
 
 # GitHub/Docs: https://github.com/drakeet/MultiType
 multitype = { module = "com.drakeet.multitype:multitype", version = "4.3.0" }
