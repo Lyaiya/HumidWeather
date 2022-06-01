@@ -41,7 +41,7 @@ longan = ["longan-main", "longan-design"]
 storage = ["mmkv-ktx"]
 
 [libraries]
-androidx-core = { module = "androidx.core:core-ktx", version = "1.7.0" }
+androidx-core = { module = "androidx.core:core-ktx", version = "1.8.0" }
 androidx-activity = { module = "androidx.activity:activity-ktx", version = "1.4.0" }
 androidx-fragment = { module = "androidx.fragment:fragment-ktx", version = "1.4.1" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version = "1.4.1" }
