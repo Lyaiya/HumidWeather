@@ -10,7 +10,7 @@ longanVersion = "1.0.5"
 moshiVersion = "1.13.0"
 
 agpVersion = "7.2.1"
-kotlinVersion = "1.6.21"
+kotlinVersion = "1.7.0"
 kspVersion = "1.6.21-1.0.5"
 
 [plugins]
