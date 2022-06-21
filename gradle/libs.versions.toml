@@ -65,7 +65,7 @@ androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", vers
 
 junit = { module = "junit:junit", version = "4.13.2" }
 
-kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version = "1.6.2" }
+kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version = "1.6.3" }
 
 # GitHub: https://github.com/square/retrofit
 # Docs: https://square.github.io/retrofit

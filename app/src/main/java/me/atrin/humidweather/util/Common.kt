@@ -5,10 +5,10 @@ import me.atrin.humidweather.BuildConfig
 import java.util.*
 
 val weatherLanguage: String
-    get() = if (LocaleListCompat.getDefault().get(0).language == Locale.CHINA.language) {
-        "zh_CN"
+    get() = if (LocaleListCompat.getDefault()[0]?.language == Locale.SIMPLIFIED_CHINESE.language) {
+        Locale.SIMPLIFIED_CHINESE.toString()
     } else {
-        "en_US"
+        Locale.US.toString()
     }
 
 val appVersionName: String

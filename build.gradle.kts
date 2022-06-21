@@ -5,6 +5,6 @@ plugins {
     alias(libs.plugins.devtools.ksp) apply false
 }
 
-tasks.register("clean", Delete::class) {
+tasks.register<Delete>("clean") {
     delete(rootProject.buildDir)
 }
