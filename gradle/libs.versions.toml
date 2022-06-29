@@ -6,7 +6,7 @@ versionName = "1.2.7"
 
 lifecycleVersion = "2.4.1"
 retrofitVersion = "2.9.0"
-longanVersion = "1.0.5"
+longanVersion = "1.1.0"
 moshiVersion = "1.13.0"
 
 agpVersion = "7.2.1"
