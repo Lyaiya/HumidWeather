@@ -8,8 +8,7 @@ import me.atrin.humidweather.util.getStringByResId
 import me.atrin.humidweather.util.getTemperatureText
 import java.time.format.DateTimeFormatter
 
-class HourlyViewDelegate :
-    BaseBindingViewDelegate<HourlyItem, ItemHourlyBinding>() {
+class HourlyViewDelegate : BaseBindingViewDelegate<HourlyItem, ItemHourlyBinding>() {
 
     override fun onBindViewHolder(
         binding: ItemHourlyBinding,

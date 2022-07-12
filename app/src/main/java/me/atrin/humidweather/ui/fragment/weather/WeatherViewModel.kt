@@ -31,7 +31,6 @@ class WeatherViewModel : ViewModel() {
         locationLiveData.value = Location(lng, lat)
     }
 
-    fun locationIsNotEmpty(): Boolean =
-        locationLng.isNotEmpty() && locationLat.isNotEmpty()
+    fun locationIsNotEmpty(): Boolean = locationLng.isNotEmpty() && locationLat.isNotEmpty()
 
 }

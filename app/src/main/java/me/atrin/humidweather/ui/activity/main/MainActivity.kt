@@ -83,8 +83,7 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
         val fragment = supportFragmentManager
             .findFragmentByTag("f$position") as WeatherFragment
 
-        binding.containerToolbar.toolbar.title =
-            fragment.weatherViewModel.placeName
+        binding.containerToolbar.toolbar.title = fragment.weatherViewModel.placeName
     }
 
     private fun initObserver() {
