@@ -51,7 +51,7 @@ material = { module = "com.google.android.material:material", version = "1.6.1" 
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version = "2.1.4" }
 androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version = "1.1.0" }
 androidx-coordinatorlayout = { module = "androidx.coordinatorlayout:coordinatorlayout", version = "1.2.0" }
-androidx-preference = { module = "androidx.preference:preference-ktx", version = "1.2.0" }
+androidx-preference = { module = "androidx.preference:preference-ktx", version = "1.2.1" }
 androidx-transition = { module = "androidx.transition:transition-ktx", version = "1.4.1" }
 androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version = "1.0.0" }
 
