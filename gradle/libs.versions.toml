@@ -93,7 +93,7 @@ viewbinding-ktx = { module = "com.github.DylanCaiCoding.ViewBindingKTX:viewbindi
 multitype = { module = "com.drakeet.multitype:multitype", version = "4.3.0" }
 
 # GitHub/Docs: https://github.com/Zackratos/UltimateBarX
-ultimatebarx = { module = "com.gitee.zackratos:UltimateBarX", version = "0.8.0" }
+ultimatebarx = { module = "com.gitee.zackratos:UltimateBarX", version = "0.8.1" }
 
 # GitHub: https://github.com/RikkaApps/RikkaX
 simplemenu-preference = { module = "dev.rikka.rikkax.preference:simplemenu-preference", version = "1.0.3" }
